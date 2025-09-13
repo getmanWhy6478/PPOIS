@@ -174,14 +174,3 @@ istream& operator>>(istream& is, Vector& vec) {
     is >> vec.x_start >> vec.y_start >> vec.z_start >> vec.x_end >> vec.y_end >> vec.z_end;
     return is;
 }
-int main(int argc, char** argv) {
-    Vector a = Vector(1, 2, 3, 4, 5, 6);
-    Vector b = Vector(1, 2, 3, 4, 5, 6);
-    b += a * 3;
-   cout << b << endl;
-    cout << a + b << endl;
-    cout << a * 4 << endl;
-    cout << a / 9 << endl;
-
-}
-
