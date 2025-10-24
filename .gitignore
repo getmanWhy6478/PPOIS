@@ -3,9 +3,9 @@
 *.obj
 *.exe
 *.out
-*.dcno
-*.dcna
-*.dcov
+*.gcno
+*.gcna
+*.gcov
 # Каталоги сборки
 /build/
 /bin/
