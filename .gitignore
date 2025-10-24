@@ -4,7 +4,7 @@
 *.exe
 *.out
 *.gcno
-*.gcna
+*.gcda
 *.gcov
 # Каталоги сборки
 /build/
