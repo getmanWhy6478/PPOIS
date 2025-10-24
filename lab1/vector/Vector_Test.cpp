@@ -1,5 +1,5 @@
 #include "Vector.h"
-#include <UnitTEST++/UnitTEST++.h>
+#include <UnitTest++/UnitTest++.h>
 #include <sstream>
 #include <stdexcept>
 #include <cmath>

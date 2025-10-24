@@ -1,5 +1,5 @@
 #include "Vector.h"
-#include <UnitTEST++/UnitTEST++.h>
+#include <UnitTest++/UnitTest++.h>
 using namespace std;
 Vector::Vector() : x_start(0), y_start(0), z_start(0), x_end(0), y_end(0), z_end(0) {}
 

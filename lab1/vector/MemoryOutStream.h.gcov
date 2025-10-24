@@ -1,0 +1,95 @@
+        -:    0:Source:/usr/include/UnitTest++/MemoryOutStream.h
+        -:    1:#ifndef UNITTEST_MEMORYOUTSTREAM_H
+        -:    2:#define UNITTEST_MEMORYOUTSTREAM_H
+        -:    3:
+        -:    4:#include "Config.h"
+        -:    5:#include "HelperMacros.h"
+        -:    6:
+        -:    7:#ifdef UNITTEST_MEMORYOUTSTREAM_IS_STD_OSTRINGSTREAM
+        -:    8:
+        -:    9:#include <sstream>
+        -:   10:
+        -:   11:namespace UnitTest
+        -:   12:{
+        -:   13:
+        -:   14:   class UNITTEST_LINKAGE MemoryOutStream : public std::ostringstream
+        -:   15:   {
+        -:   16:   public:
+    #####:   17:      MemoryOutStream() {}
+    #####:   18:      ~MemoryOutStream() {}
+------------------
+_ZN8UnitTest15MemoryOutStreamD0Ev:
+    #####:   18:      ~MemoryOutStream() {}
+------------------
+_ZN8UnitTest15MemoryOutStreamD1Ev:
+    #####:   18:      ~MemoryOutStream() {}
+------------------
+        -:   19:      void Clear();
+        -:   20:      char const* GetText() const;
+        -:   21:
+        -:   22:   private:
+        -:   23:      MemoryOutStream(MemoryOutStream const&);
+        -:   24:      void operator =(MemoryOutStream const&);
+        -:   25:
+        -:   26:      mutable std::string m_text;
+        -:   27:   };
+        -:   28:
+        -:   29:#ifdef UNITTEST_COMPILER_IS_MSVC6
+        -:   30:   std::ostream& operator<<(std::ostream& stream, __int64 const n);
+        -:   31:   std::ostream& operator<<(std::ostream& stream, unsigned __int64 const n);
+        -:   32:#endif
+        -:   33:
+        -:   34:}
+        -:   35:
+        -:   36:#else
+        -:   37:
+        -:   38:#include <cstddef>
+        -:   39:
+        -:   40:#ifdef UNITTEST_COMPILER_IS_MSVC6
+        -:   41:namespace std {}
+        -:   42:#endif
+        -:   43:
+        -:   44:namespace UnitTest
+        -:   45:{
+        -:   46:
+        -:   47:   class UNITTEST_LINKAGE MemoryOutStream
+        -:   48:   {
+        -:   49:   public:
+        -:   50:      explicit MemoryOutStream(int const size = 256);
+        -:   51:      ~MemoryOutStream();
+        -:   52:
+        -:   53:      void Clear();
+        -:   54:      char const* GetText() const;
+        -:   55:
+        -:   56:      MemoryOutStream& operator <<(char const* txt);
+        -:   57:      MemoryOutStream& operator <<(int n);
+        -:   58:      MemoryOutStream& operator <<(long n);
+        -:   59:      MemoryOutStream& operator <<(unsigned long n);
+        -:   60:#ifdef UNITTEST_COMPILER_IS_MSVC6
+        -:   61:      MemoryOutStream& operator <<(__int64 n);
+        -:   62:      MemoryOutStream& operator <<(unsigned __int64 n);
+        -:   63:#else
+        -:   64:      MemoryOutStream& operator <<(long long n);
+        -:   65:      MemoryOutStream& operator <<(unsigned long long n);
+        -:   66:#endif
+        -:   67:      MemoryOutStream& operator <<(float f);
+        -:   68:      MemoryOutStream& operator <<(double d);
+        -:   69:      MemoryOutStream& operator <<(void const* p);
+        -:   70:      MemoryOutStream& operator <<(unsigned int s);
+        -:   71:
+        -:   72:      enum { GROW_CHUNK_SIZE = 32 };
+        -:   73:      int GetCapacity() const;
+        -:   74:
+        -:   75:   private:
+        -:   76:      void operator= (MemoryOutStream const&);
+        -:   77:      void GrowBuffer(int capacity);
+        -:   78:
+        -:   79:      int m_capacity;
+        -:   80:      char* m_buffer;
+        -:   81:   };
+        -:   82:
+        -:   83:}
+        -:   84:
+        -:   85:#endif
+        -:   86:
+        -:   87:#endif

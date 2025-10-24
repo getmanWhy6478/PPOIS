@@ -1,0 +1,22 @@
+# Файлы сборки
+*.o
+*.obj
+*.exe
+*.out
+*.dcno
+*.dcna
+*.dcov
+# Каталоги сборки
+/build/
+/bin/
+
+# IDE и редакторы
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Системные файлы
+.DS_Store
+Thumbs.db
+
