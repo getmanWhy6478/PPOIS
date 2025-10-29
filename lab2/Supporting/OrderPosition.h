@@ -6,12 +6,13 @@ class OrderPosition {
 public:
     Eatable getEatable();
     void setEatable(Eatable& eat);
-    int getAmount();
+    int getAmount() const;
     void setAmount(int amount);
-    bool isDone();
+    bool isDone() const;
     void setDone(bool done);
 private:
-    Eatable eat;
+    Eatable* eat;
     int amount;
     bool done;
+friend class Order;
 };

@@ -7,7 +7,7 @@ Product::Product(string name, int calories, int amount)
 
 Product::Product(const Product& other) : name(other.name), calories(other.calories){}
 
-int Product::getCalories() {
+int Product::getCalories() const{
     return calories;
 }
 
@@ -15,7 +15,7 @@ void Product::setCalories(int calories) {
     this->calories = calories;
 }
 
-string Product::getName() {
+string Product::getName() const{
     return name;
 }
 

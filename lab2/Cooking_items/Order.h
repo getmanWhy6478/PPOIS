@@ -3,13 +3,21 @@
 #include <vector>
 class Order{
 public:
-    int countCost();
-    int countTime();
-    int countBonuses();
-    int countTime();
+    int getCost();
+    int getTime();
+    int getBonuses();
+    vector<OrderPosition> getEatList();
+    string getAdress();
+    bool isDone();
+    bool isDelievered();
+    void setEatList(vector<OrderPosition> eatList);
+    void setAdress(string adress);
+    void setIsDone(bool done);
+    void setIsDelievered(bool delievered);
 private:
     vector<OrderPosition> eatList;
     string adress;
     bool done;
     bool delievered;
+friend class Courier;
 };

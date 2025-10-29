@@ -5,19 +5,14 @@
 using namespace std;
 class Food : public Eatable{
 public:
-    Food();
-    Food(const string& name, int cost, Product* composition, int cooking_time, bool done = false);
+    Food(const string& name, int cost, vector<pair<Product, int>> composition, int cooking_time);
     Food(Food& other);
-    int getTime();
-    void setTime(int cooking_time);
-    int getProductNeeded();
-    void setProductNeeded(int product_needed);
-    Product* getComposition();
-    void setComposition(Product* composition);
-    int countCalories();
-    bool checkIfEnough(Product product);
+    int getTime() const;
+    void setTime(int cookingTime);
+    vector<pair<Product, int>> getComposition() const;
+    void setComposition(vector<pair<Product, int>> composition);
+    int getCalories();
 private:
-    vector<Product> composition;
-    int cooking_time;
-    int product_needed;
+    vector<pair<Product, int>> composition;
+    bool done;
 };

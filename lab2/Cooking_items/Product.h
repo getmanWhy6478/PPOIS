@@ -7,10 +7,10 @@ public:
     Product(string name, int calories, int amount);
     Product(const Product& other);
 
-    int getCalories();
+    int getCalories() const;
     void setCalories(int calories);
 
-    string getName();
+    string getName() const;
     void setName(const string& name);
 
 private:

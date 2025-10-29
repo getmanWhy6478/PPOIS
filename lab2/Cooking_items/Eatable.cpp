@@ -1,13 +1,13 @@
 #include "Eatable.h"
 
-Eatable::Eatable() : name(""), cost(0), calories(0) {}
+Eatable::Eatable() : name(""), cost(0) {}
 
-Eatable::Eatable(const string& name, int cost, int calories) : name(name), cost(cost), calories(0) {}
+Eatable::Eatable(const string& name, int cost, int cookingTime) : name(name), cost(cost), cookingTime(cookingTime) {}
 
 Eatable::Eatable(const Eatable& other)
-    : name(other.name), cost(other.cost), calories(other.calories) {}
+    : name(other.name), cost(other.cost) {}
 
-int Eatable::getCost() {
+int Eatable::getCost () const{
     return cost;
 }
 
@@ -15,18 +15,17 @@ void Eatable::setCost(int cost) {
     this->cost = cost;
 }
 
-string Eatable::getName() {
+string Eatable::getName() const {
     return name;
 }
 
 void Eatable::setName(const string& name) {
     this->name = name;
 }
-
-int Eatable::getCalories() {
-    return calories;
+int Eatable::getTime() const{
+    return cookingTime;
 }
 
-void Eatable::setCalories(int calories) {
-    this->calories = calories;
+void Eatable::setTime(int cookingTime) {
+    this->cookingTime = cookingTime;
 }
