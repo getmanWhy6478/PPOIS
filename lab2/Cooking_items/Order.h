@@ -11,7 +11,7 @@ public:
     bool isDone();
     bool isDelievered();
     void setEatList(vector<OrderPosition> eatList);
-    void setAdress(string adress);
+    void setAdress(const string& adress);
     void setIsDone(bool done);
     void setIsDelievered(bool delievered);
 private:
@@ -19,5 +19,5 @@ private:
     string adress;
     bool done;
     bool delievered;
-friend class Courier;
+friend class Customer;
 };

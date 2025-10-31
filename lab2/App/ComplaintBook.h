@@ -5,7 +5,12 @@
 using namespace std;
 class ComplaintBook{
 public:
-    vector<Complaint> getComplaints();
+    ComplaintBook();
+    ComplaintBook(const std::vector<Complaint>& initialComplaints);
+
+    void addComplaint(const Complaint& complaint);
+    vector<Complaint> getComplaints() const;
+    void clearComplaints();
 private:
     vector<Complaint> complaints;
 friend class Customer;

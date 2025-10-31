@@ -3,7 +3,7 @@
 #include "Order.h"
 class Vip_Customer : public Customer{
 public:
-    void suggestFood(Eatable eat);
+    void suggestFood(Eatable* eat);
     void fastDelivery(Order order);
     int getVipDays();
     void setVipDays(int vipDays);

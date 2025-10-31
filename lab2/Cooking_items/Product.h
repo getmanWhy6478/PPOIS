@@ -12,6 +12,8 @@ public:
 
     string getName() const;
     void setName(const string& name);
+    
+    bool operator==(const Product& other) const;
 
 private:
     string name;

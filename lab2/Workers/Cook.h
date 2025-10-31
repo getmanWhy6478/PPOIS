@@ -8,4 +8,6 @@ class Cook : public Worker {
 public:
     void takeProducts(Product product, int amount);
     void Cooking(OrderPosition orderPosition);
+private:
+    bool active;
 };

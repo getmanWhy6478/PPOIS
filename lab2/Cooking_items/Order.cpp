@@ -40,7 +40,7 @@ void Order::setEatList(vector<OrderPosition> eatList) {
     this->eatList = eatList;
 }
 
-void Order::setAdress(string adress) {
+void Order::setAdress(const string& adress) {
     this->adress = adress;
 }
 

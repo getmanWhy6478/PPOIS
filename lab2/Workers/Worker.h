@@ -5,7 +5,7 @@ using namespace std;
 class Worker {
 public:
     Worker();
-    Worker(const string& name, int salary, int ID, Restaurant* restaurant = nullptr);
+    Worker(const string& name, int salary, Restaurant* restaurant = nullptr);
     Worker(const Worker& other);
 
     Restaurant* getRestaurant();

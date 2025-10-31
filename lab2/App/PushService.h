@@ -5,9 +5,13 @@
 using namespace std;
 class PushService{
 public:
-    string getLanguage();
-    void setLanguage(string language);
-    void createPushNotification(User& user, string words, int bonuses, int promo);
+    PushService();
+    PushService(const std::string& language);
+
+    string getLanguage() const;
+    void setLanguage(const string& language);
+    
+    PushNotification createPushNotification(const string& words, int bonuses, int promo);
 private:
     string language;
 };

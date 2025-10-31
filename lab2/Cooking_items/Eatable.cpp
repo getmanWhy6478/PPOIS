@@ -29,3 +29,4 @@ int Eatable::getTime() const{
 void Eatable::setTime(int cookingTime) {
     this->cookingTime = cookingTime;
 }
+Eatable::~Eatable() {};

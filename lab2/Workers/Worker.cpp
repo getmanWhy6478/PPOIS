@@ -2,7 +2,7 @@
 
 Worker::Worker() : name(""), salary(0), restaurant(nullptr) {}
 
-Worker::Worker(const string& name, int salary, int ID, Restaurant* restaurant)
+Worker::Worker(const string& name, int salary, Restaurant* restaurant)
     : name(name), salary(salary), restaurant(restaurant) {}
 
 Worker::Worker(const Worker& other)

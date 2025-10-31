@@ -16,7 +16,6 @@ void Adress::setCity(const string& city) {
     this->city = city;
 }
 
-// Геттер улицы
 string Adress::getStreet() {
     return street;
 }

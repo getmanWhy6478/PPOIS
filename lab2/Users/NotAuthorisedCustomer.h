@@ -1,12 +1,23 @@
 #pragma once
-#include "User.h"
+#include <vector>
 #include "Order.h"
-#include "OrderPosition.h"
-#include "Courier.h"
-#include "Review.h"
-class NotAuthorisedCustomer{
+#include "Restaurant.h"
+using namespace std;
+
+class NotAuthorisedCustomer {
 public:
-    void orderSomething(Order order);
+    NotAuthorisedCustomer();
+    NotAuthorisedCustomer(const Order& order, int cash);
+
+    void orderSomething(Restaurant& restaurant);
+
+    Order getOrder() const;
+    void setOrder(const Order orders);
+
+    int getCash();
+    void setCash(int cash);
+
 private:
-    Order* orderList;
+    Order order;
+    int cash;
 };

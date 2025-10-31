@@ -1,19 +1,26 @@
 #pragma once
 #include <string>
 #include "User.h"
-using namespace std;
-class PushNotififcation{
+
+class PushNotification {
 public:
-    string getWords();
-    void setWords (string words);
-    int getBonuses();
-    void setBonuses (int bonuses);
-    int getPromo();
-    void setPromo (int promo);
+    
+    std::string getWords() const;
+    void setWords(const std::string& words);
+
+    int getBonuses() const;
+    void setBonuses(int bonuses);
+
+    int getPromo() const;
+    void setPromo(int promo);
+
 private:
-    PushNotififcation(const string & words, int bonuses, int promo);
-    string words;
+    PushNotification();
+
+    PushNotification(const std::string& words, int bonuses, int promo);
+    std::string words;
     int bonuses;
     int promo;
-friend class PushService;
+
+    friend class PushService;
 };

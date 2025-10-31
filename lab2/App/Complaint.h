@@ -4,7 +4,7 @@
 using namespace std;
 class Complaint{
 public:
-    string getBadWords();
+    string getBadWords() const;
     void setBadWords(string words);
 private:
     string badWords;

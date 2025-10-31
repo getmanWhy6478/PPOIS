@@ -5,11 +5,11 @@ class User{
 public:
     User();
     User(const string& name, int age, const string& email);
-    string getName();
+    string getName() const;
     void setName(const string& name);
-    int getAge();
+    int getAge() const;
     void setAge(int age);
-    string getEmail();
+    string getEmail() const;
     void setEmail(const string& email);
 protected:
     string name;

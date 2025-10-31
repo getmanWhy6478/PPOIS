@@ -22,3 +22,6 @@ string Product::getName() const{
 void Product::setName(const string& name) {
     this->name = name;
 }
+bool Product::operator==(const Product& other) const {
+    return name == other.name && calories == other.calories;
+}

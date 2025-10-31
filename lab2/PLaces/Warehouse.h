@@ -1,17 +1,35 @@
 #pragma once
 #include <string>
 #include <vector>
-#include "Product.h"
+#include "FoodPosition.h"
 #include "Place.h"
+#include "WarehouseRequirement.h"
 using namespace std;
-class Warehouse : public Place{
+class Warehouse : public Place {
 public:
-    int getCapacity();
+    Warehouse();
+
+    Warehouse(int capacity, int area, const WarehouseRequirement& requirement, const vector<FoodPosition>& stored) ;
+
+    WarehouseRequirement getRequirement() const;
+    void setRequirement(const WarehouseRequirement& requirement);
+
+    vector<FoodPosition> getStored() const;
+    void setStored(const FoodPosition& foodPosition);
+
+    int getCapacity() const;
     void setCapacity(int capacity);
-    vector <pair<Product,int>> getStored();
-    void setStored (Product product, int amount);
+
+    int getHaveCooling() const;
+    void setHaveCooling(bool haveCooling);
+
+    bool isFull() const;
+
 private:
     int capacity;
-    vector <pair<Product,int>> stored;
-friend class Cook;
+    WarehouseRequirement requirement;
+    vector<FoodPosition> stored;
+
+    bool haveCooling;
+    friend class Cook;
 };

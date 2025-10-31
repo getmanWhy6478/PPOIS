@@ -1,24 +1,15 @@
 #include "Place.h"
 
-Place::Place() : square(0), yearsUsed(0) {}
+Place::Place() : area(0) {}
 
-Place::Place(int square, const Adress& adress) : square(square), yearsUsed(yearsUsed) {}
+Place::Place(int area) : area(area) {}
 
-Place::Place(const Place& other) : square(other.square),yearsUsed(other.yearsUsed) {}
+Place::Place(const Place& other) : area(other.area) {}
 
-int Place::getSquare() {
-    return square;
+int Place::getArea() const{
+    return area;
 }
 
-void Place::setSquare(int square) {
-    this->square = square;
+void Place::setArea(int area) {
+    this->area = area;
 }
-
-int Place::getYearsUsed() {
-    return yearsUsed;
-}
-
-void Place::setYearsUsed(int YearsUsed) {
-    this->yearsUsed = yearsUsed;
-}
-

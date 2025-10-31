@@ -15,6 +15,8 @@ public:
 
     int getTime() const;
     void setTime(int cookingTime);
+
+    virtual ~Eatable();
 protected:
     string name;
     int cost;
