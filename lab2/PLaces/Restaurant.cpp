@@ -39,6 +39,9 @@ vector<Courier> Restaurant::getCouriers() const {
 vector<Order> Restaurant::getOrders() const {
     return orders;
 }
+Menu Restaurant::getMenu() const {
+    return menu;
+}
 
 void Restaurant::setAdress(const Adress& adress) {
     this->adress = adress;
@@ -69,4 +72,7 @@ void Restaurant::setCouriers(const vector<Courier>& couriers) {
 }
 void Restaurant::setOrders(const vector<Order>& orders) {
     this->orders = orders;
+}
+void Restaurant::setMenu(const Menu& menu) {
+    this->menu = menu;
 }

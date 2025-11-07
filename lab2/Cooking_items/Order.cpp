@@ -19,7 +19,9 @@ int Order::getTime() {
 int Order::getBonuses() {
     return this->getTime() * 0.25;
 }
-
+int Order::getID() {
+    return id;
+}
 vector<OrderPosition> Order::getEatList() {
     return eatList;
 }
@@ -50,4 +52,7 @@ void Order::setIsDone(bool done) {
 
 void Order::setIsDelievered(bool delievered) {
     this->delievered = delievered;
+}
+void Order::setID(int id) {
+    this->id = id;
 }

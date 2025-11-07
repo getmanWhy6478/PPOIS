@@ -3,8 +3,8 @@
 Rating::Rating()
     : stars(0), words("") {}
 
-// Конструктор с параметрами
-Rating::Rating(int stars, const std::string& words)
+
+Rating::Rating(int stars, const string& words)
     : stars(stars), words(words) {}
 
 int Rating::getStars() const {
@@ -15,10 +15,10 @@ void Rating::setStars(int stars) {
     this->stars = stars;
 }
 
-std::string Rating::getWords() const {
+string Rating::getWords() const {
     return words;
 }
 
-void Rating::setWords(const std::string& words) {
+void Rating::setWords(const string& words) {
     this->words = words;
 }

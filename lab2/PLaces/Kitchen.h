@@ -2,6 +2,7 @@
 #include <string>
 #include "Place.h"
 #include "KitchenRequirement.h"
+#include "KitchenAppliance.h"
 
 class Kitchen : public Place {
 public:
@@ -21,5 +22,6 @@ private:
     int cooksAmount;
     KitchenRequirement requirement;
     bool haveAppliance;
+    vector <KitchenAppliance> applience;
 };
 

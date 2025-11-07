@@ -9,12 +9,10 @@ public:
 
     string getName() const;
     double getDiscountPercent() const;
-    bool getIsActive() const;
     time_t getExpirationTime() const;
 
     void setName(const string& name);
     void setDiscountPercent(double percent);
-    void setIsActive(bool active);
     void setExpirationTime(time_t time);
 
     double applyTo(double originalPrice) const;
@@ -24,6 +22,5 @@ public:
 private:
     string name;
     double discountPercent;
-    bool isActive;
     time_t expirationTime;
 };

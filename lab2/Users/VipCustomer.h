@@ -1,13 +1,17 @@
 #pragma once
 #include "Customer.h"
 #include "Order.h"
+#include "Order.h"
+using namespace std;
 class Vip_Customer : public Customer{
 public:
-    void suggestFood(Eatable* eat);
+    Vip_Customer();
+    Vip_Customer(const string& name, int age, const string& email, int cash, int bonusesAmount = 0, int vipDays, int vipCategory);
+    
     void fastDelivery(Order order);
-    int getVipDays();
+    int getVipDays() const;
     void setVipDays(int vipDays);
-    int getVipCategory();
+    int getVipCategory() const;
     void setVipCategory(int vipCategory);
 private:
     int vipDays;

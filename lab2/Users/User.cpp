@@ -29,3 +29,11 @@ void User::setAge(int age) {
 void User::setEmail(const string& email) {
     this->email = email;
 }
+
+void User::setBanned(bool banned) {
+    this->age = age;
+}
+
+bool User::getBanned() {
+    return banned;
+}

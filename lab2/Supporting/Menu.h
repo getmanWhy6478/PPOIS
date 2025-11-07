@@ -7,14 +7,15 @@ class Menu {
 public:
 
     Menu();
-    Menu(const vector<Eatable*>& items);
+    Menu(const vector<Eatable>& items);
 
-    void addItem(Eatable* item);
+    void addItem(Eatable item);
     void removeItemByName(const string& name);
-    Eatable* findItemByName(const string& name);
-    vector<Eatable*> getItems() const;
+    Eatable findItemByName(const string& name);
+    vector<Eatable> getItems() const;
     void clear();
 
 private:
-    vector<Eatable*> items;
+    vector<Eatable> items;
+friend class Manager;
 };

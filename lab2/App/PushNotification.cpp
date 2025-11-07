@@ -1,6 +1,5 @@
 #include "PushNotification.h"
 
-// Конструктор по умолчанию
 PushNotification::PushNotification()
     : words(""), bonuses(0), promo(0) {}
 

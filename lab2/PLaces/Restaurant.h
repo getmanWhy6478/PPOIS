@@ -8,6 +8,8 @@
 #include "DinningRoom.h"
 #include "Cook.h"
 #include "Courier.h"
+#include "Menu.h"
+#include "SupportAgent.h"
 using namespace std;
 class Restaurant {
 public:
@@ -23,6 +25,7 @@ public:
     vector<Cook> getCooks() const;
     vector<Courier> getCouriers() const;
     vector <Order> getOrders() const;
+    Menu getMenu() const;
 
     void setAdress(const Adress& adress);
     void setManager(const Manager& manager);
@@ -32,6 +35,7 @@ public:
     void setCooks(const vector<Cook>& cooks);
     void setCouriers(const vector<Courier>& couriers);
     void setOrders(const vector <Order>& orders);
+    void setMenu(const Menu& menu);
 
 private:
     Adress adress;
@@ -42,5 +46,10 @@ private:
     vector<Cook> cooks;
     vector<Courier> couriers;
     vector <Order> orders;
+    vector<Rating> ratings;
+    Menu menu;
 friend class Customer;
+friend class NotAuthorisedCustomer;
+friend class SupportAgent;
+friend class Manager;
 };

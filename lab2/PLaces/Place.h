@@ -1,7 +1,5 @@
 #pragma once
 #include <string>
-#include "Adress.h"
-#include "PlaceRequirement.h"
 using namespace std;
 class Place{
 public:

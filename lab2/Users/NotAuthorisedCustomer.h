@@ -10,11 +10,12 @@ public:
     NotAuthorisedCustomer(const Order& order, int cash);
 
     void orderSomething(Restaurant& restaurant);
+    void addToOrder(OrderPosition orderPosition);
 
     Order getOrder() const;
-    void setOrder(const Order orders);
+    void setOrder(const Order& orders);
 
-    int getCash();
+    int getCash() const;
     void setCash(int cash);
 
 private:

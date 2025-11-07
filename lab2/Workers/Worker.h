@@ -8,14 +8,16 @@ public:
     Worker(const string& name, int salary, Restaurant* restaurant = nullptr);
     Worker(const Worker& other);
 
-    Restaurant* getRestaurant();
+    Restaurant* getRestaurant() const;
     void setRestaurant(Restaurant* restaurant);
 
-    int getSalary();
+    int getSalary() const;
     void setSalary(int salary);
 
-    string getName();
+    string getName() const;
     void setName(const string& name);
+
+    bool operator==(const Worker& other);
 
 protected:
     string name;

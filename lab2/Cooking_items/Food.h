@@ -6,7 +6,7 @@
 using namespace std;
 class Food : public Eatable{
 public:
-    Food(const string& name, int cost, vector<FoodPosition> composition, int cooking_time);
+    Food(const string& name, int cost, vector<FoodPosition> composition, int cookingTime);
     Food(Food& other);
     int getTime() const;
     void setTime(int cookingTime);

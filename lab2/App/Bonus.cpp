@@ -1,5 +1,5 @@
 #include "Bonus.h"
-#include <stdexcept>
+#include "Errors.h"
 #include <ctime>
 
 Bonus::Bonus()
@@ -19,10 +19,6 @@ double Bonus::getDiscountPercent() const {
     return discountPercent;
 }
 
-bool Bonus::getIsActive() const {
-    return isActive;
-}
-
 time_t Bonus::getExpirationTime() const {
     return expirationTime;
 }
@@ -33,13 +29,9 @@ void Bonus::setName(const string& name) {
 
 void Bonus::setDiscountPercent(double percent) {
     if (percent < 0.0 || percent > 100.0) {
-        throw invalid_argument("Скидка должна быть от 0 до 100%");
+        throw InvalidPercentError();
     }
     discountPercent = percent;
-}
-
-void Bonus::setIsActive(bool active) {
-    isActive = active;
 }
 
 void Bonus::setExpirationTime(time_t time) {
@@ -53,7 +45,8 @@ bool Bonus::isExpired() const {
 
 // Применение бонуса к цене
 double Bonus::applyTo(double originalPrice) const {
-    if (!isActive || isExpired()) return originalPrice;
+    if (isExpired()) 
+        return originalPrice;
     return originalPrice * (1.0 - discountPercent / 100.0);
 }
 

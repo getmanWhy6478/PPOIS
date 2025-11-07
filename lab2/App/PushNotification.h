@@ -1,12 +1,12 @@
 #pragma once
 #include <string>
 #include "User.h"
-
+using namespace std;
 class PushNotification {
 public:
     
-    std::string getWords() const;
-    void setWords(const std::string& words);
+    string getWords() const;
+    void setWords(const string& words);
 
     int getBonuses() const;
     void setBonuses(int bonuses);
@@ -17,8 +17,8 @@ public:
 private:
     PushNotification();
 
-    PushNotification(const std::string& words, int bonuses, int promo);
-    std::string words;
+    PushNotification(const string& words, int bonuses, int promo);
+    string words;
     int bonuses;
     int promo;
 

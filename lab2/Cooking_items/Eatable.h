@@ -4,11 +4,11 @@ using namespace std;
 class Eatable{
 public:
     Eatable(); 
-    Eatable(const string& name, int cost, int cookingTime);
+    Eatable(const string& name, double cost, int cookingTime);
     Eatable(const Eatable& other);
 
-    virtual int getCost() const;
-    virtual void setCost(int cost);
+    virtual double getCost() const;
+    virtual void setCost(double cost);
 
     virtual string getName() const;
     virtual void setName(const string& name);
@@ -17,8 +17,9 @@ public:
     void setTime(int cookingTime);
 
     virtual ~Eatable();
+    bool operator==(const Eatable& other);
 protected:
     string name;
-    int cost;
+    double cost;
     int cookingTime;
 };
