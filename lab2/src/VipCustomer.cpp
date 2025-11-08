@@ -1,0 +1,31 @@
+#include "../include/VipCustomer.h"
+#include <iostream>
+
+Vip_Customer::Vip_Customer()
+    : vipDays(0), vipCategory(0) {}
+
+Vip_Customer::Vip_Customer(const std::string& name, int age, const std::string& email, int cash, int vipDays, int vipCategory)
+    : Customer(name, age, email, cash),
+      vipDays(vipDays),
+      vipCategory(vipCategory){}
+
+
+int Vip_Customer::getVipDays() const {
+    return vipDays;
+}
+
+int Vip_Customer::getVipCategory() const {
+    return vipCategory;
+}
+
+void Vip_Customer::setVipDays(int days) {
+    vipDays = days;
+}
+
+void Vip_Customer::setVipCategory(int category) {
+    vipCategory = category;
+}
+
+void Vip_Customer::fastDelivery(Order order) {
+    cout << "VIP клиент запросил быструю доставку заказа #" << order.getID() << endl;//добавить
+}
