@@ -16,10 +16,6 @@ public:
 
     bool operator==(const Vehicle& other) const;
 
-    friend std::ostream& operator<<(std::ostream& os, const Vehicle& v) {
-        os << "Vehicle(model: " << v.model << ", capacity: " << v.capacity << ")";
-        return os;
-    }
 protected:
     string model;
     int capacity;

@@ -12,10 +12,6 @@ public:
     string getPhoneNumber() const;
     void setPhoneNumber(const string& phoneNumber);
     void textUser(const string& text);
-    friend std::ostream& operator<<(std::ostream& os, const Courier& v) {
-        os << "Courier(name: " << v.name << ")";
-        return os;
-    }
 private:
     string phoneNumber;
 };

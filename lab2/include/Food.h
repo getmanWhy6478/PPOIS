@@ -11,6 +11,8 @@ public:
     vector<FoodPosition> getComposition() const;
     void setComposition(vector<FoodPosition> composition);
     int getCalories();
+    bool getDone() const;
+    void setDone(bool done);
 private:
     vector<FoodPosition> composition;
     bool done;

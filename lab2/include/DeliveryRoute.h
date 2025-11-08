@@ -20,10 +20,6 @@ public:
 
     void setTotalDistance(double distance);
     bool operator==(const DeliveryRoute& other) const;
-    friend std::ostream& operator<<(std::ostream& os, const DeliveryRoute& v) {
-        os << "Route: " << v.totalDistance;
-        return os;
-    }
 private:
     string startPoint;
     string endPoint;

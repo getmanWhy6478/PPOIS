@@ -2,11 +2,7 @@
 #include <string>
 using namespace std;
 class LoyaltyProgram {
-private:
-    string programName;
-    int minPointsForReward;
-    double rewardAmount;
-    bool active;
+
 public:
     LoyaltyProgram(const string& name, int minPoints, double reward);
 
@@ -20,4 +16,9 @@ public:
 
     bool isEligible(int userPoints) const;
     double claimReward(int& userPoints);
+private:
+    string programName;
+    int minPointsForReward;
+    double rewardAmount;
+    bool active;
 };

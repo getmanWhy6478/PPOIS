@@ -14,10 +14,6 @@ public:
 
     void updateStatus(string newStatus, const string& updatedBy, const string& comment = "");
     bool operator==(const DeliveryStatus& other) const; 
-    friend std::ostream& operator<<(std::ostream& os, const DeliveryStatus& v) {
-        os << "Vehicle(model: " << v.comment;
-        return os;
-    }
 private:
     string currentStatus;
     string lastUpdatedBy;

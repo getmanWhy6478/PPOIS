@@ -22,3 +22,9 @@ int Food::getCalories() {
     }
     return total;
 }
+bool Food::getDone() const{
+    return done;
+}
+void Food::setDone(bool done){
+    this->done = done;
+}
