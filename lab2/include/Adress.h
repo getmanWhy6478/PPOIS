@@ -5,7 +5,6 @@ class Adress{
 public:
     Adress();
     Adress(const string& city, const string& street, int house);
-    Adress(const Adress& other);
 
     string getCity();
     void setCity(const string& city);

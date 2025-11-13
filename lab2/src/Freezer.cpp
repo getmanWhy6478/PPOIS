@@ -1,4 +1,8 @@
 #include "../include/Freezer.h"
+
+Freezer::Freezer()
+    : KitchenAppliance("", true, false), minTemperature(0){}
+
 Freezer::Freezer(const string& name, bool isElectric, int minTemperature, bool isAvailable)
     : KitchenAppliance(name, isElectric, isAvailable), minTemperature(minTemperature) {}
 

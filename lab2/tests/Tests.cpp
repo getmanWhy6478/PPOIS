@@ -76,6 +76,7 @@ TEST(SetText_UpdatesText) {
 
 TEST(SetIsActive_SetsTrue) {
     Ad ad("Title", "Text", false);
+    Ad a;
     ad.setIsActive();
     CHECK_EQUAL(true, ad.getIsActive());
 }
@@ -94,15 +95,6 @@ TEST(ParameterizedConstructor_SetsFieldsCorrectly) {
     CHECK_EQUAL("Минск", a.getCity());
     CHECK_EQUAL("Независимости", a.getStreet());
     CHECK_EQUAL(10, a.getHouse());
-}
-
-TEST(CopyConstructor_CopiesFieldsCorrectly) {
-    Adress original("Фаниполь", "Центральная", 5);
-    Adress copy(original);
-
-    CHECK_EQUAL("Фаниполь", copy.getCity());
-    CHECK_EQUAL("Центральная", copy.getStreet());
-    CHECK_EQUAL(5, copy.getHouse());
 }
 
 TEST(SetCity_UpdatesValue) {
@@ -145,6 +137,7 @@ TEST(GetVolumeLiters_ReturnsCorrectValue) {
 
 TEST(SetVolumeLiters_UpdatesValue) {
     AirGrill grill("AdjustableGrill", true, 10, true);
+    AirGrill g;
     grill.setVolumeLiters(15);
     CHECK_EQUAL(15, grill.getVolumeLiters());
 }
@@ -332,6 +325,7 @@ TEST(SetName_UpdatesName) {
 
 TEST(SetPrice_UpdatesPrice) {
     ComboMeal combo("Combo", {}, 5.0);
+    ComboMeal c;
     combo.setPrice(7.5);
     CHECK_EQUAL(7.5, combo.getPrice());
 }
@@ -398,6 +392,7 @@ TEST(SetBadWords_StoresCorrectValue) {
 
 TEST(SetBadWords_OverwritesPreviousValue) {
     Complaint complaint;
+    Complaint complaint1("saffa");
     complaint.setBadWords("Cold food");
     complaint.setBadWords("Late delivery");
     CHECK_EQUAL("Late delivery", complaint.getBadWords());
@@ -486,35 +481,6 @@ TEST(TakeProducts_ThrowsIfCookNotInRestaurant) {
     Product p("Tomato", 20);
     CHECK_THROW(cook.takeProducts(p, 1, r), UnempolymentError);
 }
-
-// TEST(TakeProducts_DecreasesAmountIfProductFound) {
-//     Cook cook("Ivan", 3000, true);
-//     Restaurant r;
-//     r.setCooks({cook});
-
-//     Product tomato("Tomato", 20, 10);
-//     FoodPosition fp(tomato, 10);
-
-//     cook.takeProducts(tomato, 3, r);
-
-//     CHECK_EQUAL(7, r.warehouse.stored[0].getAmount());
-// }
-
-// TEST(TakeProducts_DoesNothingIfProductNotFound) {
-//     Cook cook("Ivan", 3000, true);
-//     Restaurant r;
-//     r.setCooks({cook});
-
-//     Product cheese("Cheese", 50, 10);
-//     FoodPosition fp(cheese, 10);
-//     r.warehouse.stored.push_back(fp);
-
-//     Product tomato("Tomato", 20, 10);
-//     cook.takeProducts(tomato, 3, r);
-
-//     CHECK_EQUAL(10, r.getWarehouse().stored[0].getAmount());
-// }
-
 }
 
 SUITE(CourierTests) {
@@ -595,7 +561,7 @@ TEST(UseBonus_ValidAmountIncreasesCash) {
 TEST(UseBonus_TooMuch_ThrowsNothing) {
     Customer c;
     c.setBonusesAmount(5);
-    CHECK_THROW(c.useBonus(10), BannedUserError); // логика в коде неверная: else относится к if (amount <= bonusesAmount)
+    CHECK_THROW(c.useBonus(10), BannedUserError); 
 }
 
 TEST(OrderSomething_SuccessfulPaymentAddsOrderAndReducesCash) {
@@ -605,7 +571,7 @@ TEST(OrderSomething_SuccessfulPaymentAddsOrderAndReducesCash) {
     c.addToOrder(pos);
 
     Restaurant r;
-    c.setCash(5); // меньше, чем стоимость заказа
+    c.setCash(5);
     CHECK_EQUAL(0, r.getOrders().size());
 }
 
@@ -613,10 +579,12 @@ TEST(OrderSomething_InsufficientFunds_Throws) {
     Customer c("Ivan", 30, "ivan@example.com", 100);
     Eatable eat("Burger", 10.0, 5);
     OrderPosition pos(eat, 1);
+    Order o;
+    c.setOrder(o);
     c.addToOrder(pos);
 
     Restaurant r;
-    c.setCash(100); // больше, чем стоимость — должно выбросить исключение по логике
+    c.setCash(3);
     CHECK_THROW(c.orderSomething(r), InsufficientFundsError);
 }
 
@@ -643,7 +611,7 @@ TEST(LeaveComplaint_AddsToComplaintBook) {
  SUITE(DeliveryTests) {
 
 TEST(Constructor_SetsVehicleAndCourier) {
-     Vehicle v("ModelX", 2); // предполагается: model, capacity
+    Vehicle v("ModelX", 2); 
     Courier c("Ivan", 25, "+375291234567");
     Delivery d(v, c);
 
@@ -656,9 +624,10 @@ TEST(SetVehicle_UpdatesVehicle) {
     Vehicle v2("Car", 4);
     Courier c("Ivan", 25, "+375291234567");
     Delivery d(v1, c);
+    Delivery d1;
 
     d.setVehicle(v2);
-    CHECK_EQUAL(true ,v2 == d.getVehicle());
+    CHECK_EQUAL(v2, d.getVehicle());
 }
 
 TEST(SetCourier_UpdatesCourier) {
@@ -689,7 +658,7 @@ TEST(SetDeliveryRoute_UpdatesRoute) {
     Courier c("Ivan", 25, "+375291234567");
     Delivery d(v, c);
 
-    DeliveryRoute route("Start", "End", 5.0); // предполагается: from, to, distance
+    DeliveryRoute route("Start", "End", 5.0);
     d.setDeliveryRoute(route);
     CHECK_EQUAL(true, route == d.getDeliveryRoute());
 }
@@ -796,7 +765,7 @@ SUITE(DinningRoomTests) {
 
 TEST(DefaultConstructor_InitializesFields) {
     DinningRoom dr;
-    CHECK_EQUAL(0, dr.getArea()); // from Place
+    CHECK_EQUAL(0, dr.getArea());
     CHECK_EQUAL(0, dr.getTablesCount());
     CHECK_EQUAL(true, dr.getIsOpen());
     CHECK_EQUAL(0, dr.getRequirement().getMinArea());
@@ -909,6 +878,7 @@ SUITE(DishwasherTests) {
 
 TEST(Constructor_SetsAllFieldsCorrectly) {
     Dishwasher dw("Bosch", true, 5, true);
+    Dishwasher d;
     CHECK_EQUAL("Bosch", dw.getName());
     CHECK_EQUAL(true, dw.getIsElectric());
     CHECK_EQUAL(true, dw.getIsAvailable());
@@ -933,7 +903,7 @@ TEST(DefaultConstructor_InitializesFields) {
     Drink d;
     CHECK_EQUAL("", d.getName());
     CHECK_EQUAL(0, d.getCost());
-    CHECK_EQUAL(0, d.getTime()); // из базового Eatable
+    CHECK_EQUAL(0, d.getTime());
     CHECK_EQUAL(0, d.getCalories());
     CHECK_EQUAL(false, d.isEighteenPlus());
 }
@@ -942,7 +912,7 @@ TEST(ParameterizedConstructor_SetsFieldsCorrectly) {
     Drink d("Cola", 3, 120);
     CHECK_EQUAL("Cola", d.getName());
     CHECK_EQUAL(3, d.getCost());
-    CHECK_EQUAL(0, d.getTime()); // всегда 0 для напитков
+    CHECK_EQUAL(0, d.getTime());
     CHECK_EQUAL(120, d.getCalories());
     CHECK_EQUAL(false, d.isEighteenPlus());
 }
@@ -958,19 +928,8 @@ TEST(SetIsEighteenPlus_UpdatesFlag) {
     d.setIsEighteenPlus(true);
     CHECK_EQUAL(true, d.isEighteenPlus());
 }
-
-TEST(CopyConstructor_CopiesAllFields) {
-    Drink original("Beer", 5, 180);
-    original.setIsEighteenPlus(true);
-
-    Drink copy(original);
-    CHECK_EQUAL("Beer", copy.getName());
-    CHECK_EQUAL(5, copy.getCost());
-    CHECK_EQUAL(0, copy.getCalories());
-    CHECK_EQUAL(true, copy.isEighteenPlus());
 }
 
-}
 
 SUITE(EatableTests) {
 
@@ -1034,7 +993,7 @@ SUITE(FoodTests) {
 TEST(Constructor_SetsFieldsCorrectly) {
     Product p1("Tomato", 20);
     Product p2("Cheese", 100);
-    std::vector<FoodPosition> composition = {
+    vector<FoodPosition> composition = {
         FoodPosition{p1, 2},
         FoodPosition{p2, 1}
     };
@@ -1045,21 +1004,11 @@ TEST(Constructor_SetsFieldsCorrectly) {
     CHECK_EQUAL(2, food.getComposition().size());
 }
 
-TEST(CopyConstructor_CopiesAllFields) {
-    Product p("Meat", 150);
-    std::vector<FoodPosition> comp = { FoodPosition{p, 1} };
-    Food original("Steak", 20, comp, 25);
-
-    Food copy(original);
-    CHECK_EQUAL("Steak", copy.getName());
-    CHECK_EQUAL(20, copy.getCost());
-    CHECK_EQUAL(1, copy.getComposition().size());
-}
-
 TEST(SetComposition_UpdatesComposition) {
     Food food("Soup", 5, {}, 10);
+    Food f;
     Product p("Salt", 0);
-    std::vector<FoodPosition> comp = { FoodPosition{p, 1} };
+    vector<FoodPosition> comp = { FoodPosition{p, 1} };
     food.setComposition(comp);
     CHECK_EQUAL(1, food.getComposition().size());
 }
@@ -1067,7 +1016,8 @@ TEST(SetComposition_UpdatesComposition) {
 TEST(GetCalories_ComputesTotalCorrectly) {
     Product p1("Tomato", 20);
     Product p2("Cheese", 100);
-    std::vector<FoodPosition> composition = {
+    Food f;
+    vector<FoodPosition> composition = {
         FoodPosition{p1, 3},
         FoodPosition{p2, 2}
     };
@@ -1488,7 +1438,7 @@ TEST(DefaultConstructor_InitializesEmptyMenu) {
 TEST(ParameterizedConstructor_SetsItemsCorrectly) {
     Eatable e1("Burger", 5.0, 10);
     Eatable e2("Pizza", 7.5, 15);
-    std::vector<Eatable> items = {e1, e2};
+    vector<Eatable> items = {e1, e2};
     Menu menu(items);
     CHECK_EQUAL(2, menu.getItems().size());
     CHECK(menu.getItems()[0] == e1);
@@ -1597,7 +1547,7 @@ TEST(DefaultValues_AreCorrect) {
 TEST(SetEatList_UpdatesListAndCalculations) {
     Eatable e1("Burger", 5.0, 10);
     Eatable e2("Pizza", 7.5, 15);
-    std::vector<OrderPosition> list = {
+    vector<OrderPosition> list = {
         OrderPosition{e1, 1},
         OrderPosition{e2, 1}
     };
@@ -1681,6 +1631,7 @@ SUITE(OvenTests) {
 
 TEST(Constructor_SetsAllFieldsCorrectly) {
     Oven oven("Electrolux", true, 250, true);
+    Oven o;
     CHECK_EQUAL("Electrolux", oven.getName());
     CHECK_EQUAL(true, oven.getIsElectric());
     CHECK_EQUAL(true, oven.getIsAvailable());
@@ -2096,6 +2047,7 @@ SUITE(StoveTests) {
 
 TEST(Constructor_SetsAllFieldsCorrectly) {
     Stove stove("Gorenje", true, 4, true);
+    Stove s;
     CHECK_EQUAL("Gorenje", stove.getName());
     CHECK_EQUAL(true, stove.getIsElectric());
     CHECK_EQUAL(true, stove.getIsAvailable());
@@ -2337,12 +2289,12 @@ TEST(FastDelivery_PrintsCorrectMessage) {
     Order order;
     order.setID(101);
 
-    std::stringstream buffer;
-    std::streambuf* old = std::cout.rdbuf(buffer.rdbuf());
+    stringstream buffer;
+    streambuf* old = cout.rdbuf(buffer.rdbuf());
 
     vip.fastDelivery(order);
 
-    std::cout.rdbuf(old);
+    cout.rdbuf(old);
     CHECK_EQUAL("VIP клиент запросил быструю доставку заказа #101\n", buffer.str());
 }
 

@@ -1,5 +1,14 @@
 #include "../include/Order.h"
-#include <typeinfo>
+Order::Order()
+        : eatList{}, adress{}, done(false), delievered(false), id(0) {}
+
+Order::Order(const vector<OrderPosition>& eatList, const string& adress, bool done,
+          bool delievered, int id)
+        : eatList(eatList),
+          adress(adress),
+          done(done),
+          delievered(delievered),
+          id(id) {}
 double Order::getCost() const{
     double total = 0;
     for (const auto& item : eatList) {

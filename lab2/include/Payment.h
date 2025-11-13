@@ -8,15 +8,22 @@ public:
     Payment(double amount, const string& method, const string& currency);
 
     double getAmount() const;
+    void setAmount(double amount);
+
     string getMethod() const;
+    void setMethod(const string& method);
+    
     string getCurrency() const;
     time_t getTime() const;
-    bool isConfirmed() const;
-
-    void setAmount(double amount);
-    void setMethod(const string& method);
     void setCurrency(const string& currency);
+
+    bool isConfirmed() const;
     void confirm();
+
+    
+    
+   
+    
 
 private:
     double amount;

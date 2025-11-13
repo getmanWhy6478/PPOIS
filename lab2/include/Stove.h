@@ -3,12 +3,12 @@
 #include "KitchenAppliance.h"
 using namespace std;
 class Stove : public KitchenAppliance {
-private:
-    int burnerCount;
-
 public:
+    Stove();
     Stove(const string& name, bool isElectric, int burnerCount, bool isAvailable = true);
 
     int getBurnerCount() const;
     void setBurnerCount(int count);
+private:
+    int burnerCount;
 };

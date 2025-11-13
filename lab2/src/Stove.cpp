@@ -1,4 +1,7 @@
 #include "../include/Stove.h"
+
+Stove::Stove()
+    : KitchenAppliance("", true, false), burnerCount(0){}
 Stove::Stove(const string& name, bool isElectric, int burnerCount, bool isAvailable)
     : KitchenAppliance(name, isElectric, isAvailable), burnerCount(burnerCount) {}
 

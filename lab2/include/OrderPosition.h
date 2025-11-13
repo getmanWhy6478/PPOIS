@@ -9,8 +9,10 @@ public:
 
     Eatable getEatable();
     void setEatable(Eatable& eat);
+
     int getAmount() const;
     void setAmount(int amount);
+    
     bool isDone() const;
     void setDone(bool done);
 private:

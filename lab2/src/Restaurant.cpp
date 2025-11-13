@@ -1,7 +1,6 @@
 #include "../include/Restaurant.h"
 #include <algorithm>
-Restaurant::Restaurant()
-    : adress(), manager(), dinningRoom(), warehouse(), kitchen(), cooks(), couriers() {}
+Restaurant::Restaurant() = default;
 
 Restaurant::Restaurant(const Adress& adress, const Manager& manager,
                        const DinningRoom& dinningRoom, const Warehouse& warehouse, const Kitchen& kitchen)

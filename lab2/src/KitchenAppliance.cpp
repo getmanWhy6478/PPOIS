@@ -1,10 +1,8 @@
 #include "../include/KitchenAppliance.h"
 
-// Конструктор по умолчанию
 KitchenAppliance::KitchenAppliance()
     : name(""), isElectric(false), isAvailable(true) {}
 
-// Конструктор с параметрами
 KitchenAppliance::KitchenAppliance(const std::string& name, bool isElectric, bool isAvailable)
     : name(name), isElectric(isElectric), isAvailable(isAvailable) {}
 

@@ -5,9 +5,6 @@ Adress::Adress() : city(""), street(""), house(0) {}
 Adress::Adress(const string& city, const string& street, int house)
     : city(city), street(street), house(house) {}
 
-Adress::Adress(const Adress& other)
-    : city(other.city), street(other.street), house(other.house) {}
-
 string Adress::getCity() {
     return city;
 }

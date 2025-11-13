@@ -4,6 +4,7 @@ using namespace std;
 class LoyaltyProgram {
 
 public:
+    LoyaltyProgram();
     LoyaltyProgram(const string& name, int minPoints, double reward);
 
     const string& getName() const;

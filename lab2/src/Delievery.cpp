@@ -1,5 +1,7 @@
 #include "../include/Delivery.h"
 
+Delivery::Delivery() = default;
+
 Delivery::Delivery(const Vehicle& vehicle, const Courier& courier)
     : vehicle(vehicle), courier(courier) {}
 

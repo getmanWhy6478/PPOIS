@@ -8,9 +8,9 @@ public:
                        int minCooksNeeded, bool needsAppliance);
 
     int getMinTablesCount() const;
-    bool getMustBeOpen() const;
-
     void setMinTablesCount(int minTablesCount);
+    
+    bool getMustBeOpen() const;
     void setMustBeOpen(bool mustBeOpen);
 
     bool isDinningRoomSatisfiedBy(int actualArea, bool hasElectricity, bool isAccessible,

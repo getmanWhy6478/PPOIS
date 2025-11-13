@@ -20,13 +20,14 @@ public:
     void leaveComplaint(ComplaintBook& complaintBook, Complaint complaint);
 
     Order getOrder() const;
-    int getBonusesAmount() const;
-    int getCash() const;
-
     void setOrder(const Order& order);
-    void setBonusesAmount(int amount);
-    void setCash(int amount);
 
+    int getBonusesAmount() const;
+    void setBonusesAmount(int amount);
+    
+    int getCash() const;
+    void setCash(int amount);
+ 
 private:
     Order order;
     int bonusesAmount;

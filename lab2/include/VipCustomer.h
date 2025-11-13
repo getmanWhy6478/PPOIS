@@ -9,8 +9,10 @@ public:
     Vip_Customer(const string& name, int age, const string& email, int cash, int vipDays, int vipCategory);
     
     void fastDelivery(Order order);
+    
     int getVipDays() const;
     void setVipDays(int vipDays);
+
     int getVipCategory() const;
     void setVipCategory(int vipCategory);
 private:

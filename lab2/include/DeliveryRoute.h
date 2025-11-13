@@ -9,16 +9,14 @@ public:
     DeliveryRoute(const string& startPoint, const string& endPoint, double totalDistance);
 
     string getStartPoint() const;
-
-    string getEndPoint() const;
-
-    double getTotalDistance() const;
-    
     void setStartPoint(const string& point);
 
+    string getEndPoint() const;
     void setEndPoint(const string& point);
 
+    double getTotalDistance() const;
     void setTotalDistance(double distance);
+    
     bool operator==(const DeliveryRoute& other) const;
 private:
     string startPoint;

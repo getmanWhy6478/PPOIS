@@ -1,12 +1,10 @@
 #include "../include/Food.h"
 
+Food::Food() = default;
+
 Food::Food(const string& name, int cost, vector<FoodPosition>  composition, int cookingTime)
     : Eatable(name, cost, cookingTime), composition(composition), done(false) {}
 
-
-Food::Food(Food& other)
-    : Eatable(other), composition(other.composition),
-      done(other.done) {}
 vector<FoodPosition> Food::getComposition() const{
     return composition;
 }

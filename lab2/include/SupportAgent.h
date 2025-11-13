@@ -9,6 +9,7 @@ class SupportAgent : public User {
 public:
     SupportAgent();
     SupportAgent(const string& name, int age, const string& email);
+    
     void banUser(User& user);
     void deleteRating(Rating& rating, Restaurant& restaurant);
 };

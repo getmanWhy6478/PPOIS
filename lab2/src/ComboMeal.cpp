@@ -1,6 +1,7 @@
 #include "../include/ComboMeal.h"
 #include <algorithm>
-
+ComboMeal::ComboMeal()
+    : name(""), includedItems(), price(0), available(true) {}
 ComboMeal::ComboMeal(const string& name, const vector<Eatable>& items, double price)
     :name(name), includedItems(items), price(price), available(true) {}
 

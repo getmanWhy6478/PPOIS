@@ -1,5 +1,6 @@
 #include "../include/Ad.h"
-
+Ad::Ad() 
+    : title(""), text(""), isActive(true) {}
 Ad::Ad(const string& title, const string& text, bool isActive)
     : title(title), text(text), isActive(isActive) {}
 

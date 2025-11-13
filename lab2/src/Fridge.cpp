@@ -1,5 +1,6 @@
 #include "../include/Fridge.h"
-
+Fridge::Fridge()
+    : KitchenAppliance("", true, false), capacityLiters(0){}
 Fridge::Fridge(const string& name, bool isElectric, int capacityLiters, bool isAvailable)
     : KitchenAppliance(name, isElectric, isAvailable), capacityLiters(capacityLiters) {}
 

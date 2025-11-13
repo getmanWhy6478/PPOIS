@@ -9,13 +9,12 @@ public:
     Vehicle(const string& model, int capacity);
 
     string getModel() const;
-    int getCapacity() const;
-
     void setModel(const string& model);
+    int getCapacity() const;
     void setCapacity(int capacity);
 
     bool operator==(const Vehicle& other) const;
-
+    friend ostream& operator<<(ostream& os, const Vehicle& vehicle);
 protected:
     string model;
     int capacity;

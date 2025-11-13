@@ -4,13 +4,13 @@
 Customer::Customer()
     : User(), order(), bonusesAmount(0), cash(0) {}
 
-Customer::Customer(const std::string& name, int age, const std::string& email, int cash)
+Customer::Customer(const string& name, int age, const string& email, int cash)
     : User(name, age, email), order(), bonusesAmount(0), cash(cash) {}
 
 void Customer::orderSomething(Restaurant& restaurant) {
     if (!banned){
         Payment payment(order.getCost(), "byCArd", "BYN");
-        if (cash < payment.getAmount()){
+        if (cash > payment.getAmount()){
             restaurant.orders.push_back(this->order);
             cash -= payment.getAmount();
             payment.confirm();
@@ -27,8 +27,8 @@ void Customer::orderSomething(Restaurant& restaurant) {
 void Customer::useBonus(int amount) {
     if (!banned)
         if (amount <= bonusesAmount) {
-        bonusesAmount -= amount;
-        cash += amount*0.5;
+            bonusesAmount -= amount;
+            cash += amount*0.5;
         }
     else{
         throw BannedUserError();
@@ -37,7 +37,7 @@ void Customer::useBonus(int amount) {
 
 void Customer::addToOrder(OrderPosition orderPosition) {
     if (!banned)
-        order.eatList.push_back(orderPosition); // добавить оплату
+        order.eatList.push_back(orderPosition); 
     else{
         throw BannedUserError();
     }

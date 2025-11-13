@@ -26,3 +26,9 @@ void Vehicle::setCapacity(int capacity) {
 bool Vehicle::operator==(const Vehicle& other) const {
         return model == other.model && capacity == other.capacity;
 }
+ostream& operator<<(ostream& os, const Vehicle& vehicle) {
+    os << "Vehicle: "
+       << "Model = " << vehicle.model
+       << ", Capacity = " << vehicle.capacity;
+    return os;
+}

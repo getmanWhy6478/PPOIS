@@ -7,11 +7,12 @@ public:
     KitchenAppliance(const string& name, bool isElectric, bool isAvailable = true);
 
     string getName() const;
-    bool getIsElectric() const;
-    bool getIsAvailable() const;
-
     void setName(const string& name);
+
+    bool getIsElectric() const;
     void setIsElectric(bool isElectric);
+    
+    bool getIsAvailable() const;
     void setIsAvailable(bool isAvailable);
 
 private:

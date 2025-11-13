@@ -18,24 +18,32 @@ public:
                const DinningRoom& dinningRoom, const Warehouse& warehouse, const Kitchen& kitchen);
 
     Adress getAdress() const;
-    Manager getManager() const;
-    DinningRoom getDinningRoom() const;
-    Warehouse getWarehouse() const;
-    Kitchen getKitchen() const;
-    vector<Cook> getCooks() const;
-    vector<Courier> getCouriers() const;
-    vector <Order> getOrders() const;
-    vector<Rating> getRatings() const;
-    Menu getMenu() const;
-
     void setAdress(const Adress& adress);
+
+    Manager getManager() const;
     void setManager(const Manager& manager);
+
+    DinningRoom getDinningRoom() const;
     void setDinningRoom(const DinningRoom& dinningRoom);
+
+    Warehouse getWarehouse() const;
     void setWarehouse(const Warehouse& warehouse);
+
+    Kitchen getKitchen() const;
     void setKitchen(const Kitchen& kitchen);
+
+    vector<Cook> getCooks() const;
     void setCooks(const vector<Cook>& cooks);
+
+    vector<Courier> getCouriers() const;
     void setCouriers(const vector<Courier>& couriers);
+
+    vector <Order> getOrders() const;
     void setOrders(const vector <Order>& orders);
+
+    vector<Rating> getRatings() const;
+
+    Menu getMenu() const;
     void setMenu(const Menu& menu);
 
     bool findCook(Cook cook) const;

@@ -32,4 +32,3 @@ bool Eatable::operator==(const Eatable& other){
            this->getCost() == other.getCost() &&
            this->getTime() == other.getTime();
 }
-Eatable::~Eatable() {};

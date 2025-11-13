@@ -8,13 +8,14 @@ public:
     Bonus(const string& name, double discountPercent, time_t expirationTime, bool isActive = true);
 
     string getName() const;
-    double getDiscountPercent() const;
-    time_t getExpirationTime() const;
-
     void setName(const string& name);
-    void setDiscountPercent(double percent);
-    void setExpirationTime(time_t time);
 
+    double getDiscountPercent() const;
+    void setDiscountPercent(double percent);
+
+    time_t getExpirationTime() const;
+    void setExpirationTime(time_t time);
+    
     double applyTo(double originalPrice) const;
 
     bool isExpired() const;

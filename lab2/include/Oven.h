@@ -4,6 +4,7 @@
 using namespace std;
 class Oven : public KitchenAppliance {
 public:
+    Oven();
     Oven(const string& name, bool isElectric, int maxTemperature, bool isAvailable = true);
 
     int getMaxTemperature() const;

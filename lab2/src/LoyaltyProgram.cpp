@@ -1,5 +1,9 @@
 #include "../include/LoyaltyProgram.h"
 
+LoyaltyProgram::LoyaltyProgram()
+    : programName(""), minPointsForReward(0), rewardAmount(0), active(true) {}
+
+
 LoyaltyProgram::LoyaltyProgram(const string& name, int minPoints, double reward)
     : programName(name), minPointsForReward(minPoints), rewardAmount(reward), active(true) {}
 

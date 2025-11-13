@@ -7,16 +7,19 @@
 
 class Delivery {
 public:
+    Delivery();
     Delivery(const Vehicle& vehicle, const Courier& courier);
 
     Vehicle getVehicle() const;
-    Courier getCourier() const;
-    Order getOrder() const;
-    DeliveryRoute getDeliveryRoute() const;
-
     void setVehicle(const Vehicle& vehicle);
+
+    Courier getCourier() const;
     void setCourier(const Courier& courier);
+
+    Order getOrder() const;
     void setOrder(const Order& order);
+    
+    DeliveryRoute getDeliveryRoute() const;
     void setDeliveryRoute(const DeliveryRoute& route);
 
     void confirmDelivery();

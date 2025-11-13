@@ -1,7 +1,7 @@
 #include "../include/Supplier.h"
 #include "../include/Errors.h"
 Supplier::Supplier()
-    : Worker("Unnamed Supplier", 0) {}
+    : Worker("", 0) {}
 
 Supplier::Supplier(const string& name, int salary)
     : Worker(name, salary) {}
