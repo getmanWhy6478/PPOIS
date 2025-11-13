@@ -6,6 +6,7 @@
 *.gcno
 *.gcda
 *.gcov
+*.json
 # Каталоги сборки
 /build/
 /bin/
