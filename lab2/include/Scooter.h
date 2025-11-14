@@ -1,5 +1,6 @@
 #pragma once
 #include "Vehicle.h"
+#include "DeliveryRoute.h"
 using namespace std;
 class Scooter : public Vehicle {
 
@@ -9,6 +10,8 @@ public:
 
     double getBatteryLevel() const;
     void setBatteryLevel(double level);
+
+    void shortDistance(DeliveryRoute& deliveryRoute);
 private:
     double batteryLevel;
 };

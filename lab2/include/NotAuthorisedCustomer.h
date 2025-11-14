@@ -9,16 +9,16 @@ public:
     NotAuthorisedCustomer();
     NotAuthorisedCustomer(const Order& order, int cash);
 
-    void orderSomething(Restaurant& restaurant);
-    void addToOrder(OrderPosition orderPosition);
+    void orderSomething(Restaurant& restaurant) ; 
+
+    void addToOrder(OrderPosition orderPosition); 
 
     Order getOrder() const;
-    void setOrder(const Order& orders);
+    void setOrder(const Order& order);
 
     int getCash() const;
-    void setCash(int cash);
-
-private:
+    void setCash(int amount);
+protected:
     Order order;
     int cash;
 };

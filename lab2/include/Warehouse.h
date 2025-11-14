@@ -20,9 +20,6 @@ public:
     int getCapacity() const;
     void setCapacity(int capacity);
 
-    int getHaveCooling() const;
-    void setHaveCooling(bool haveCooling);
-
     bool isFull() const;
 
 private:
@@ -30,7 +27,6 @@ private:
     WarehouseRequirement requirement;
     vector<FoodPosition> stored;
 
-    bool haveCooling;
     friend class Cook;
     friend class Supplier;
 };

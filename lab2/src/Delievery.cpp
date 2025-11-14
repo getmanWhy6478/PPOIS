@@ -1,5 +1,5 @@
 #include "../include/Delivery.h"
-
+#include "Errors.h"
 Delivery::Delivery() = default;
 
 Delivery::Delivery(const Vehicle& vehicle, const Courier& courier)
@@ -34,4 +34,14 @@ void Delivery::setDeliveryRoute(const DeliveryRoute& route) {
 }
 void Delivery:: confirmDelivery(){
     order.setIsDelievered(true);
+}
+
+int Delivery::getTime(){
+    return time;
+}
+void Delivery::setTime(int time){
+    if (time >0)
+        this->time = time;
+    else
+        throw NegativeTimeError();
 }

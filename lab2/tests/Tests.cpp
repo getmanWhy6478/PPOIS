@@ -169,13 +169,22 @@ TEST(SetIsElectric_UpdatesValue) {
     bike.setIsElectric(true);
     CHECK_EQUAL(true, bike.getIsElectric());
 }
+TEST(SpeedUp){
+    Bike bike("PowerBike", 1, false);
+    Delivery d;
+    d.setTime(100);
+    bike.speedUp(d);
+    CHECK_EQUAL(50, d.getTime());
+}
+    
+
 }
 SUITE(BonusTests) {
 
 TEST(DefaultConstructor_InitializesFields) {
     Bonus b;
     CHECK_EQUAL("", b.getName());
-    CHECK_EQUAL(0.0, b.getDiscountPercent());
+    CHECK_EQUAL(0.0, b.getDiscount());
     CHECK_CLOSE(static_cast<double>(time(nullptr)), static_cast<double>(b.getExpirationTime()), 2.0);
 }
 
@@ -183,7 +192,7 @@ TEST(ParameterizedConstructor_SetsValidFields) {
     time_t future = time(nullptr) + 3600;
     Bonus b("Holiday", 15.0, future, true);
     CHECK_EQUAL("Holiday", b.getName());
-    CHECK_EQUAL(15.0, b.getDiscountPercent());
+    CHECK_EQUAL(15.0, b.getDiscount());
     CHECK_EQUAL(future, b.getExpirationTime());
 }
 
@@ -193,20 +202,10 @@ TEST(SetName_UpdatesName) {
     CHECK_EQUAL("Black Friday", b.getName());
 }
 
-TEST(SetDiscountPercent_ValidValue) {
+TEST(SetDiscount_ValidValue) {
     Bonus b;
-    b.setDiscountPercent(25.0);
-    CHECK_EQUAL(25.0, b.getDiscountPercent());
-}
-
-TEST(SetDiscountPercent_InvalidLow_Throws) {
-    Bonus b;
-    CHECK_THROW(b.setDiscountPercent(-10.0), InvalidPercentError);
-}
-
-TEST(SetDiscountPercent_InvalidHigh_Throws) {
-    Bonus b;
-    CHECK_THROW(b.setDiscountPercent(150.0), InvalidPercentError);
+    b.setDiscount(25.0);
+    CHECK_EQUAL(25.0, b.getDiscount());
 }
 
 TEST(SetExpirationTime_UpdatesTime) {
@@ -226,17 +225,6 @@ TEST(IsExpired_ReturnsTrueForPast) {
     CHECK_EQUAL(true, b.isExpired());
 }
 
-TEST(ApplyTo_NotExpired_AppliesDiscount) {
-    Bonus b("Promo", 20.0, time(nullptr) + 1000, true);
-    double result = b.applyTo(100.0);
-    CHECK_CLOSE(80.0, result, 0.001);
-}
-
-TEST(ApplyTo_Expired_NoDiscount) {
-    Bonus b("Expired", 20.0, time(nullptr) - 1000, true);
-    double result = b.applyTo(100.0);
-    CHECK_EQUAL(100.0, result);
-}
 
 }
 SUITE(CarTests) {
@@ -265,7 +253,19 @@ TEST(SetSeatCount_UpdatesValue) {
     car.setSeatCount(9);
     CHECK_EQUAL(9, car.getSeatCount());
 }
+TEST(FarAway){
+    Car car("Van", 7, 7);
+    Delivery d;
+    DeliveryRoute dr;
+    d.setTime(100);
+    dr.setTotalDistance(200);
+    d.setDeliveryRoute(dr);
+    car.farAway(d);
+    CHECK_EQUAL(50, d.getTime());
 }
+}
+
+
 SUITE(CEOTests) {
 
 TEST(DefaultConstructor_InitializesAsWorker) {
@@ -513,99 +513,82 @@ TEST(SetPhoneNumber_InvalidFormat_Throws) {
 }
 
 SUITE(CustomerTests) {
+    TEST(AddBonusAndFind) {
+        Customer c("Ivan", 30, "ivan@example.com", 100, Order());
 
-TEST(DefaultConstructor_InitializesFields) {
-    Customer c;
-    CHECK_EQUAL(0, c.getBonusesAmount());
-    CHECK_EQUAL(0, c.getCash());
-    CHECK_EQUAL(0, c.getOrder().getEatList().size());
-}
+        time_t tomorrow = time(nullptr) + 24*60*60;
+        Bonus b("Welcome", 10.0, tomorrow, true);
 
-TEST(ParameterizedConstructor_SetsFieldsCorrectly) {
-    Customer c("Ivan", 30, "ivan@example.com", 100);
-    CHECK_EQUAL("Ivan", c.getName());
-    CHECK_EQUAL(30, c.getAge());
-    CHECK_EQUAL("ivan@example.com", c.getEmail());
-    CHECK_EQUAL(100, c.getCash());
-}
+        CHECK(!c.findBonus(b));
+        c.addBonus(b);
+        CHECK(c.findBonus(b));
+    }
 
-TEST(SetBonusesAmount_NegativeSetsZero) {
-    Customer c;
-    c.setBonusesAmount(-10);
-    CHECK_EQUAL(0, c.getBonusesAmount());
-}
+    TEST(UseBonusSuccess) {
+        Customer c("Ivan", 30, "ivan@example.com", 100, Order());
 
-TEST(SetCash_NegativeSetsZero) {
-    Customer c;
-    c.setCash(-50);
-    CHECK_EQUAL(0, c.getCash());
-}
+        time_t tomorrow = time(nullptr) + 24*60*60;
+        Bonus b("Discount10", 10.0, tomorrow, true);
+        c.addBonus(b);
 
-TEST(AddToOrder_AppendsItemIfNotBanned) {
-    Customer c;
-    Eatable eat("Pizza", 10.0, 15);
-    OrderPosition pos(eat, 2);
-    c.addToOrder(pos);
-    CHECK_EQUAL(1, c.getOrder().getEatList().size());
-}
+        int before = c.getCash();
+        c.useBonus(b);
+        CHECK_EQUAL(before + static_cast<int>(b.getDiscount()), c.getCash());
+    }
 
-TEST(UseBonus_ValidAmountIncreasesCash) {
-    Customer c;
-    c.setBonusesAmount(20);
-    c.setCash(0);
-    c.useBonus(10);
-    CHECK_EQUAL(5, c.getCash());
-    CHECK_EQUAL(10, c.getBonusesAmount());
-}
+    TEST(UseBonusExpiredThrows) {
+        Customer c("Ivan", 30, "ivan@example.com", 100, Order());
 
-TEST(UseBonus_TooMuch_ThrowsNothing) {
-    Customer c;
-    c.setBonusesAmount(5);
-    CHECK_THROW(c.useBonus(10), BannedUserError); 
-}
+        time_t yesterday = time(nullptr) - 24*60*60;
+        Bonus expired("OldBonus", 15.0, yesterday, true);
+        c.addBonus(expired);
 
-TEST(OrderSomething_SuccessfulPaymentAddsOrderAndReducesCash) {
-    Customer c("Ivan", 30, "ivan@example.com", 50);
-    Eatable eat("Burger", 10.0, 5);
-    OrderPosition pos(eat, 1);
-    c.addToOrder(pos);
+        CHECK_THROW(c.useBonus(expired), BonusExpired);
+    }
 
-    Restaurant r;
-    c.setCash(5);
-    CHECK_EQUAL(0, r.getOrders().size());
-}
+    TEST(UseBonusNotOwnedThrows) {
+        Customer c("Ivan", 30, "ivan@example.com", 100, Order());
 
-TEST(OrderSomething_InsufficientFunds_Throws) {
-    Customer c("Ivan", 30, "ivan@example.com", 100);
-    Eatable eat("Burger", 10.0, 5);
-    OrderPosition pos(eat, 1);
-    Order o;
-    c.setOrder(o);
-    c.addToOrder(pos);
+        time_t tomorrow = time(nullptr) + 24*60*60;
+        Bonus b("AlienBonus", 5.0, tomorrow, true);
 
-    Restaurant r;
-    c.setCash(3);
-    CHECK_THROW(c.orderSomething(r), InsufficientFundsError);
-}
+        CHECK_THROW(c.useBonus(b), BonusExpired);
+    }
 
-TEST(LeaveRating_AddsToRestaurant) {
-    Customer c;
-    Restaurant r;
-    Rating rating(5, "Great!");
-    c.leaveRating(r, rating);
-    CHECK_EQUAL(1, r.getRatings().size());
-}
+    TEST(LeaveRatingSuccess) {
+        Customer c("Ivan", 30, "ivan@example.com", 100, Order());
+        Restaurant r;
+        Rating rating(5, "Excellent!");
 
-TEST(LeaveComplaint_AddsToComplaintBook) {
-    Customer c;
-    ComplaintBook book;
-    Complaint complaint;
-    complaint.setBadWords("Cold food");
-    c.leaveComplaint(book, complaint);
-    CHECK_EQUAL(1, book.getComplaints().size());
-    CHECK_EQUAL("Cold food", book.getComplaints()[0].getBadWords());
-}
+        c.leaveRating(r, rating);
+        CHECK_EQUAL(1, r.getRatings().size());
+        CHECK_EQUAL(5, r.getRatings()[0].getStars());
+    }
 
+    TEST(LeaveComplaintSuccess) {
+        Customer c("Ivan", 30, "ivan@example.com", 100, Order());
+        ComplaintBook cb;
+        Complaint complaint("Delivery was late");
+
+        c.leaveComplaint(cb, complaint);
+        CHECK_EQUAL(1, cb.getComplaints().size());
+        CHECK_EQUAL("Delivery was late", cb.getComplaints()[0].getBadWords());
+    }
+
+    TEST(ClearBonuses) {
+        Customer c("Ivan", 30, "ivan@example.com", 100, Order());
+
+        time_t tomorrow = time(nullptr) + 24*60*60;
+        Bonus b1("B1", 10.0, tomorrow, true);
+        Bonus b2("B2", 20.0, tomorrow, true);
+
+        c.addBonus(b1);
+        c.addBonus(b2);
+        CHECK_EQUAL(2, c.getBonuses().size());
+
+        c.clearBonuses();
+        CHECK_EQUAL(0, c.getBonuses().size());
+    }
 }
 
  SUITE(DeliveryTests) {
@@ -1117,7 +1100,6 @@ SUITE(KitchenTests) {
 TEST(DefaultConstructor_InitializesFields) {
     Kitchen kitchen;
     CHECK_EQUAL(0, kitchen.getCooksAmount());
-    CHECK_EQUAL(false, kitchen.getHaveAppliance());
 
     KitchenRequirement req = kitchen.getRequierement();
     CHECK_EQUAL(0, req.getMinArea());
@@ -1130,7 +1112,6 @@ TEST(DefaultConstructor_InitializesFields) {
 TEST(ParameterizedConstructor_SetsFieldsCorrectly) {
     Kitchen kitchen(120, 3, true, true);
     CHECK_EQUAL(3, kitchen.getCooksAmount());
-    CHECK_EQUAL(false, kitchen.getHaveAppliance());
 
     KitchenRequirement req = kitchen.getRequierement();
     CHECK_EQUAL(120, req.getMinArea());
@@ -1144,12 +1125,6 @@ TEST(SetCooksAmount_UpdatesValue) {
     Kitchen kitchen;
     kitchen.setCooksAmount(5);
     CHECK_EQUAL(5, kitchen.getCooksAmount());
-}
-
-TEST(SetHaveAppliance_UpdatesValue) {
-    Kitchen kitchen;
-    kitchen.setHaveAppliance(true);
-    CHECK_EQUAL(true, kitchen.getHaveAppliance());
 }
 
 TEST(SetRequierement_UpdatesRequirement) {
@@ -1351,7 +1326,7 @@ TEST(FireCourier_RemovesCourierIfManagerMatches) {
     r.setManager(m);
 
     Courier c("Alex", 25, "+375291234567");
-    r.setCouriers({c});
+    r.addCourier(c);
     CHECK_EQUAL(1, r.getCouriers().size());
 
     m.Fire(c, r);
@@ -1379,7 +1354,7 @@ TEST(FireCook_RemovesCookIfManagerMatches) {
     r.setManager(m);
 
     Cook cook("Olga", 2000);
-    r.setCooks({cook});
+    r.addCook(cook);
     CHECK_EQUAL(1, r.getCooks().size());
 
     m.Fire(cook, r);
@@ -1519,6 +1494,7 @@ TEST(OrderSomething_AddsOrderToRestaurant) {
     NotAuthorisedCustomer customer;
     OrderPosition pos;
     customer.addToOrder(pos);
+    customer.setCash(1000);
 
     Restaurant r;
     CHECK_EQUAL(0, r.getOrders().size());
@@ -1552,12 +1528,14 @@ TEST(SetEatList_UpdatesListAndCalculations) {
         OrderPosition{e2, 1}
     };
     Order order;
-    order.setEatList(list);
+    order.addEat(OrderPosition{e1, 1});
+    order.addEat(OrderPosition{e2, 1});
+
 
     CHECK_EQUAL(2, order.getEatList().size());
-    CHECK_EQUAL(12.5, order.getCost()); // 5.0 + 7.5
-    CHECK_EQUAL(25, order.getTime());   // 10 + 15
-    CHECK_EQUAL(6, order.getBonuses()); // 25 * 0.25
+    CHECK_EQUAL(12.5, order.getCost());
+    CHECK_EQUAL(25, order.getTime()); 
+    CHECK_EQUAL(6, order.getBonuses());
 }
 
 TEST(SetAdress_UpdatesValue) {
@@ -1763,7 +1741,7 @@ TEST(SetMustBeAccessible_UpdatesValue) {
 
 TEST(IsSatisfiedBy_ReturnsTrueIfAreaIsEnough) {
     PlaceRequirement req(80, true, true);
-    CHECK(req.isSatisfiedBy(100, false, false)); // ignores electricity/accessibility
+    CHECK(req.isSatisfiedBy(100, false, false)); 
 }
 
 TEST(IsSatisfiedBy_ReturnsFalseIfAreaIsTooSmall) {
@@ -1984,7 +1962,7 @@ TEST(SetCooksAndFindCook_WorksCorrectly) {
     Cook c1("Olga", 30, "Grill");
     Cook c2("Max", 25, "Oven");
 
-    r.setCooks({c1});
+    r.addCook(c1);
     CHECK(r.findCook(c1));
     CHECK(!r.findCook(c2));
 }
@@ -1994,7 +1972,7 @@ TEST(SetCouriersAndFindCourier_WorksCorrectly) {
     Courier cr1("Alex", 22, "+375291234567");
     Courier cr2("Nina", 28, "+375291111111");
 
-    r.setCouriers({cr1});
+    r.addCourier(cr1);
     CHECK(r.findCourier(cr1));
     CHECK(!r.findCourier(cr2));
 }
@@ -2007,7 +1985,7 @@ TEST(SetOrdersAndMenu_WorksCorrectly) {
     Eatable e("Burger", 5.0, 10);
     m.addItem(e);
 
-    r.setOrders({o});
+    r.addOrder(o);
     r.setMenu(m);
 
     CHECK_EQUAL(1, r.getOrders().size());
@@ -2040,7 +2018,14 @@ TEST(SetBatteryLevel_UpdatesValue) {
     s.setBatteryLevel(42.0);
     CHECK_EQUAL(42.0, s.getBatteryLevel());
 }
-
+TEST(ShortDistance){
+    Scooter s;
+    s.setBatteryLevel(42.0);
+    DeliveryRoute dr;
+    dr.setTotalDistance(200);
+    s.shortDistance(dr);
+    CHECK_EQUAL(100, dr.getTotalDistance());
+}
 }
 
 SUITE(StoveTests) {
@@ -2114,7 +2099,7 @@ TEST(ParameterizedConstructor_SetsFieldsCorrectly) {
 
 TEST(BanUser_SetsUserAsBanned) {
     SupportAgent agent;
-    User user("Bob", 25, "bob@example.com");
+    User user("Bob", 25, "bob@example.com", false);
     CHECK_EQUAL(false, user.getBanned());
 
     agent.banUser(user);
@@ -2169,7 +2154,7 @@ TEST(DefaultConstructor_InitializesFields) {
 }
 
 TEST(ParameterizedConstructor_SetsFieldsCorrectly) {
-    User u("Ivan", 35, "ivan@example.com");
+    User u("Ivan", 35, "ivan@example.com", false);
     CHECK_EQUAL("Ivan", u.getName());
     CHECK_EQUAL(35, u.getAge());
     CHECK_EQUAL("ivan@example.com", u.getEmail());
@@ -2263,7 +2248,8 @@ TEST(DefaultConstructor_InitializesFields) {
 }
 
 TEST(ParameterizedConstructor_SetsFieldsCorrectly) {
-    Vip_Customer vip("Ivan", 40, "ivan@example.com", 500, 30, 2);
+    Order o;
+    Vip_Customer vip("Ivan", 40, "ivan@example.com", 500, 30, 2, o);
     CHECK_EQUAL("Ivan", vip.getName());
     CHECK_EQUAL(40, vip.getAge());
     CHECK_EQUAL("ivan@example.com", vip.getEmail());
@@ -2307,7 +2293,6 @@ TEST(DefaultConstructor_InitializesFields) {
     CHECK_EQUAL(0, w.getCapacity());
     CHECK_EQUAL(0, w.getArea());
     CHECK_EQUAL(0, w.getStored().size());
-    CHECK_EQUAL(0, w.getHaveCooling());
 }
 
 TEST(ParameterizedConstructor_SetsFieldsCorrectly) {
@@ -2329,12 +2314,6 @@ TEST(SetCapacity_UpdatesValue) {
     Warehouse w;
     w.setCapacity(200);
     CHECK_EQUAL(200, w.getCapacity());
-}
-
-TEST(SetHaveCooling_UpdatesValue) {
-    Warehouse w;
-    w.setHaveCooling(true);
-    CHECK_EQUAL(true, w.getHaveCooling());
 }
 
 TEST(SetRequirement_UpdatesValue) {

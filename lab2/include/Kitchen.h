@@ -16,8 +16,6 @@ public:
     int getCooksAmount() const;
     void setCooksAmount(int amount);
 
-    bool getHaveAppliance() const;
-    void setHaveAppliance(bool haveAppliance);
 
     vector <KitchenAppliance> getAppliance() const;
     void setAppliance (vector <KitchenAppliance> applience);
@@ -26,7 +24,6 @@ public:
 private:
     int cooksAmount;
     KitchenRequirement requirement;
-    bool haveAppliance;
     vector <KitchenAppliance> applience;
 };
 

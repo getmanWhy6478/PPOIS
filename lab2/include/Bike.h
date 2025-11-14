@@ -1,5 +1,6 @@
 #pragma once
 #include "Vehicle.h"
+#include "Delivery.h"
 using namespace std;
 class Bike : public Vehicle {
 public:
@@ -8,6 +9,8 @@ public:
 
     bool getIsElectric() const;
     void setIsElectric(bool value);
+
+    void speedUp(Delivery& delivery);
 private:
     bool isElectric;
 

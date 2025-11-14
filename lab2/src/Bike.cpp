@@ -12,3 +12,6 @@ bool Bike::getIsElectric() const {
 void Bike::setIsElectric(bool value) {
     isElectric = value;
 }
+void Bike::speedUp(Delivery& delivery){
+    delivery.setTime(delivery.getTime() / 2);
+}

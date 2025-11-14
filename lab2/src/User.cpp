@@ -1,10 +1,10 @@
 #include "../include/User.h"
 
 User::User()
-    : name(""), age(0), email("") {}
+    : name(""), age(0), email(""), banned(false) {}
 
-User::User(const string& name, int age, const string& email)
-    : name(name), age(age), email(email) {}
+User::User(const string& name, int age, const string& email, bool banned)
+    : name(name), age(age), email(email), banned(banned) {}
 
 string User::getName() const {
     return name;

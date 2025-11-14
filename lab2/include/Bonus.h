@@ -10,18 +10,18 @@ public:
     string getName() const;
     void setName(const string& name);
 
-    double getDiscountPercent() const;
-    void setDiscountPercent(double percent);
+    double getDiscount() const;
+    void setDiscount(double discount);
 
     time_t getExpirationTime() const;
     void setExpirationTime(time_t time);
-    
-    double applyTo(double originalPrice) const;
 
     bool isExpired() const;
+    bool operator==(const Bonus& other) const;
+    
 
 private:
     string name;
-    double discountPercent;
+    double discount;
     time_t expirationTime;
 };

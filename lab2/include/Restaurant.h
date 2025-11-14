@@ -10,6 +10,7 @@
 #include "Courier.h"
 #include "Menu.h"
 #include "SupportAgent.h"
+#include "Order.h"
 using namespace std;
 class Restaurant {
 public:
@@ -33,15 +34,16 @@ public:
     void setKitchen(const Kitchen& kitchen);
 
     vector<Cook> getCooks() const;
-    void setCooks(const vector<Cook>& cooks);
+    void addCook(Cook cook);
 
     vector<Courier> getCouriers() const;
-    void setCouriers(const vector<Courier>& couriers);
+    void addCourier(Courier courier);
 
     vector <Order> getOrders() const;
-    void setOrders(const vector <Order>& orders);
+    void addOrder(Order orders);
 
     vector<Rating> getRatings() const;
+    void addRating(Rating rating);
 
     Menu getMenu() const;
     void setMenu(const Menu& menu);
@@ -60,8 +62,6 @@ private:
     vector <Order> orders;
     vector<Rating> ratings;
     Menu menu;
-friend class Customer;
-friend class NotAuthorisedCustomer;
 friend class SupportAgent;
 friend class Manager;
 };

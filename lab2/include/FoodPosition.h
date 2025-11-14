@@ -14,6 +14,5 @@ public:
 private:
     Product product;
     int amount;
-friend class Food;
 friend class Warehouse;
 };

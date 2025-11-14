@@ -1,51 +1,28 @@
 #include "../include/Customer.h"
 #include "../include/Errors.h"
 #include "../include/Payment.h"
-Customer::Customer()
-    : User(), order(), bonusesAmount(0), cash(0) {}
+#include <algorithm>
 
-Customer::Customer(const string& name, int age, const string& email, int cash)
-    : User(name, age, email), order(), bonusesAmount(0), cash(cash) {}
+Customer::Customer() = default;
 
-void Customer::orderSomething(Restaurant& restaurant) {
-    if (!banned){
-        Payment payment(order.getCost(), "byCArd", "BYN");
-        if (cash > payment.getAmount()){
-            restaurant.orders.push_back(this->order);
-            cash -= payment.getAmount();
-            payment.confirm();
-        }
-        else{
-            throw InsufficientFundsError();
-        }    
-    }
-    else{
-        throw BannedUserError();
-    }
+Customer::Customer(const string& name, int age, const string& email, int cash, Order order)
+    : User(name, age, email, false), NotAuthorisedCustomer(order, cash), bonuses() {}
+
+bool Customer::findBonus(Bonus bonus){
+    return find(bonuses.begin(), bonuses.end(), bonus) != bonuses.end();
 }
-
-void Customer::useBonus(int amount) {
-    if (!banned)
-        if (amount <= bonusesAmount) {
-            bonusesAmount -= amount;
-            cash += amount*0.5;
-        }
-    else{
+void Customer::useBonus(Bonus bonus) {
+    if (banned)
         throw BannedUserError();
+    else if (!findBonus(bonus) || bonus.isExpired()){
+        throw BonusExpired();
     }
-}
-
-void Customer::addToOrder(OrderPosition orderPosition) {
-    if (!banned)
-        order.eatList.push_back(orderPosition); 
-    else{
-        throw BannedUserError();
-    }
+        cash += bonus.getDiscount();
 }
 
 void Customer::leaveRating(Restaurant& restaurant, Rating rating) {
     if (!banned)
-        restaurant.ratings.push_back(rating);
+        restaurant.addRating(rating);
     else{
         throw BannedUserError();
     }
@@ -53,32 +30,30 @@ void Customer::leaveRating(Restaurant& restaurant, Rating rating) {
 
 void Customer::leaveComplaint(ComplaintBook& complaintBook, Complaint complaint) {
     if (!banned)
-            complaintBook.complaints.push_back(complaint);
+            complaintBook.addComplaint(complaint);
     else{
         throw BannedUserError();
     }
 }
 
-Order Customer::getOrder() const {
-    return order;
+vector<Bonus> Customer::getBonuses() const {
+    return bonuses;
 }
 
-int Customer::getBonusesAmount() const {
-    return bonusesAmount;
+void Customer::addBonus(Bonus bonus) {
+    bonuses.push_back(bonus);
 }
 
-int Customer::getCash() const {
-    return cash;
-}
 
-void Customer::setOrder(const Order& order) {
-    this->order = order;
+void Customer::clearBonuses(){
+    bonuses.clear();
 }
-
-void Customer::setBonusesAmount(int amount) {
-    bonusesAmount = (amount >= 0) ? amount : 0;
-}
-
-void Customer::setCash(int amount) {
-    cash = (amount >= 0) ? amount : 0;
+void Customer::useLoyaltyProgram(LoyaltyProgram program){
+    if(program.isActive() && loyaltypoints >= program.getMinPointsForReward()){
+        cash += program.getRewardAmount();
+        loyaltypoints -= program.getMinPointsForReward();
+    }
+    else{
+        throw LoyaltyProgramError();
+    }
 }

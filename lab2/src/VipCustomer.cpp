@@ -4,8 +4,9 @@
 Vip_Customer::Vip_Customer()
     : vipDays(0), vipCategory(0) {}
 
-Vip_Customer::Vip_Customer(const std::string& name, int age, const std::string& email, int cash, int vipDays, int vipCategory)
-    : Customer(name, age, email, cash),
+Vip_Customer::Vip_Customer(const std::string& name, int age, const std::string& email, int cash, 
+    int vipDays, int vipCategory, Order order)
+    : Customer(name, age, email, cash, order),
       vipDays(vipDays),
       vipCategory(vipCategory){}
 

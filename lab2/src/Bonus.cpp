@@ -3,19 +3,19 @@
 #include <ctime>
 
 Bonus::Bonus()
-    : name(""), discountPercent(0.0), expirationTime(time(nullptr)) {}
+    : name(""), discount(0.0), expirationTime(time(nullptr)) {}
 
-Bonus::Bonus(const string& name, double discountPercent, time_t expirationTime, bool isActive)
+Bonus::Bonus(const string& name, double discount, time_t expirationTime, bool isActive)
     : name(name), expirationTime(expirationTime) {
-    setDiscountPercent(discountPercent);
+    setDiscount(discount);
 }
 
 string Bonus::getName() const {
     return name;
 }
 
-double Bonus::getDiscountPercent() const {
-    return discountPercent;
+double Bonus::getDiscount() const {
+    return discount;
 }
 
 time_t Bonus::getExpirationTime() const {
@@ -26,26 +26,21 @@ void Bonus::setName(const string& name) {
     this->name = name;
 }
 
-void Bonus::setDiscountPercent(double percent) {
-    if (percent < 0.0 || percent > 100.0) {
-        throw InvalidPercentError();
-    }
-    discountPercent = percent;
+void Bonus::setDiscount(double discount) {
+    this->discount = discount;
 }
 
 void Bonus::setExpirationTime(time_t time) {
     expirationTime = time;
 }
 
-// Проверка на истечение срока действия
 bool Bonus::isExpired() const {
     return time(nullptr) > expirationTime;
 }
 
-// Применение бонуса к цене
-double Bonus::applyTo(double originalPrice) const {
-    if (isExpired()) 
-        return originalPrice;
-    return originalPrice * (1.0 - discountPercent / 100.0);
+bool Bonus::operator==(const Bonus& other) const {
+        return this->name == other.name &&
+               this->discount == other.discount &&
+               this->expirationTime == other.expirationTime;
 }
-
+    

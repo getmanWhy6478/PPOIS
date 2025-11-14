@@ -47,8 +47,8 @@ bool Order::isDelievered() const{
     return delievered;
 }
 
-void Order::setEatList(vector<OrderPosition> eatList) {
-    this->eatList = eatList;
+void Order::addEat(OrderPosition eat) {
+    eatList.push_back(eat);
 }
 
 void Order::setAdress(const string& adress) {

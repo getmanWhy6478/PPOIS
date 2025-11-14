@@ -19,7 +19,6 @@ std::vector<FoodPosition> Warehouse::getStored() const {
 }
 
 void Warehouse::setStored(FoodPosition& foodPosition) {
-
     for (auto& entry : stored) {
         if (entry.product == foodPosition.product) {
             entry.amount += foodPosition.amount;
@@ -36,14 +35,6 @@ int Warehouse::getCapacity() const {
 
 void Warehouse::setCapacity(int capacity) {
     this->capacity = capacity;
-}
-
-int Warehouse::getHaveCooling() const {
-    return haveCooling;
-}
-
-void Warehouse::setHaveCooling(bool haveCooling) {
-    this->haveCooling = haveCooling;
 }
 
 bool Warehouse::isFull() const {

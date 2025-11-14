@@ -1,5 +1,4 @@
 #include "../include/Scooter.h"
-
 Scooter::Scooter() : Vehicle("", 0), batteryLevel(100.0) {}
 
 Scooter::Scooter(const string& model, int capacity, double batteryLevel)
@@ -11,4 +10,8 @@ double Scooter::getBatteryLevel() const {
 
 void Scooter::setBatteryLevel(double level) {
     batteryLevel = level;
+}
+
+void Scooter::shortDistance(DeliveryRoute& deliveryRoute){
+    deliveryRoute.setTotalDistance(deliveryRoute.getTotalDistance() / 2);
 }

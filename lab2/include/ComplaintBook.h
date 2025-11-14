@@ -13,5 +13,4 @@ public:
     void clearComplaints();
 private:
     vector<Complaint> complaints;
-friend class Customer;
 };

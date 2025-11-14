@@ -65,15 +65,19 @@ void Restaurant::setKitchen(const Kitchen& kitchen) {
     this->kitchen = kitchen;
 }
 
-void Restaurant::setCooks(const vector<Cook>& cooks) {
-    this->cooks = cooks;
+void Restaurant::addCook(Cook cook) {
+    cooks.push_back(cook);
 }
 
-void Restaurant::setCouriers(const vector<Courier>& couriers) {
-    this->couriers = couriers;
+void Restaurant::addCourier(Courier courier) {
+    couriers.push_back(courier);
 }
-void Restaurant::setOrders(const vector<Order>& orders) {
-    this->orders = orders;
+void Restaurant::addOrder(Order order) {
+    orders.push_back(order);
+}
+
+void Restaurant::addRating(Rating rating) {
+    ratings.push_back(rating);
 }
 void Restaurant::setMenu(const Menu& menu) {
     this->menu = menu;

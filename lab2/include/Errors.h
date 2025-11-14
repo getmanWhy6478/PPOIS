@@ -33,10 +33,10 @@ public:
     CookBusyError() : DeliveryError("Повар занят.") {}
 };
 
-// 5. Курьер уже занят
-class CourierBusyError : public DeliveryError {
+//5. Бонус кончился или не существует
+class BonusExpired : public DeliveryError {
 public:
-    CourierBusyError() : DeliveryError("Курьер уже занят другим заказом.") {}
+    BonusExpired() : DeliveryError("Срок действия бонуса истёк или бонус не найден ") {}
 };
 
 // 6. Недопустимое блюдо
@@ -64,9 +64,9 @@ public:
 };
 
 // 10. Неправильный процент
-class InvalidPercentError : public DeliveryError {
+class NegativeTimeError: public DeliveryError {
 public:
-    InvalidPercentError() : DeliveryError("Некорректный процент.") {}
+    NegativeTimeError () : DeliveryError("Доставка не может занимать отрицательное время.") {}
 };
 
 // 11. Отрицательное количество продуктов
@@ -75,8 +75,7 @@ public:
     NegativeAmountError() : DeliveryError("Количество не может быть отрицательным.") {}
 };
 
-// 12. Не найдена позиция
-class PositionNotFoundError : public DeliveryError {
+class LoyaltyProgramError : public DeliveryError {
 public:
-    PositionNotFoundError() : DeliveryError("Нарушение бизнес-правил доставки.") {}
+    LoyaltyProgramError() : DeliveryError("Программа лояльности вам недоступна.") {}
 };

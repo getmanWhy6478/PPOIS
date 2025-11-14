@@ -21,13 +21,6 @@ int Kitchen::getCooksAmount() const {
 void Kitchen::setCooksAmount(int amount) {
     this->cooksAmount = amount;
 }
-bool Kitchen::getHaveAppliance() const {
-    return haveAppliance;
-}
-
-void Kitchen::setHaveAppliance(bool haveAppliance) {
-    this->haveAppliance = haveAppliance;
-}
 
 vector <KitchenAppliance> Kitchen::getAppliance() const{
     return applience;

@@ -4,7 +4,7 @@ using namespace std;
 class User{
 public:
     User();
-    User(const string& name, int age, const string& email);
+    User(const string& name, int age, const string& email, bool banned);
     string getName() const;
     void setName(const string& name);
 

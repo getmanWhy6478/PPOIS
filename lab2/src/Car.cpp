@@ -12,3 +12,8 @@ int Car::getSeatCount() const {
 void Car::setSeatCount(int count) {
     seatCount = count;
 }
+void Car::farAway(Delivery& delivery){
+    if(delivery.getDeliveryRoute().getTotalDistance() > 150){
+        delivery.setTime(delivery.getTime() / 2);
+    }
+}

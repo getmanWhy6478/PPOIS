@@ -22,6 +22,9 @@ public:
     DeliveryRoute getDeliveryRoute() const;
     void setDeliveryRoute(const DeliveryRoute& route);
 
+    int getTime();
+    void setTime(int time);
+
     void confirmDelivery();
 
 private:
@@ -30,5 +33,6 @@ private:
     Order order;
     DeliveryRoute route;
     DeliveryStatus status;
+    int time;
 };
 

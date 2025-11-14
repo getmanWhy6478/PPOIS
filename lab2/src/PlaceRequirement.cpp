@@ -1,7 +1,7 @@
 #include "../include/PlaceRequirement.h"
 
 PlaceRequirement::PlaceRequirement()
-    : minArea(0) {}
+    : minArea(0), requiresElectricity(false), mustBeAccessible(false) {}
 
 PlaceRequirement::PlaceRequirement(int minArea, bool requiresElectricity, bool mustBeAccessible)
     : minArea(minArea), requiresElectricity(requiresElectricity), mustBeAccessible(mustBeAccessible) {}

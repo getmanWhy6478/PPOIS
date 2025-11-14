@@ -6,7 +6,8 @@ using namespace std;
 class Vip_Customer : public Customer{
 public:
     Vip_Customer();
-    Vip_Customer(const string& name, int age, const string& email, int cash, int vipDays, int vipCategory);
+    Vip_Customer(const string& name, int age, const string& email, int cash, 
+        int vipDays, int vipCategory, Order order);
     
     void fastDelivery(Order order);
     

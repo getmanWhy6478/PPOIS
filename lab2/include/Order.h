@@ -12,7 +12,8 @@ public:
     int getBonuses() const;
 
     vector<OrderPosition> getEatList() const;
-    void setEatList(vector<OrderPosition> eatList);
+    void addEat(OrderPosition eat);
+    void clearOrder();
 
     string getAdress() const;
     void setAdress(const string& adress);
@@ -32,6 +33,4 @@ private:
     bool done;
     bool delievered;
     int id;
-friend class Customer;
-friend class NotAuthorisedCustomer;
 };

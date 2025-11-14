@@ -4,7 +4,7 @@ SupportAgent::SupportAgent()
     : User(){}
 
 SupportAgent::SupportAgent(const string& name, int age, const string& email)
-    : User(name, age, email){}
+    : User(name, age, email, false){}
 
 void SupportAgent::banUser(User& user){
     user.setBanned(true);

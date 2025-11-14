@@ -20,11 +20,6 @@ public:
     bool isConfirmed() const;
     void confirm();
 
-    
-    
-   
-    
-
 private:
     double amount;
     string method;     

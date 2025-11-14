@@ -1,10 +1,10 @@
 #include "../include/OrderPosition.h"
 
 OrderPosition::OrderPosition()
-    : eat(), amount(0) {}
+    : eat(), amount(0), done(false) {}
 
 OrderPosition::OrderPosition(Eatable& eatable, int amount)
-    : eat(eatable), amount(amount) {}
+    : eat(eatable), amount(amount), done(false) {}
 
 Eatable OrderPosition::getEatable() {
     return eat;

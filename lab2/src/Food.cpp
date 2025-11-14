@@ -16,7 +16,7 @@ void Food::setComposition(vector<FoodPosition> composition) {
 int Food::getCalories() {
     int total = 0;
     for (const auto& product : composition) {
-        total += product.product.getCalories() * product.amount;
+        total += product.getProduct().getCalories() * product.getAmount();
     }
     return total;
 }
