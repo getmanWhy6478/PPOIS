@@ -1,8 +1,9 @@
 #include "../include/Eatable.h"
 
-Eatable::Eatable() : name(""), cost(0), cookingTime(0) {}
+Eatable::Eatable() : name(""), cost(0), cookingTime(0), exparationTime(time(0) + 7200) {}
 
-Eatable::Eatable(const string& name, double cost, int cookingTime) : name(name), cost(cost), cookingTime(cookingTime) {}
+Eatable::Eatable(const string& name, double cost, int cookingTime, time_t exparationTime) : name(name), cost(cost), 
+cookingTime(cookingTime), exparationTime(exparationTime) {}
 
 double Eatable::getCost () const{
     return cost;
@@ -25,6 +26,13 @@ int Eatable::getTime() const{
 
 void Eatable::setTime(int cookingTime) {
     this->cookingTime = cookingTime;
+}
+
+time_t Eatable::getExparationTime() const{
+    return exparationTime;
+}
+void Eatable::setExparationTime(time_t exparationTime){
+    this->exparationTime = exparationTime;
 }
 
 bool Eatable::operator==(const Eatable& other){

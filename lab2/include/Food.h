@@ -7,7 +7,7 @@ using namespace std;
 class Food : public Eatable{
 public:
     Food();
-    Food(const string& name, int cost, vector<FoodPosition> composition, int cookingTime);
+    Food(const string& name, int cost, vector<FoodPosition> composition, int cookingTime, time_t ExparationTime);
 
     vector<FoodPosition> getComposition() const;
     void setComposition(vector<FoodPosition> composition);

@@ -3,7 +3,7 @@
 Drink::Drink() : Eatable(), eighteenPlus(false) {}
 
 Drink::Drink(const string& name, int cost, int calories)
-    : Eatable(name, cost, 0), calories(calories), eighteenPlus(false) {}
+    : Eatable(name, cost, 0, time(0) + 999999999), calories(calories), eighteenPlus(false) {}
 
 bool Drink::isEighteenPlus() const{
     return eighteenPlus;

@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include "KitchenAppliance.h"
+#include "Eatable.h"
 using namespace std;
 class Freezer : public KitchenAppliance {
 public:
@@ -9,6 +10,8 @@ public:
 
     int getMinTemperature() const;
     void setMinTemperature(int temp);
+
+    void cold(Eatable& eat);
 private:
     int minTemperature;
 

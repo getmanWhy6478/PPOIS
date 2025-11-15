@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include "KitchenAppliance.h"
+#include "Eatable.h"
 using namespace std;
 class Stove : public KitchenAppliance {
 public:
@@ -9,6 +10,8 @@ public:
 
     int getBurnerCount() const;
     void setBurnerCount(int count);
+
+    void fastFire(Eatable& eat);
 private:
     int burnerCount;
 };

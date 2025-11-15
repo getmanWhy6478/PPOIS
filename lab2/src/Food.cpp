@@ -2,8 +2,8 @@
 
 Food::Food() = default;
 
-Food::Food(const string& name, int cost, vector<FoodPosition>  composition, int cookingTime)
-    : Eatable(name, cost, cookingTime), composition(composition), done(false) {}
+Food::Food(const string& name, int cost, vector<FoodPosition>  composition, int cookingTime, time_t exparationTime)
+    : Eatable(name, cost, cookingTime, exparationTime), composition(composition), done(false) {}
 
 vector<FoodPosition> Food::getComposition() const{
     return composition;

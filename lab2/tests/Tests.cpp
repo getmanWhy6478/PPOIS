@@ -303,8 +303,8 @@ SUITE(ComboMealTests) {
 
 TEST(Constructor_SetsFieldsCorrectly) {
     vector<Eatable> items = {
-        Eatable("Burger", 5.0, 10),
-        Eatable("Fries", 2.5, 5)
+        Eatable("Burger", 5.0, 10, time(0) + 7200),
+        Eatable("Fries", 2.5, 5, time(0) + 7200)
     };
     ComboMeal combo("Lunch Combo", items, 9.99);
 
@@ -338,37 +338,37 @@ TEST(SetAvailability_UpdatesFlag) {
 
 TEST(AddItem_AppendsToList) {
     ComboMeal combo("Combo", {}, 5.0);
-    combo.addItem(Eatable("Drink", 1.5, 2));
+    combo.addItem(Eatable("Drink", 1.5, 2, time(0) + 7200));
     CHECK_EQUAL(1, combo.getIncludedItems().size());
     CHECK_EQUAL("Drink", combo.getIncludedItems()[0].getName());
 }
 
 TEST(RemoveItem_RemovesMatchingItem) {
     vector<Eatable> items = {
-        Eatable("Burger", 5.0, 10),
-        Eatable("Fries", 2.5, 5),
-        Eatable("Drink", 1.5, 2)
+        Eatable("Burger", 5.0, 10, time(0) + 7200),
+        Eatable("Fries", 2.5, 5, time(0) + 7200),
+        Eatable("Drink", 1.5, 2, time(0) + 7200)
     };
     ComboMeal combo("Combo", items, 10.0);
-    combo.removeItem(Eatable("Fries", 2.5, 5));
+    combo.removeItem(Eatable("Fries", 2.5, 5, time(0) + 7200));
     CHECK_EQUAL("Burger", combo.getIncludedItems()[0].getName());
     CHECK_EQUAL("Drink", combo.getIncludedItems()[1].getName());
 }
 
 TEST(RemoveItem_NoMatch_DoesNothing) {
     vector<Eatable> items = {
-        Eatable("Burger", 5.0, 10),
-        Eatable("Fries", 2.5, 5)
+        Eatable("Burger", 5.0, 10, time(0) + 7200),
+        Eatable("Fries", 2.5, 5, time(0) + 7200)
     };
     ComboMeal combo("Combo", items, 10.0);
-    combo.removeItem(Eatable("IceCream", 3.0, 0));
+    combo.removeItem(Eatable("IceCream", 3.0, 0, time(0) + 7200));
     CHECK_EQUAL(2, combo.getIncludedItems().size());
 }
 
 TEST(ClearItems_RemovesAll) {
     vector<Eatable> items = {
-        Eatable("Burger", 5.0, 10),
-        Eatable("Fries", 2.5, 5)
+        Eatable("Burger", 5.0, 10, time(0) + 7200),
+        Eatable("Fries", 2.5, 5, time(0) + 7200)
     };
     ComboMeal combo("Combo", items, 10.0);
     combo.clearItems();
@@ -462,14 +462,14 @@ TEST(SetActive_ChangesStatus) {
 
 TEST(Cooking_ThrowsIfInactive) {
     Cook cook("Ivan", 3000, false);
-    Eatable eat("Burger", 5.0, 10);
+    Eatable eat("Burger", 5.0, 10, time(0) + 7200);
     OrderPosition pos(eat, 1);
     CHECK_THROW(cook.Cooking(pos), CookBusyError);
 }
 
 TEST(Cooking_SetsOrderDoneIfActive) {
     Cook cook("Ivan", 3000, true);
-    Eatable eat("Burger", 5.0, 10);
+    Eatable eat("Burger", 5.0, 10, time(0) + 7200);
     OrderPosition pos(eat, 1);
     cook.Cooking(pos);
     CHECK_EQUAL(true, pos.isDone());
@@ -628,7 +628,7 @@ TEST(SetOrder_UpdatesOrder) {
     Courier c("Ivan", 25, "+375291234567");
     Delivery d(v, c);
 
-    Eatable eat("Pizza", 10.0, 15);
+    Eatable eat("Pizza", 10.0, 15, time(0) + 7200);
     OrderPosition pos(eat, 1);
     Order order;
 
@@ -924,14 +924,14 @@ TEST(DefaultConstructor_InitializesFields) {
 }
 
 TEST(ParameterizedConstructor_SetsFieldsCorrectly) {
-    Eatable e("Burger", 5.99, 12);
+    Eatable e("Burger", 5.99, 12, time(0) + 7200);
     CHECK_EQUAL("Burger", e.getName());
     CHECK_EQUAL(5.99, e.getCost());
     CHECK_EQUAL(12, e.getTime());
 }
 
 TEST(CopyConstructor_CopiesNameAndCostOnly) {
-    Eatable original("Pizza", 7.5, 20);
+    Eatable original("Pizza", 7.5, 20, time(0) + 7200);
     Eatable copy(original);
     CHECK_EQUAL("Pizza", copy.getName());
     CHECK_EQUAL(7.5, copy.getCost());
@@ -957,17 +957,22 @@ TEST(SetTime_UpdatesValue) {
 }
 
 TEST(EqualityOperator_ReturnsTrueForIdenticalObjects) {
-    Eatable e1("Salad", 4.0, 5);
-    Eatable e2("Salad", 4.0, 5);
+    Eatable e1("Salad", 4.0, 5, time(0) + 7200);
+    Eatable e2("Salad", 4.0, 5, time(0) + 7200);
     CHECK(e1 == e2);
 }
 
 TEST(EqualityOperator_ReturnsFalseForDifferentObjects) {
-    Eatable e1("Salad", 4.0, 5);
-    Eatable e2("Soup", 4.0, 5);
+    Eatable e1("Salad", 4.0, 5, time(0) + 7200);
+    Eatable e2("Soup", 4.0, 5, time(0) + 7200);
     CHECK(!(e1 == e2));
 }
-
+TEST(GetTime_UpdatesValue) {
+    Eatable e1("Salad", 4.0, 5, time(0) + 7200);
+    Eatable e2("Soup", 4.0, 5, time(0) + 7200);
+    e1.setExparationTime(time(0) + 3600);
+    CHECK_EQUAL(e1.getExparationTime(), time(0) + 3600);
+}
 }
 
 
@@ -981,14 +986,15 @@ TEST(Constructor_SetsFieldsCorrectly) {
         FoodPosition{p2, 1}
     };
 
-    Food food("Pizza", 10, composition, 15);
+    Food food("Pizza", 10, composition, 15, time(0) + 7200);
     CHECK_EQUAL("Pizza", food.getName());
     CHECK_EQUAL(10, food.getCost());
     CHECK_EQUAL(2, food.getComposition().size());
+    CHECK_EQUAL(time(0) + 7200, food.getExparationTime());
 }
 
 TEST(SetComposition_UpdatesComposition) {
-    Food food("Soup", 5, {}, 10);
+    Food food("Soup", 5, {}, 10,time(0) + 7200);
     Food f;
     Product p("Salt", 0);
     vector<FoodPosition> comp = { FoodPosition{p, 1} };
@@ -1004,7 +1010,7 @@ TEST(GetCalories_ComputesTotalCorrectly) {
         FoodPosition{p1, 3},
         FoodPosition{p2, 2}
     };
-    Food food("Salad", 8, composition, 5);
+    Food food("Salad", 8, composition, 5, time(0) + 7200);
     CHECK_EQUAL(260, food.getCalories());
 }
 
@@ -1366,7 +1372,7 @@ TEST(AddEatable_AddsItemToMenuIfManagerMatches) {
     Restaurant r;
     r.setManager(m);
 
-    Eatable e("Burger", 5.0, 10);
+    Eatable e("Burger", 5.0, 10, time(0) + 7200);
     CHECK_EQUAL(0, r.getMenu().getItems().size());
 
     m.addEatable(e, r);
@@ -1382,7 +1388,7 @@ TEST(DeleteEatable_RemovesItemFromMenuIfManagerMatches) {
     Restaurant r;
     r.setManager(m);
 
-    Eatable e("Burger", 5.0, 10);
+    Eatable e("Burger", 5.0, 10, time(0) + 7200);
     m.addEatable(e, r);
     CHECK_EQUAL(1, r.getMenu().getItems().size());
 
@@ -1396,7 +1402,7 @@ TEST(DeleteEatable_ThrowsIfManagerMismatch) {
     Restaurant r;
     r.setManager(m2);
 
-    Eatable e("Burger", 5.0, 10);
+    Eatable e("Burger", 5.0, 10, time(0) + 7200);
     r.getMenu().getItems().push_back(e);
 
     CHECK_THROW(m1.deleteEatable(e, r), UnempolymentError);
@@ -1411,8 +1417,8 @@ TEST(DefaultConstructor_InitializesEmptyMenu) {
 }
 
 TEST(ParameterizedConstructor_SetsItemsCorrectly) {
-    Eatable e1("Burger", 5.0, 10);
-    Eatable e2("Pizza", 7.5, 15);
+    Eatable e1("Burger", 5.0, 10, time(0) + 7200);
+    Eatable e2("Pizza", 7.5, 15, time(0) + 7200);
     vector<Eatable> items = {e1, e2};
     Menu menu(items);
     CHECK_EQUAL(2, menu.getItems().size());
@@ -1422,15 +1428,15 @@ TEST(ParameterizedConstructor_SetsItemsCorrectly) {
 
 TEST(AddItem_AppendsToMenu) {
     Menu menu;
-    Eatable e("Soup", 3.0, 5);
+    Eatable e("Soup", 3.0, 5, time(0) + 7200);
     menu.addItem(e);
     CHECK_EQUAL(1, menu.getItems().size());
     CHECK(menu.getItems()[0] == e);
 }
 
 TEST(RemoveItemByName_RemovesCorrectItem) {
-    Eatable e1("Burger", 5.0, 10);
-    Eatable e2("Pizza", 7.5, 15);
+    Eatable e1("Burger", 5.0, 10, time(0) + 7200);
+    Eatable e2("Pizza", 7.5, 15, time(0) + 7200);
     Menu menu({e1, e2});
     menu.removeItemByName("Burger");
     CHECK_EQUAL(1, menu.getItems().size());
@@ -1438,7 +1444,7 @@ TEST(RemoveItemByName_RemovesCorrectItem) {
 }
 
 TEST(RemoveItemByName_DoesNothingIfNotFound) {
-    Eatable e("Burger", 5.0, 10);
+    Eatable e("Burger", 5.0, 10, time(0) + 7200);
     Menu menu({e});
     menu.removeItemByName("Pizza");
     CHECK_EQUAL(1, menu.getItems().size());
@@ -1446,7 +1452,7 @@ TEST(RemoveItemByName_DoesNothingIfNotFound) {
 }
 
 TEST(FindItemByName_ReturnsCorrectItem) {
-    Eatable e("Burger", 5.0, 10);
+    Eatable e("Burger", 5.0, 10, time(0) + 7200);
     Menu menu({e});
     Eatable found = menu.findItemByName("Burger");
     CHECK(found == e);
@@ -1458,8 +1464,8 @@ TEST(FindItemByName_ThrowsIfNotFound) {
 }
 
 TEST(Clear_RemovesAllItems) {
-    Eatable e1("Burger", 5.0, 10);
-    Eatable e2("Pizza", 7.5, 15);
+    Eatable e1("Burger", 5.0, 10, time(0) + 7200);
+    Eatable e2("Pizza", 7.5, 15, time(0) + 7200);
     Menu menu({e1, e2});
     menu.clear();
     CHECK_EQUAL(0, menu.getItems().size());
@@ -1521,8 +1527,8 @@ TEST(DefaultValues_AreCorrect) {
 }
 
 TEST(SetEatList_UpdatesListAndCalculations) {
-    Eatable e1("Burger", 5.0, 10);
-    Eatable e2("Pizza", 7.5, 15);
+    Eatable e1("Burger", 5.0, 10, time(0) + 7200);
+    Eatable e2("Pizza", 7.5, 15, time(0) + 7200);
     vector<OrderPosition> list = {
         OrderPosition{e1, 1},
         OrderPosition{e2, 1}
@@ -1574,7 +1580,7 @@ TEST(DefaultConstructor_InitializesFields) {
 }
 
 TEST(ParameterizedConstructor_SetsFieldsCorrectly) {
-    Eatable e("Burger", 5.0, 10);
+    Eatable e("Burger", 5.0, 10, time(0) + 7200);
     OrderPosition pos(e, 2);
     CHECK_EQUAL("Burger", pos.getEatable().getName());
     CHECK_EQUAL(2, pos.getAmount());
@@ -1582,22 +1588,22 @@ TEST(ParameterizedConstructor_SetsFieldsCorrectly) {
 }
 
 TEST(SetEatable_UpdatesValue) {
-    Eatable e1("Soup", 3.0, 5);
-    Eatable e2("Pizza", 7.5, 15);
+    Eatable e1("Soup", 3.0, 5, time(0) + 7200);
+    Eatable e2("Pizza", 7.5, 15, time(0) + 7200);
     OrderPosition pos(e1, 1);
     pos.setEatable(e2);
     CHECK_EQUAL("Pizza", pos.getEatable().getName());
 }
 
 TEST(SetAmount_UpdatesValue) {
-    Eatable e("Salad", 4.0, 7);
+    Eatable e("Salad", 4.0, 7, time(0) + 7200);
     OrderPosition pos(e, 1);
     pos.setAmount(5);
     CHECK_EQUAL(5, pos.getAmount());
 }
 
 TEST(SetDone_UpdatesFlag) {
-    Eatable e("Steak", 12.0, 20);
+    Eatable e("Steak", 12.0, 20, time(0) + 7200);
     OrderPosition pos(e, 1);
     pos.setDone(true);
     CHECK_EQUAL(true, pos.isDone());
@@ -1982,7 +1988,7 @@ TEST(SetOrdersAndMenu_WorksCorrectly) {
     Order o;
     o.setID(101);
     Menu m;
-    Eatable e("Burger", 5.0, 10);
+    Eatable e("Burger", 5.0, 10, time(0) + 7200);
     m.addItem(e);
 
     r.addOrder(o);

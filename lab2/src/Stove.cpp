@@ -12,3 +12,6 @@ int Stove::getBurnerCount() const {
 void Stove::setBurnerCount(int count) {
     burnerCount = count;
 }
+void Stove::fastFire(Eatable& eat){
+    eat.setTime(eat.getTime() / 2);
+}

@@ -11,3 +11,6 @@ int Fridge::getCapacityLiters() const {
 void Fridge::setCapacityLiters(int capacity) {
     capacityLiters = capacity;
 }
+void Fridge::cold(Eatable& eat){
+    eat.setExparationTime(eat.getExparationTime() * 2);
+}

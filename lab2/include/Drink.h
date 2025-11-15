@@ -1,5 +1,6 @@
 #pragma once
 #include "Eatable.h"
+#include <ctime>
 class Drink : public Eatable{
 public:
     Drink();

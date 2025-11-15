@@ -13,4 +13,6 @@ int Freezer::getMinTemperature() const {
 void Freezer::setMinTemperature(int temp) {
     minTemperature = temp;
 }
-
+void Freezer::cold(Eatable& eat){
+    eat.setExparationTime(eat.getExparationTime() * 2.5);
+}
