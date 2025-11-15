@@ -28,5 +28,5 @@ void Vip_Customer::setVipCategory(int category) {
 }
 
 void Vip_Customer::fastDelivery(Order order) {
-    cout << "VIP клиент запросил быструю доставку заказа #" << order.getID() << endl;//добавить
+    cout << "VIP клиент запросил быструю доставку заказа #" << order.getID() << endl;
 }

@@ -48,10 +48,11 @@ void Customer::addBonus(Bonus bonus) {
 void Customer::clearBonuses(){
     bonuses.clear();
 }
-void Customer::useLoyaltyProgram(LoyaltyProgram program){
+void Customer::useLoyaltyProgram(LoyaltyProgram& program){
     if(program.isActive() && loyaltypoints >= program.getMinPointsForReward()){
         cash += program.getRewardAmount();
         loyaltypoints -= program.getMinPointsForReward();
+        program.deactivate();
     }
     else{
         throw LoyaltyProgramError();

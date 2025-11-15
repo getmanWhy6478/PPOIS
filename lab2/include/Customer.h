@@ -19,7 +19,7 @@ public:
     void leaveRating(Restaurant& restaurant, Rating rating);
     void leaveComplaint(ComplaintBook& complaintBook, Complaint complaint);
     bool findBonus(Bonus bonus);
-    void useLoyaltyProgram(LoyaltyProgram program);
+    void useLoyaltyProgram(LoyaltyProgram& program);
 
 
     vector<Bonus> getBonuses() const;
