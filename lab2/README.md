@@ -20,12 +20,12 @@
 | DinningRoom | 4 | 6 | → DinningRoomRequirements|
 | DinningRoomRequirements | 5 | 5 | |
 | Dishwasher | 4 | 2 | |
-| Drink | 5 | 4 | |
-| Eatable | 3 | 6 | |
-| Food | 5 | 5 | → FoodPosition|
+| Drink | 6 | 6 | |
+| Eatable | 4 | 8 | |
+| Food | 6 | 7 | → FoodPosition|
 | FoodPosition| 2 | 4 | → Product |
-| Freezer | 4 | 2 | |
-| Fridge | 4 | 2 | |
+| Freezer | 4 | 3 | |
+| Fridge | 4 | 3 | |
 | Kitchen | 3 | 6 | → KitchenAppliance, KitchenRequirement|
 | KitchenAppliance | 3 | 6 | |
 | KitchenRequirement | 5 | 5 | |
@@ -45,7 +45,7 @@
 | Rating | 2 | 4 | |
 | Restaurant | 10 | 22 | → Adress, DinningRoom, Cook, Courier, Manager, Warehouse, Order, Rating, Menu |
 | Scooter | 3 | 3 | |
-| Stove | 4 | 2 | |
+| Stove | 4 | 3 | |
 | Supplier | 2 | 1 | → FoodPosition, Warehouse |
 | SupportAgent | 0 | 2 | → Rating, Restaurant |
 | User | 4 | 8 | |
@@ -57,7 +57,7 @@
 
 ## Итоговая статистика
 
-- **Поля:** 173
-- **Поведения:** 276
+- **Поля:** 176
+- **Поведения:** 289
 - **Ассоциации:** 52
 - **Всего классов:** 52 классов
