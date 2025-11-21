@@ -23,4 +23,7 @@ public:
     bool operator<(const Person& other) const {
         return age < other.age;
     }
+    bool operator>(const Person& other) const {
+        return age > other.age;
+    }
 };

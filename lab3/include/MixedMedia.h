@@ -1,0 +1,21 @@
+#pragma once
+
+#include "Artwork.h"
+#include <string>
+#include <vector>
+
+// Класс для произведений смешанной техники
+class MixedMedia : public Artwork {
+private:
+    std::vector<std::string> mediaTypes;
+
+public:
+    MixedMedia() = default;
+    MixedMedia(const std::string& title, int year, Artist* artist);
+    ~MixedMedia() = default;
+    
+    std::string getType() const override;
+    void addMediaType(const std::string& type);
+    std::vector<std::string> getMediaTypes() const;
+};
+

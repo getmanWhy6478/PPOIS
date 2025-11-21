@@ -1,3 +1,4 @@
+#include <algorithm>
 template<typename RandomIt>
 void stoogeSort(RandomIt begin, RandomIt end) {
     auto len = end - begin;

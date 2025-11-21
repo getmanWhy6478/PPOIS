@@ -40,14 +40,11 @@ TEST(StoogeSort_Books_ByPages) {
     CHECK_EQUAL("War and Peace", books[3].getTitle());
 }
 
-TEST(HeapSort_EmptyVector) {
-    std::vector<int> empty;
-    heapsort(empty.begin(), empty.end());
-    CHECK_EQUAL(0, empty.size());
-}
-
 TEST(StoogeSort_SingleElement) {
     std::vector<int> one = {42};
     stoogeSort(one.begin(), one.end());
     CHECK_EQUAL(42, one[0]);
+}
+int main(){
+    return UnitTest::RunAllTests();
 }

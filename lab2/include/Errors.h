@@ -63,7 +63,7 @@ public:
     EatableNotFoundError() : DeliveryError("Блюдо не найдено.") {}
 };
 
-// 10. Неправильный процент
+// 10. Неправильное время
 class NegativeTimeError: public DeliveryError {
 public:
     NegativeTimeError () : DeliveryError("Доставка не может занимать отрицательное время.") {}
