@@ -1,6 +1,7 @@
 #include "../include/Visitor.h"
 #include "../include/Ticket.h"
 #include "../include/Tour.h"
+#include "../include/Event.h"
 #include <ctime>
 #include <algorithm>
 #include <iostream>
@@ -86,7 +87,7 @@ void Visitor::incrementVisitCount() {
     visitCount++;
 }
 
-void Visitor:: useTicket(Ticket ticket){
+void Visitor:: useTicket(Ticket* ticket){
     if (find(tickets.begin(), tickets.end(), ticket) != tickets.end()){
         tickets.erase(std::remove(tickets.begin(), tickets.end(), ticket), tickets.end());;
     }

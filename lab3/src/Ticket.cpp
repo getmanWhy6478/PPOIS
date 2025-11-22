@@ -66,3 +66,11 @@ void Ticket::useTicket() {
     visitYear = now->tm_year + 1900;
 }
 
+bool Ticket:: operator==(const Ticket& other) const {
+        return ticketNumber == other.ticketNumber
+            && visitor == other.visitor
+            && exhibition == other.exhibition
+            && visitYear == other.visitYear
+            && price == other.price
+            && isUsed == other.isUsed;
+    }

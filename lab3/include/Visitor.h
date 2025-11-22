@@ -8,6 +8,7 @@
 class Exhibition;
 class Tour;
 class Ticket;
+class Event;
 
 class Visitor {
 private:
@@ -50,7 +51,7 @@ public:
     bool getIsMember() const;
     void setIsMember(bool member);
 
-    void useTicket(Ticket ticket);
+    void useTicket(Ticket* ticket);
     void visitTour(Tour* tour);
     void watchPainting();
     void visitExhibition(Event* event);

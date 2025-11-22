@@ -32,5 +32,6 @@ public:
     bool getIsUsed() const;
     void setIsUsed(bool used);
     void useTicket();
+    bool operator==(const Ticket& other) const;
 };
 

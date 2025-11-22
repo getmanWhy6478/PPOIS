@@ -19,7 +19,7 @@ SUITE(InstallationTests) {
         Installation* installation = new Installation("The Physical Impossibility", 1991, artist);
         
         installation->setSetupInstructions("Requires special lighting and climate control");
-        
+        installation->setSpaceRequirements("Large gallery space");
         CHECK_EQUAL("Large gallery space", installation->getSpaceRequirements());
         CHECK_EQUAL("Requires special lighting and climate control", installation->getSetupInstructions());
         
