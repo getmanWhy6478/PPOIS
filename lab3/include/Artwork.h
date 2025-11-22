@@ -6,7 +6,6 @@
 class Artist;
 class Gallery;
 
-// Базовый класс для всех художественных произведений
 class Artwork {
 protected:
     std::string title;

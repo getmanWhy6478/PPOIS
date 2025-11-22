@@ -2,7 +2,6 @@
 
 #include <string>
 
-// Класс для валидации данных
 class Validator {
 public:
     static bool isValidEmail(const std::string& email);

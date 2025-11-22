@@ -4,7 +4,6 @@
 #include <vector>
 #include "Artwork.h"
 
-// Класс для страховки произведений
 class Insurance {
 private:
     std::string policyNumber;

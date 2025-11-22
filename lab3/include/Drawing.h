@@ -3,7 +3,6 @@
 #include "Artwork.h"
 #include <string>
 
-// Класс для рисунков
 class Drawing : public Artwork {
 private:
     std::string drawingMedium;

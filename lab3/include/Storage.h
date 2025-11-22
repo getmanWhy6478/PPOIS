@@ -4,7 +4,6 @@
 #include <vector>
 #include "Artwork.h"
 
-// Класс для хранилища произведений
 class Storage {
 private:
     std::string location;

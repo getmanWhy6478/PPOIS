@@ -3,7 +3,6 @@
 #include <string>
 #include "Gallery.h"
 
-// Базовый класс для сотрудников галереи
 class Employee {
 protected:
     std::string firstName;

@@ -7,7 +7,7 @@
 #include "Exhibition.h"
 
 class Guide;
-// Класс для экскурсии
+
 class Tour {
 private:
     std::string tourId;

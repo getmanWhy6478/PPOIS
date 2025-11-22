@@ -4,7 +4,6 @@
 #include <vector>
 #include "Visitor.h"
 
-// Класс для членства в галерее
 class Membership {
 private:
     std::string membershipNumber;

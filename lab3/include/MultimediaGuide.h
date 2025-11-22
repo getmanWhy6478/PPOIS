@@ -5,7 +5,6 @@
 #include "Artwork.h"
 #include "Exhibition.h"
 
-// Класс для мультимедийного гида
 class MultimediaGuide {
 private:
     std::string guideId;

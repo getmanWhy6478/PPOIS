@@ -4,7 +4,6 @@
 #include <vector>
 #include "Artwork.h"
 
-// Класс для жанра
 class Genre {
 private:
     std::string name;

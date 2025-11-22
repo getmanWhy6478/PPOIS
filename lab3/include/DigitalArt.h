@@ -3,12 +3,11 @@
 #include "Artwork.h"
 #include <string>
 
-// Класс для цифрового искусства
 class DigitalArt : public Artwork {
 private:
     std::string software;
     std::string fileFormat;
-    std::string displayType; // экран, проекция, печать
+    std::string displayType;
     int resolutionWidth;
     int resolutionHeight;
     bool isInteractive;

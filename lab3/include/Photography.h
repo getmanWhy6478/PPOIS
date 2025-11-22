@@ -3,7 +3,6 @@
 #include "Artwork.h"
 #include <string>
 
-// Класс для фотографий
 class Photography : public Artwork {
 private:
     std::string cameraType;

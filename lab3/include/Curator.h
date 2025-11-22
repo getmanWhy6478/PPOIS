@@ -5,7 +5,6 @@
 #include <vector>
 #include "Exhibition.h"
 
-// Класс для куратора
 class Curator : public Employee {
 private:
     std::string specialization;

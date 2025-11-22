@@ -5,7 +5,6 @@
 #include "Artwork.h"
 #include "Restorer.h"
 
-// Класс для консервации произведений
 class Conservation {
 private:
     std::string conservationId;

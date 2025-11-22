@@ -3,7 +3,6 @@
 #include <string>
 #include "Artwork.h"
 
-// Класс для оценки произведений
 class Appraisal {
 private:
     std::string appraisalId;

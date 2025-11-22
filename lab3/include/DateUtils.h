@@ -2,7 +2,6 @@
 
 #include <string>
 
-// Утилиты для работы с датами
 class DateUtils {
 public:
     static std::string formatYear(int year);

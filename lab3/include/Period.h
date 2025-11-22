@@ -4,7 +4,6 @@
 #include <vector>
 #include "Artwork.h"
 
-// Класс для исторического периода
 class Period {
 private:
     std::string name;

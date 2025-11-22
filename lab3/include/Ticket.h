@@ -4,7 +4,6 @@
 #include "Visitor.h"
 #include "Exhibition.h"
 
-// Класс для билета
 class Ticket {
 private:
     std::string ticketNumber;

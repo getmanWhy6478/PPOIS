@@ -3,7 +3,6 @@
 #include "Artwork.h"
 #include <string>
 
-// Класс для керамики
 class Ceramics : public Artwork {
 private:
     std::string clayType;

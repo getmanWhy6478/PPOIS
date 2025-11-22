@@ -5,7 +5,6 @@
 #include "Artwork.h"
 #include "Exhibition.h"
 
-// Класс для каталога
 class Catalog {
 private:
     std::string isbn;

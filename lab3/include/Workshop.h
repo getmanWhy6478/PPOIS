@@ -4,7 +4,6 @@
 #include <string>
 #include <vector>
 
-// Класс для мастер-класса
 class Workshop : public Event {
 private:
     std::string instructorName;

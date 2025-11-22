@@ -4,7 +4,6 @@
 #include <vector>
 #include "Artist.h"
 
-// Класс для художественного направления
 class ArtMovement {
 private:
     std::string name;

@@ -5,7 +5,6 @@
 #include "Artwork.h"
 #include "Visitor.h"
 
-// Класс для заказа/покупки
 class Order {
 private:
     std::string orderNumber;

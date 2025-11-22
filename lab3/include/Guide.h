@@ -6,7 +6,7 @@
 #include "Tour.h"
 
 class Tour;
-// Класс для экскурсовода
+
 class Guide : public Employee {
 private:
     std::vector<std::string> languages;

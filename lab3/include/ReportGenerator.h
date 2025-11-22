@@ -8,7 +8,6 @@
 class Visitor;
 class Artwork;
 
-// Класс для генерации отчетов
 class ReportGenerator {
 public:
     static std::string generateExhibitionReport(Exhibition* exhibition);

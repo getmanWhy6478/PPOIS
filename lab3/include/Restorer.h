@@ -7,7 +7,7 @@
 #include "Restoration.h"
 
 class Restoration;
-// Класс для реставратора
+
 class Restorer : public Employee {
 private:
     std::string specialization;

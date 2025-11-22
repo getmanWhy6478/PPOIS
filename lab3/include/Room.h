@@ -4,7 +4,6 @@
 #include <vector>
 #include "Artwork.h"
 
-// Класс для представления зала/комнаты в галерее
 class Room {
 private:
     std::string name;

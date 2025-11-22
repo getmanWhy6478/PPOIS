@@ -3,7 +3,6 @@
 #include "Artwork.h"
 #include <string>
 
-// Класс для картин
 class Painting : public Artwork {
 private:
     std::string paintType;

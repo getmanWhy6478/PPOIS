@@ -4,7 +4,6 @@
 #include <string>
 #include <vector>
 
-// Класс для произведений смешанной техники
 class MixedMedia : public Artwork {
 private:
     std::vector<std::string> mediaTypes;

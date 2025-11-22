@@ -4,7 +4,6 @@
 #include <vector>
 #include "Gallery.h"
 
-// Класс для магазина галереи
 class GalleryShop {
 private:
     std::string shopId;

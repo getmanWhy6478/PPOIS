@@ -3,7 +3,6 @@
 #include "Event.h"
 #include <string>
 
-// Класс для лекции
 class Lecture : public Event {
 private:
     std::string speakerName;

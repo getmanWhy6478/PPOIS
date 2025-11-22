@@ -11,7 +11,6 @@ class Employee;
 class Exhibition;
 class Visitor;
 
-// Класс для представления галереи
 class Gallery {
 private:
     std::string name;

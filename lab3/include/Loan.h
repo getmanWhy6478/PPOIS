@@ -5,7 +5,6 @@
 #include "Artwork.h"
 #include "Gallery.h"
 
-// Класс для займа произведений
 class Loan {
 private:
     std::string loanId;

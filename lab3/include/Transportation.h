@@ -4,7 +4,6 @@
 #include <vector>
 #include "Artwork.h"
 
-// Класс для транспортировки произведений
 class Transportation {
 private:
     std::string shipmentNumber;

@@ -5,7 +5,6 @@
 #include "Artwork.h"
 #include "Artist.h"
 
-// Класс для архива галереи
 class Archive {
 private:
     std::string archiveId;

@@ -5,7 +5,7 @@
 #include "Exhibition.h"
 
 class Critic;
-// Класс для рецензии
+
 class Review {
 private:
     std::string reviewId;

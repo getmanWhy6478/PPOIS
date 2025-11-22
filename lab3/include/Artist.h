@@ -6,7 +6,6 @@
 class Artwork;
 class ArtMovement;
 
-// Класс для представления художника
 class Artist {
 private:
     std::string firstName;

@@ -6,7 +6,6 @@
 
 class Artwork;
 
-// Класс для инсталляций
 class Installation : public Artwork {
 private:
     std::vector<Artwork*> components;

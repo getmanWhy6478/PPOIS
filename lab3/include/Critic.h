@@ -6,7 +6,7 @@
 
 class Exhibition;
 class Review;
-// Класс для критика
+
 class Critic {
 private:
     std::string firstName;

@@ -2,7 +2,8 @@
 #include "../include/Ticket.h"
 #include "../include/Tour.h"
 #include <ctime>
-
+#include <algorithm>
+#include <iostream>
 Visitor::Visitor(const std::string& firstName, const std::string& lastName,
                  const std::string& email)
     : firstName(firstName), lastName(lastName), email(email),
@@ -85,6 +86,20 @@ void Visitor::incrementVisitCount() {
     visitCount++;
 }
 
+void Visitor:: useTicket(Ticket ticket){
+    if (find(tickets.begin(), tickets.end(), ticket) != tickets.end()){
+        tickets.erase(std::remove(tickets.begin(), tickets.end(), ticket), tickets.end());;
+    }
+}
+void Visitor:: visitTour(Tour* tour){
+    tour->addVisitor(this);
+}
+void Visitor::watchPainting(){
+    std::cout << "Wow!";
+}
+void Visitor::visitExhibition(Event* event){
+    event->addAttendee(this);
+}
 Ticket* Visitor::purchaseTicket(const std::string& ticketNumber,
                                 Exhibition* exhibition,
                                 double price, const std::string& paymentMethod) {

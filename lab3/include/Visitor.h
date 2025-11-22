@@ -3,11 +3,12 @@
 #include <string>
 #include <vector>
 #include "Ticket.h"
+#include "Event.h"
 
 class Exhibition;
 class Tour;
 class Ticket;
-// Класс для представления посетителя
+
 class Visitor {
 private:
     std::string firstName;
@@ -49,6 +50,10 @@ public:
     bool getIsMember() const;
     void setIsMember(bool member);
 
+    void useTicket(Ticket ticket);
+    void visitTour(Tour* tour);
+    void watchPainting();
+    void visitExhibition(Event* event);
     std::string getMembershipType() const;
     void setMembershipType(const std::string& type);
 

@@ -5,7 +5,6 @@
 #include <vector>
 #include "Room.h"
 
-// Класс для охранника
 class Security : public Employee {
 private:
     Room* assignedRoom;

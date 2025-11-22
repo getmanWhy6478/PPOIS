@@ -5,7 +5,6 @@
 #include "Room.h"
 #include "Storage.h"
 
-// Класс для отслеживания местоположения произведения
 class ArtworkLocation {
 private:
     std::string locationId;

@@ -3,7 +3,6 @@
 #include "Artwork.h"
 #include <string>
 
-// Класс для текстильных произведений
 class Textile : public Artwork {
 private:
     std::string textileType;

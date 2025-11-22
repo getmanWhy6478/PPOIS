@@ -5,7 +5,6 @@
 #include "Gallery.h"
 #include "Visitor.h"
 
-// Класс для событий в галерее
 class Event {
 private:
     std::string eventId;

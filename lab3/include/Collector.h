@@ -6,7 +6,6 @@
 
 class Artwork;
 
-// Класс для коллекционера
 class Collector {
 private:
     std::string firstName;

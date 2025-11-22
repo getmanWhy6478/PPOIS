@@ -4,7 +4,6 @@
 #include "Artwork.h"
 #include "Membership.h"
 
-// Класс для расчета цен
 class PriceCalculator {
 public:
     static double calculateTicketPrice(double basePrice, Membership* membership);

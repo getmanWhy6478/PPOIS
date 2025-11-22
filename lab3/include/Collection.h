@@ -6,7 +6,6 @@
 
 class Collector;
 
-// Класс для представления коллекции
 class Collection {
 private:
     std::string name;

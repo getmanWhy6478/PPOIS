@@ -3,7 +3,6 @@
 #include "Artwork.h"
 #include <string>
 
-// Класс для гравюр и принтов
 class Print : public Artwork {
 private:
     std::string printType;

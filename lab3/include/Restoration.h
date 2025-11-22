@@ -6,7 +6,6 @@
 #include "Restorer.h"
 
 class Restorer;
-// Класс для реставрации произведений
 class Restoration {
 private:
     std::string restorationId;

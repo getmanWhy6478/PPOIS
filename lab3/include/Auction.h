@@ -5,7 +5,6 @@
 #include "Artwork.h"
 #include "Collector.h"
 
-// Класс для аукциона
 class Auction {
 private:
     std::string auctionId;
