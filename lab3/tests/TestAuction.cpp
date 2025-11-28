@@ -28,6 +28,10 @@ SUITE(AuctionTests) {
         Auction* auction = new Auction("AUC003", "Bonhams", "Paris");
         Artist* artist = new Artist("Test", "Artist", "Unknown", 1900);
         Artwork* artwork = new Painting("Auction Piece", 2000, artist);
+        auction->setIsCompleted(false);
+        auction->setAuctionHouse("My home");
+        auction->setLocation("Smolevichi");
+
         
         auction->addArtwork(artwork);
         std::vector<Artwork*> artworks = auction->getArtworks();
@@ -38,5 +42,6 @@ SUITE(AuctionTests) {
         delete artwork;
         delete artist;
     }
+    
 }
 

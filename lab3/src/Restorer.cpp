@@ -53,4 +53,8 @@ Restoration* Restorer::startRestoration(const std::string& restorationId,
     restorations.push_back(restoration);
     return restoration;
 }
+void Restorer::endRestoration(Restoration* restoration, const std::string& conditionAfter) {
+    restoration->setConditionAfter(conditionAfter);
+    restoration->setStatus("ended");
+}
 

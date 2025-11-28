@@ -4,12 +4,12 @@
 #include <vector>
 #include "Ticket.h"
 #include "Event.h"
-
+#include "Recommendation.h"
 class Exhibition;
 class Tour;
 class Ticket;
 class Event;
-
+class Recommendation;
 class Visitor {
 private:
     std::string firstName;
@@ -21,6 +21,7 @@ private:
     bool isMember;
     std::string membershipType;
     int visitCount;
+    double cash;
 
 public:
     Visitor() = default;
@@ -60,7 +61,13 @@ public:
 
     int getVisitCount() const;
     void incrementVisitCount();
-    
+
+    double getCash();
+    void setCash(double cash);
+
+    Artist getTooExcited(const std::string& nationality);
+    Recommendation leaveRecommendation(std::string text);
+    void vandolise(Artwork* artwork);
 
     Ticket* purchaseTicket(const std::string& ticketNumber, Exhibition* exhibition,
                            double price, const std::string& paymentMethod);

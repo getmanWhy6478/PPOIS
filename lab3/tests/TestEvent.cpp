@@ -21,18 +21,14 @@ SUITE(EventTests) {
         Event* event = new Event("EVT002", "Art Lecture", gallery);
         
         event->setDescription("Evening lecture on modern art");
-        event->setEventYear(2024);
         event->setDurationMinutes(90);
         event->setMaxCapacity(100);
         event->setTicketPrice(15.0);
-        event->setOrganizer("Gallery Education Department");
         
         CHECK_EQUAL("Evening lecture on modern art", event->getDescription());
-        CHECK_EQUAL(2024, event->getEventYear());
         CHECK_EQUAL(90, event->getDurationMinutes());
         CHECK_EQUAL(100, event->getMaxCapacity());
         CHECK_CLOSE(15.0, event->getTicketPrice(), 0.01);
-        CHECK_EQUAL("Gallery Education Department", event->getOrganizer());
         
         delete event;
         delete gallery;

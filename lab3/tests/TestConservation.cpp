@@ -35,13 +35,11 @@ SUITE(ConservationTests) {
         
         conservation->setStartYear(2023);
         conservation->setCompletionYear(2024);
-        conservation->setEnvironmentalConditions("Temperature: 20C, Humidity: 50%");
         conservation->setCost(30000.0);
         conservation->setStatus("completed");
         
         CHECK_EQUAL(2023, conservation->getStartYear());
         CHECK_EQUAL(2024, conservation->getCompletionYear());
-        CHECK_EQUAL("Temperature: 20C, Humidity: 50%", conservation->getEnvironmentalConditions());
         CHECK_CLOSE(30000.0, conservation->getCost(), 0.01);
         CHECK(conservation->isCompleted());
         

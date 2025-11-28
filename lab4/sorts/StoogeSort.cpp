@@ -9,8 +9,8 @@ void stoogeSort(RandomIt begin, RandomIt end) {
 
     if (len > 2) {
         auto third = len / 3;
-        stoogeSort(begin, end - third);      // Первые 2/3
-        stoogeSort(begin + third, end);      // Последние 2/3
-        stoogeSort(begin, end - third);      // Первые 2/3 снова
+        stoogeSort(begin, end - third);
+        stoogeSort(begin + third, end);
+        stoogeSort(begin, end - third);
     }
 }

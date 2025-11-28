@@ -8,7 +8,7 @@ SUITE(InstallationTests) {
         Artist* artist = new Artist("Yayoi", "Kusama", "Japanese", 1929);
         Installation* installation = new Installation("Infinity Room", 2013, artist);
         
-        CHECK_EQUAL("Installation", installation->getType());
+        CHECK_EQUAL("Infinity Room", installation->getTitle());
         
         delete installation;
         delete artist;

@@ -7,7 +7,7 @@ SUITE(PrintTests) {
         Artist* artist = new Artist("Albrecht", "Durer", "German", 1471);
         Print* print = new Print("The Four Horsemen", 1498, artist);
         
-        CHECK_EQUAL("Print", print->getType());
+        CHECK_EQUAL(1498, print->getYear());
         
         delete print;
         delete artist;
@@ -18,12 +18,10 @@ SUITE(PrintTests) {
         Print* print = new Print("The Three Crosses", 1653, artist);
         
         print->setPrintType("Etching");
-        print->setPaperType("Laid paper");
         print->setIsSigned(true);
         print->setIsNumbered(true);
         
         CHECK_EQUAL("Etching", print->getPrintType());
-        CHECK_EQUAL("Laid paper", print->getPaperType());
         CHECK(print->getIsSigned());
         CHECK(print->getIsNumbered());
         

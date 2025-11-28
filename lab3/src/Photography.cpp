@@ -5,10 +5,6 @@ Photography::Photography(const std::string& title, int year, Artist* artist)
     : Artwork(title, year, artist), shootYear(0) {
 }
 
-std::string Photography::getType() const {
-    return "Photography";
-}
-
 std::string Photography::getCameraType() const {
     return cameraType;
 }

@@ -24,9 +24,8 @@ protected:
 public:
     Artwork() = default;
     Artwork(const std::string& title, int year, Artist* artist);
-    virtual ~Artwork() = default;
+    ~Artwork() = default;
     
-    virtual std::string getType() const = 0;
     std::string getTitle() const;
     void setTitle(const std::string& title);
     std::string getDescription() const;

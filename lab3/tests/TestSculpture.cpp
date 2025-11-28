@@ -7,7 +7,6 @@ SUITE(SculptureTests) {
         Artist* artist = new Artist("Michelangelo", "Buonarroti", "Italian", 1475);
         Sculpture* sculpture = new Sculpture("David", 1504, artist);
         
-        CHECK_EQUAL("Sculpture", sculpture->getType());
         CHECK_EQUAL("David", sculpture->getTitle());
         
         delete sculpture;

@@ -1,7 +1,7 @@
 #include "UnitTest++/UnitTest++.h"
 #include "../include/Loan.h"
 #include "../include/Gallery.h"
-#include "../include/Artwork.h"
+#include "../include/Collection.h"
 #include "../include/Painting.h"
 #include "../include/Artist.h"
 
@@ -30,13 +30,11 @@ SUITE(LoanTests) {
         loan->setEndYear(2025);
         loan->setInsuranceAmount(5000000.0);
         loan->setStatus("approved");
-        loan->setTransportMethod("Airplane");
         
         CHECK_EQUAL(2024, loan->getStartYear());
         CHECK_EQUAL(2025, loan->getEndYear());
         CHECK_CLOSE(5000000.0, loan->getInsuranceAmount(), 0.01);
         CHECK_EQUAL("approved", loan->getStatus());
-        CHECK_EQUAL("Airplane", loan->getTransportMethod());
         
         delete loan;
         delete borrower;

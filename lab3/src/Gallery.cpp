@@ -3,6 +3,7 @@
 #include "../include/Exhibition.h"
 #include "../include/Collection.h"
 #include "../include/Employee.h"
+#include <algorithm>
 
 Gallery::Gallery(const std::string& name, const std::string& address,
                  const std::string& city, const std::string& country)
@@ -90,3 +91,13 @@ void Gallery::setMaxCapacity(int capacity) {
     this->maxCapacity = capacity;
 }
 
+bool Gallery::borrow(Collection& collection, Gallery& other) {
+    for (size_t i = 0; i < other.collections.size(); ++i) {
+        if (*(other.collections[i]) == collection) {
+            collections.push_back(other.collections[i]); 
+            other.collections.erase(other.collections.begin() + i);
+            return true;
+        }
+    }
+    return false;
+}

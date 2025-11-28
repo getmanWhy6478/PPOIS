@@ -6,18 +6,6 @@ DigitalArt::DigitalArt(const std::string& title, int year, Artist* artist)
       isInteractive(false) {
 }
 
-std::string DigitalArt::getType() const {
-    return "DigitalArt";
-}
-
-std::string DigitalArt::getSoftware() const {
-    return software;
-}
-
-void DigitalArt::setSoftware(const std::string& software) {
-    this->software = software;
-}
-
 std::string DigitalArt::getFileFormat() const {
     return fileFormat;
 }

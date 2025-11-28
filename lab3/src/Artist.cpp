@@ -95,6 +95,9 @@ bool Artist::getIsAlive() const {
 void Artist::setIsAlive(bool alive) {
     this->isAlive = alive;
 }
+Artwork Artist::createMasterpiece(const std::string& title, int age){
+    return Artwork(title, age, this);
+}
 
 int Artist::getAge() const {
     if (!isAlive && deathYear > 0) {

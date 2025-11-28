@@ -6,10 +6,6 @@ Sculpture::Sculpture(const std::string& title, int year, Artist* artist)
       baseWidth(0.0), baseHeight(0.0), baseDepth(0.0) {
 }
 
-std::string Sculpture::getType() const {
-    return "Sculpture";
-}
-
 std::string Sculpture::getMaterial() const {
     return material;
 }

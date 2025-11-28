@@ -14,7 +14,6 @@ public:
     Painting(const std::string& title, int year, Artist* artist);
     ~Painting() = default;
     
-    std::string getType() const override;
     std::string getPaintType() const;
     void setPaintType(const std::string& type);
     std::string getCanvasType() const;

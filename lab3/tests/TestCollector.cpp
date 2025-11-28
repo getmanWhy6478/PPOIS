@@ -13,18 +13,6 @@ SUITE(CollectorTests) {
         CHECK_EQUAL("John Patron", collector->getFullName());
         delete collector;
     }
-    
-    TEST(CollectorProperties) {
-        Collector* collector = new Collector("Jane", "Benefactor");
-        
-        collector->setPhone("+1-555-1234");
-        collector->setCollectingFocus("Impressionist paintings");
-        
-        CHECK_EQUAL("+1-555-1234", collector->getPhone());
-        CHECK_EQUAL("Impressionist paintings", collector->getCollectingFocus());
-        
-        delete collector;
-    }
 
     TEST(CollectorPurchaseArtwork) {
         Collector* collector = new Collector("Lydia", "Artlover");

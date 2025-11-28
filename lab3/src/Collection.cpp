@@ -70,3 +70,25 @@ void Collection::updateStatistics() {
     }
 }
 
+bool Collection::operator==(const Collection& other) const {
+    if (name != other.name) 
+        return false;
+    if (description != other.description) 
+        return false;
+    if (collector != other.collector) 
+        return false;
+
+    if (totalArtworks != other.totalArtworks) 
+        return false;
+    if (totalValue != other.totalValue) 
+        return false;
+
+    if (artworks.size() != other.artworks.size()) 
+        return false;
+    for (size_t i = 0; i < artworks.size(); ++i) {
+        if (artworks[i] != other.artworks[i]) 
+        return false;
+    }
+
+    return true;
+}

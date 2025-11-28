@@ -32,5 +32,6 @@ public:
     int getTotalArtworks() const;
     double getTotalValue() const;
     void updateStatistics();
+    bool  operator==(const Collection& other) const;
 };
 

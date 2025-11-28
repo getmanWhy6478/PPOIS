@@ -9,9 +9,7 @@ private:
     Artwork* artwork;
     std::string appraiserName;
     int appraisalYear;
-    double estimatedValue;
     double marketValue;
-    double insuranceValue;
 
 public:
     Appraisal() = default;
@@ -27,11 +25,7 @@ public:
     void setAppraiserName(const std::string& name);
     int getAppraisalYear() const;
     void setAppraisalYear(int year);
-    double getEstimatedValue() const;
-    void setEstimatedValue(double value);
     double getMarketValue() const;
     void setMarketValue(double value);
-    double getInsuranceValue() const;
-    void setInsuranceValue(double value);
 };
 

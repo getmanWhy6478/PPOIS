@@ -1,5 +1,5 @@
 #include "../include/Loan.h"
-#include "../include/Artwork.h"
+#include "../include/Collection.h"
 #include "../include/Gallery.h"
 #include <ctime>
 
@@ -17,12 +17,12 @@ void Loan::setLoanId(const std::string& id) {
     this->loanId = id;
 }
 
-void Loan::addArtwork(Artwork* artwork) {
-    artworks.push_back(artwork);
+void Loan::addCollection(Collection* collection) {
+    collections.push_back(collection);
 }
 
-std::vector<Artwork*> Loan::getArtworks() const {
-    return artworks;
+std::vector<Collection*> Loan::getCollections() const {
+    return collections;
 }
 
 Gallery* Loan::getLenderGallery() const {
@@ -71,14 +71,6 @@ std::string Loan::getStatus() const {
 
 void Loan::setStatus(const std::string& status) {
     this->status = status;
-}
-
-std::string Loan::getTransportMethod() const {
-    return transportMethod;
-}
-
-void Loan::setTransportMethod(const std::string& method) {
-    this->transportMethod = method;
 }
 
 bool Loan::isActive() const {

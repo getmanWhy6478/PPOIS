@@ -7,7 +7,7 @@ SUITE(PhotographyTests) {
         Artist* artist = new Artist("Ansel", "Adams", "American", 1902);
         Photography* photo = new Photography("Moonrise", 1941, artist);
         
-        CHECK_EQUAL("Photography", photo->getType());
+        CHECK_EQUAL(1941, photo->getYear());
         
         delete photo;
         delete artist;

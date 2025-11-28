@@ -14,7 +14,6 @@ SUITE(OrderTests) {
         CHECK(order->getCustomer() == customer);
         CHECK_CLOSE(0.0, order->getTotalAmount(), 0.01);
         CHECK_EQUAL("pending", order->getStatus());
-        CHECK_EQUAL("unpaid", order->getPaymentStatus());
         
         delete order;
         delete customer;
@@ -49,10 +48,8 @@ SUITE(OrderTests) {
         Order* order = new Order("ORD003", customer);
         
         order->setStatus("confirmed");
-        order->setPaymentStatus("paid");
         
         CHECK_EQUAL("confirmed", order->getStatus());
-        CHECK_EQUAL("paid", order->getPaymentStatus());
         
         delete order;
         delete customer;

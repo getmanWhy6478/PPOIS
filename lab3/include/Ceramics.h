@@ -14,7 +14,6 @@ public:
     Ceramics(const std::string& title, int year, Artist* artist);
     ~Ceramics() = default;
     
-    std::string getType() const override;
     std::string getClayType() const;
     void setClayType(const std::string& type);
     std::string getFiringTechnique() const;

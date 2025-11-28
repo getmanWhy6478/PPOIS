@@ -1,3 +1,4 @@
+#pragma once
 #include <iterator>
 #include <utility>
 #include <stdexcept>
@@ -23,22 +24,50 @@ private:
     container_type edges_;
 
 public:
-    bool empty() const noexcept { return edges_.empty(); }
-    std::size_t size() const noexcept { return edges_.size(); }
+    bool empty() const noexcept { 
+        return edges_.empty(); 
+    }
+    std::size_t size() const noexcept { 
+        return edges_.size(); 
+    }
 
-    iterator begin() noexcept { return edges_.begin(); }
-    iterator end()   noexcept { return edges_.end(); }
-    const_iterator begin() const noexcept { return edges_.begin(); }
-    const_iterator end()   const noexcept { return edges_.end(); }
-    const_iterator cbegin() const noexcept { return edges_.cbegin(); }
-    const_iterator cend()   const noexcept { return edges_.cend(); }
+    iterator begin() noexcept { 
+        return edges_.begin(); 
+    }
+    iterator end()   noexcept { 
+        return edges_.end(); 
+    }
+    const_iterator begin() const noexcept { 
+        return edges_.begin(); 
+    }
+    const_iterator end()   const noexcept { 
+        return edges_.end(); 
+    }
+    const_iterator cbegin() const noexcept { 
+        return edges_.cbegin(); 
+    }
+    const_iterator cend()   const noexcept { 
+        return edges_.cend(); 
+    }
 
-    reverse_iterator rbegin() noexcept { return edges_.rbegin(); }
-    reverse_iterator rend()   noexcept { return edges_.rend(); }
-    const_reverse_iterator rbegin() const noexcept { return edges_.rbegin(); }
-    const_reverse_iterator rend()   const noexcept { return edges_.rend(); }
-    const_reverse_iterator crbegin() const noexcept { return edges_.crbegin(); }
-    const_reverse_iterator crend()   const noexcept { return edges_.crend(); }
+    reverse_iterator rbegin() noexcept { 
+        return edges_.rbegin(); 
+    }
+    reverse_iterator rend()   noexcept { 
+        return edges_.rend(); 
+    }
+    const_reverse_iterator rbegin() const noexcept { 
+        return edges_.rbegin(); 
+    }
+    const_reverse_iterator rend()   const noexcept { 
+        return edges_.rend(); 
+    }
+    const_reverse_iterator crbegin() const noexcept { 
+        return edges_.crbegin(); 
+    }
+    const_reverse_iterator crend()   const noexcept { 
+        return edges_.crend(); 
+    }
 
     const_iterator find(const edge_type& e) const {
         return std::find(edges_.begin(), edges_.end(), e);

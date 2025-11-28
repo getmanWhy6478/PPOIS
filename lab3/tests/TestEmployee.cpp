@@ -25,12 +25,10 @@ SUITE(EmployeeTests) {
         employee->setPhone("+44-20-7887-8888");
         employee->setHireYear(2020);
         employee->setSalary(50000.0);
-        employee->setDepartment("Curatorial");
         
         CHECK_EQUAL("+44-20-7887-8888", employee->getPhone());
         CHECK_EQUAL(2020, employee->getHireYear());
         CHECK_CLOSE(50000.0, employee->getSalary(), 0.01);
-        CHECK_EQUAL("Curatorial", employee->getDepartment());
         
         delete employee;
         delete gallery;

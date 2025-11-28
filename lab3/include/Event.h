@@ -11,12 +11,10 @@ private:
     std::string title;
     std::string description;
     Gallery* gallery;
-    int eventYear;
     int durationMinutes;
     std::vector<Visitor*> attendees;
     int maxCapacity;
     double ticketPrice;
-    std::string organizer;
 
 public:
     Event() = default;
@@ -43,7 +41,5 @@ public:
     bool isFull() const;
     double getTicketPrice() const;
     void setTicketPrice(double price);
-    std::string getOrganizer() const;
-    void setOrganizer(const std::string& organizer);
 };
 

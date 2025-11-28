@@ -45,14 +45,6 @@ std::vector<Artwork*> Period::getArtworks() const {
     return artworks;
 }
 
-std::string Period::getCulturalContext() const {
-    return culturalContext;
-}
-
-void Period::setCulturalContext(const std::string& context) {
-    this->culturalContext = context;
-}
-
 void Period::addKeyEvent(const std::string& event) {
     keyEvents.push_back(event);
 }

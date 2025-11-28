@@ -5,10 +5,6 @@ Installation::Installation(const std::string& title, int year, Artist* artist)
     : Artwork(title, year, artist) {
 }
 
-std::string Installation::getType() const {
-    return "Installation";
-}
-
 void Installation::addComponent(Artwork* component) {
     components.push_back(component);
 }

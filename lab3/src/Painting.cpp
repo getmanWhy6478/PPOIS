@@ -5,10 +5,6 @@ Painting::Painting(const std::string& title, int year, Artist* artist)
     : Artwork(title, year, artist), isFramed(false) {
 }
 
-std::string Painting::getType() const {
-    return "Painting";
-}
-
 std::string Painting::getPaintType() const {
     return paintType;
 }

@@ -4,7 +4,7 @@
 Appraisal::Appraisal(const std::string& appraisalId, Artwork* artwork,
                      const std::string& appraiserName)
     : appraisalId(appraisalId), artwork(artwork), appraiserName(appraiserName),
-      estimatedValue(0.0), marketValue(0.0), insuranceValue(0.0),
+    marketValue(0.0),
       appraisalYear(0) {
 }
 
@@ -39,14 +39,6 @@ void Appraisal::setAppraisalYear(int year) {
     this->appraisalYear = year;
 }
 
-double Appraisal::getEstimatedValue() const {
-    return estimatedValue;
-}
-
-void Appraisal::setEstimatedValue(double value) {
-    this->estimatedValue = value;
-}
-
 double Appraisal::getMarketValue() const {
     return marketValue;
 }
@@ -55,12 +47,5 @@ void Appraisal::setMarketValue(double value) {
     this->marketValue = value;
 }
 
-double Appraisal::getInsuranceValue() const {
-    return insuranceValue;
-}
-
-void Appraisal::setInsuranceValue(double value) {
-    this->insuranceValue = value;
-}
 
 

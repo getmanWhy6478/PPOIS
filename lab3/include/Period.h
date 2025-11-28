@@ -11,7 +11,6 @@ private:
     int startYear;
     int endYear;
     std::vector<Artwork*> artworks;
-    std::string culturalContext;
     std::vector<std::string> keyEvents;
 
 public:
@@ -29,8 +28,6 @@ public:
     void setEndYear(int year);
     void addArtwork(Artwork* artwork);
     std::vector<Artwork*> getArtworks() const;
-    std::string getCulturalContext() const;
-    void setCulturalContext(const std::string& context);
     void addKeyEvent(const std::string& event);
     std::vector<std::string> getKeyEvents() const;
     int getDuration() const;

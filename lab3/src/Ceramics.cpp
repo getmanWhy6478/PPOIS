@@ -5,10 +5,6 @@ Ceramics::Ceramics(const std::string& title, int year, Artist* artist)
     : Artwork(title, year, artist) {
 }
 
-std::string Ceramics::getType() const {
-    return "Ceramics";
-}
-
 std::string Ceramics::getClayType() const {
     return clayType;
 }

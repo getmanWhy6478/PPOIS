@@ -50,5 +50,7 @@ public:
     void setAdmissionPrice(double price);
     int getMaxCapacity() const;
     void setMaxCapacity(int capacity);
+
+    bool borrow(Collection& collection, Gallery& other);
 };
 

@@ -7,7 +7,7 @@ SUITE(TextileTests) {
         Artist* artist = new Artist("Anni", "Albers", "German", 1899);
         Textile* textile = new Textile("Tapestry", 1950, artist);
         
-        CHECK_EQUAL("Textile", textile->getType());
+        CHECK_EQUAL("Tapestry", textile->getTitle());
         
         delete textile;
         delete artist;

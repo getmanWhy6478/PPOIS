@@ -7,7 +7,7 @@ SUITE(DrawingTests) {
         Artist* artist = new Artist("Leonardo", "da Vinci", "Italian", 1452);
         Drawing* drawing = new Drawing("Study of Hands", 1474, artist);
         
-        CHECK_EQUAL("Drawing", drawing->getType());
+        CHECK_EQUAL(1474, drawing->getYear());
         
         delete drawing;
         delete artist;
@@ -18,13 +18,11 @@ SUITE(DrawingTests) {
         Drawing* drawing = new Drawing("Study", 1500, artist);
         
         drawing->setDrawingMedium("Charcoal");
-        drawing->setPaperType("Sketch paper");
         drawing->setPaperSize("A4");
         drawing->setIsSigned(true);
         drawing->setIsDated(true);
         
         CHECK_EQUAL("Charcoal", drawing->getDrawingMedium());
-        CHECK_EQUAL("Sketch paper", drawing->getPaperType());
         CHECK_EQUAL("A4", drawing->getPaperSize());
         CHECK(drawing->getIsSigned());
         CHECK(drawing->getIsDated());

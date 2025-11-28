@@ -5,10 +5,6 @@ Textile::Textile(const std::string& title, int year, Artist* artist)
     : Artwork(title, year, artist), isHandmade(false) {
 }
 
-std::string Textile::getType() const {
-    return "Textile";
-}
-
 std::string Textile::getTextileType() const {
     return textileType;
 }

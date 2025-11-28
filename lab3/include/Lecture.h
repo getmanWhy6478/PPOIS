@@ -6,7 +6,6 @@
 class Lecture : public Event {
 private:
     std::string speakerName;
-    std::string speakerBio;
     std::string topic;
     bool requiresRegistration;
 
@@ -18,8 +17,6 @@ public:
     
     std::string getSpeakerName() const;
     void setSpeakerName(const std::string& name);
-    std::string getSpeakerBio() const;
-    void setSpeakerBio(const std::string& bio);
     std::string getTopic() const;
     void setTopic(const std::string& topic);
     bool getRequiresRegistration() const;

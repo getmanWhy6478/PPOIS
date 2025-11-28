@@ -38,5 +38,6 @@ public:
     Restoration* startRestoration(const std::string& restorationId,
                                   Artwork* artwork,
                                   const std::string& conditionBefore);
+    void endRestoration(Restoration* restoration, const std::string& conditionAfter);
 };
 

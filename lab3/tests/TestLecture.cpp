@@ -17,11 +17,9 @@ SUITE(LectureTests) {
         Gallery* gallery = new Gallery("Tate", "Bankside", "London", "UK");
         Lecture* lecture = new Lecture("LEC002", "Modernism", gallery, "Prof. Jones");
         
-        lecture->setSpeakerBio("Renowned art historian");
         lecture->setTopic("Abstract Expressionism");
         lecture->setRequiresRegistration(true);
         
-        CHECK_EQUAL("Renowned art historian", lecture->getSpeakerBio());
         CHECK_EQUAL("Abstract Expressionism", lecture->getTopic());
         CHECK(lecture->getRequiresRegistration());
         

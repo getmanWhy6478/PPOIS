@@ -5,24 +5,12 @@ Drawing::Drawing(const std::string& title, int year, Artist* artist)
     : Artwork(title, year, artist), isSigned(false), isDated(false) {
 }
 
-std::string Drawing::getType() const {
-    return "Drawing";
-}
-
 std::string Drawing::getDrawingMedium() const {
     return drawingMedium;
 }
 
 void Drawing::setDrawingMedium(const std::string& medium) {
     this->drawingMedium = medium;
-}
-
-std::string Drawing::getPaperType() const {
-    return paperType;
-}
-
-void Drawing::setPaperType(const std::string& type) {
-    this->paperType = type;
 }
 
 std::string Drawing::getPaperSize() const {

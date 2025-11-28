@@ -27,7 +27,7 @@ double PriceCalculator::calculateOrderTotal(const std::vector<Artwork*>& artwork
 
 double PriceCalculator::calculateInsurancePremium(double artworkValue,
                                                    const std::string& coverageType) {
-    double rate = 0.01; // 1% базовый тариф
+    double rate = 0.01;
     
     if (coverageType == "полная") {
         rate = 0.015; // 1.5%

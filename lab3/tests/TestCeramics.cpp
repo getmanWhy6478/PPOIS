@@ -7,7 +7,7 @@ SUITE(CeramicsTests) {
         Artist* artist = new Artist("Pablo", "Picasso", "Spanish", 1881);
         Ceramics* ceramics = new Ceramics("Vase", 1950, artist);
         
-        CHECK_EQUAL("Ceramics", ceramics->getType());
+        CHECK_EQUAL(1950, ceramics->getYear());
         
         delete ceramics;
         delete artist;

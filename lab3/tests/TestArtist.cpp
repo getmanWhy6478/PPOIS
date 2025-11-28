@@ -1,6 +1,7 @@
 #include "UnitTest++/UnitTest++.h"
 #include "../include/Artist.h"
 #include "../include/ArtMovement.h"
+#include "../include/Artwork.h"
 
 SUITE(ArtistTests) {
     TEST(ArtistConstructor) {
@@ -52,6 +53,14 @@ SUITE(ArtistTests) {
         
         delete artist;
         delete movement;
+    }
+    TEST(CreateMasterpieceReturnsArtworkByValue) {
+        Artist artist("Иван", "Иванов", "Беларусь", 1980);
+
+        Artwork art = artist.createMasterpiece("Шедевр", 45);
+        CHECK_EQUAL("Шедевр", art.getTitle());
+        CHECK_EQUAL(45, art.getYear()); 
+        CHECK_EQUAL(&artist, art.getArtist());
     }
 }
 

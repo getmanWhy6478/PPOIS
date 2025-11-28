@@ -17,7 +17,6 @@ public:
     Installation(const std::string& title, int year, Artist* artist);
     ~Installation() = default;
     
-    std::string getType() const override;
     void addComponent(Artwork* component);
     std::vector<Artwork*> getComponents() const;
     std::string getSpaceRequirements() const;

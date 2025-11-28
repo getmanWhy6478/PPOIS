@@ -5,7 +5,7 @@
 Event::Event(const std::string& eventId, const std::string& title,
              Gallery* gallery)
     : eventId(eventId), title(title), gallery(gallery), maxCapacity(0),
-      ticketPrice(0.0), eventYear(0), durationMinutes(0) {
+      ticketPrice(0.0), durationMinutes(0) {
 }
 
 std::string Event::getEventId() const {
@@ -38,14 +38,6 @@ Gallery* Event::getGallery() const {
 
 void Event::setGallery(Gallery* gallery) {
     this->gallery = gallery;
-}
-
-int Event::getEventYear() const {
-    return eventYear;
-}
-
-void Event::setEventYear(int year) {
-    this->eventYear = year;
 }
 
 int Event::getDurationMinutes() const {
@@ -83,14 +75,6 @@ double Event::getTicketPrice() const {
 
 void Event::setTicketPrice(double price) {
     this->ticketPrice = price;
-}
-
-std::string Event::getOrganizer() const {
-    return organizer;
-}
-
-void Event::setOrganizer(const std::string& organizer) {
-    this->organizer = organizer;
 }
 
 

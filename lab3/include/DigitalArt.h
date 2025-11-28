@@ -5,7 +5,6 @@
 
 class DigitalArt : public Artwork {
 private:
-    std::string software;
     std::string fileFormat;
     std::string displayType;
     int resolutionWidth;
@@ -17,9 +16,6 @@ public:
     DigitalArt(const std::string& title, int year, Artist* artist);
     ~DigitalArt() = default;
     
-    std::string getType() const override;
-    std::string getSoftware() const;
-    void setSoftware(const std::string& software);
     std::string getFileFormat() const;
     void setFileFormat(const std::string& format);
     std::string getDisplayType() const;

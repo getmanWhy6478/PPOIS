@@ -27,14 +27,6 @@ std::string Collector::getFullName() const {
     return firstName + " " + lastName;
 }
 
-std::string Collector::getPhone() const {
-    return phone;
-}
-
-void Collector::setPhone(const std::string& phone) {
-    this->phone = phone;
-}
-
 
 void Collector::addCollection(Collection* collection) {
     collections.push_back(collection);
@@ -43,15 +35,6 @@ void Collector::addCollection(Collection* collection) {
 std::vector<Collection*> Collector::getCollections() const {
     return collections;
 }
-
-std::string Collector::getCollectingFocus() const {
-    return collectingFocus;
-}
-
-void Collector::setCollectingFocus(const std::string& focus) {
-    this->collectingFocus = focus;
-}
-
 bool Collector::purchaseArtwork(Artwork* artwork, Collection* targetCollection,
                                 double purchasePrice) {
     if (!artwork || !targetCollection || purchasePrice <= 0.0) {

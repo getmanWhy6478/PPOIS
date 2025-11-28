@@ -15,7 +15,6 @@ public:
     Sculpture(const std::string& title, int year, Artist* artist);
     ~Sculpture() = default;
     
-    std::string getType() const override;
     std::string getMaterial() const;
     void setMaterial(const std::string& material);
     double getBaseWidth() const;

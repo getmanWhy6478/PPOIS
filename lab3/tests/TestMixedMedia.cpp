@@ -7,7 +7,7 @@ SUITE(MixedMediaTests) {
         Artist* artist = new Artist("Robert", "Rauschenberg", "American", 1925);
         MixedMedia* mixed = new MixedMedia("Combines", 1954, artist);
         
-        CHECK_EQUAL("MixedMedia", mixed->getType());
+        CHECK_EQUAL(1954, mixed->getYear());
         
         delete mixed;
         delete artist;

@@ -6,7 +6,6 @@
 class Drawing : public Artwork {
 private:
     std::string drawingMedium;
-    std::string paperType;
     std::string paperSize;
     bool isSigned;
     bool isDated;
@@ -16,11 +15,8 @@ public:
     Drawing(const std::string& title, int year, Artist* artist);
     ~Drawing() = default;
     
-    std::string getType() const override;
     std::string getDrawingMedium() const;
     void setDrawingMedium(const std::string& medium);
-    std::string getPaperType() const;
-    void setPaperType(const std::string& type);
     std::string getPaperSize() const;
     void setPaperSize(const std::string& size);
     bool getIsSigned() const;

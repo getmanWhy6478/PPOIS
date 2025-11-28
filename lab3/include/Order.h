@@ -13,7 +13,6 @@ private:
     int orderYear;
     double totalAmount;
     std::string status;
-    std::string paymentStatus;
 
 public:
     Order() = default;
@@ -32,7 +31,5 @@ public:
     void calculateTotalAmount();
     std::string getStatus() const;
     void setStatus(const std::string& status);
-    std::string getPaymentStatus() const;
-    void setPaymentStatus(const std::string& status);
 };
 

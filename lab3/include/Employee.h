@@ -11,7 +11,6 @@ protected:
     std::string phone;
     int hireYear;
     double salary;
-    std::string department;
     Gallery* gallery;
 
 public:
@@ -34,8 +33,6 @@ public:
     void setHireYear(int year);
     double getSalary() const;
     void setSalary(double salary);
-    std::string getDepartment() const;
-    void setDepartment(const std::string& department);
     Gallery* getGallery() const;
     void setGallery(Gallery* gallery);
     int getYearsOfService() const;

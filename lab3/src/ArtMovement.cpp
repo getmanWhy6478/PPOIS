@@ -46,13 +46,6 @@ std::vector<Artist*> ArtMovement::getArtists() const {
 }
 
 
-void ArtMovement::addKeyWork(const std::string& work) {
-    keyWorks.push_back(work);
-}
-
-std::vector<std::string> ArtMovement::getKeyWorks() const {
-    return keyWorks;
-}
 
 
 

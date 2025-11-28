@@ -3,47 +3,87 @@
 #include "../include/Visitor.h"
 
 SUITE(MembershipTests) {
-    TEST(MembershipConstructor) {
-        Visitor* member = new Visitor("John", "Doe", "john@example.com");
-        Membership* membership = new Membership("MEM001", member, "Premium");
-        
-        CHECK_EQUAL("MEM001", membership->getMembershipNumber());
-        CHECK(membership->getMember() == member);
-        CHECK_EQUAL("Premium", membership->getMembershipType());
-        CHECK(membership->getIsActive());
-        
-        delete membership;
-        delete member;
+
+    TEST(ConstructorInitializesFields) {
+        Visitor visitor;
+        Membership m("M123", &visitor, "Premium");
+
+        CHECK_EQUAL("M123", m.getMembershipNumber());
+        CHECK_EQUAL(&visitor, m.getMember());
+        CHECK_EQUAL("Premium", m.getMembershipType());
+
+        CHECK_EQUAL(0.0, m.getAnnualFee());
+        CHECK(m.getIsActive());
+        CHECK_EQUAL(0, m.getDiscountPercentage());
+
+        CHECK_EQUAL(m.getStartYear() + 1, m.getEndYear());
     }
-    
-    TEST(MembershipBenefits) {
-        Visitor* member = new Visitor("Jane", "Smith", "jane@example.com");
-        Membership* membership = new Membership("MEM002", member, "VIP");
-        
-        membership->addBenefit("Free admission");
-        membership->addBenefit("Priority booking");
-        membership->addBenefit("Exclusive events");
-        
-        std::vector<std::string> benefits = membership->getBenefits();
-        CHECK_EQUAL(3, benefits.size());
-        CHECK_EQUAL("Free admission", benefits[0]);
-        
-        delete membership;
-        delete member;
+
+    TEST(SettersUpdateFields) {
+        Visitor visitor1;
+        Visitor visitor2;
+
+        Membership m("M123", &visitor1, "Standard");
+
+        m.setMembershipNumber("M456");
+        m.setMember(&visitor2);
+        m.setMembershipType("VIP");
+        m.setStartYear(2020);
+        m.setEndYear(2025);
+        m.setAnnualFee(150.0);
+        m.setIsActive(false);
+        m.setDiscountPercentage(20);
+
+        CHECK_EQUAL("M456", m.getMembershipNumber());
+        CHECK_EQUAL(&visitor2, m.getMember());
+        CHECK_EQUAL("VIP", m.getMembershipType());
+        CHECK_EQUAL(2020, m.getStartYear());
+        CHECK_EQUAL(2025, m.getEndYear());
+        CHECK_EQUAL(150.0, m.getAnnualFee());
+        CHECK(!m.getIsActive());
+        CHECK_EQUAL(20, m.getDiscountPercentage());
     }
-    
-    TEST(MembershipDiscount) {
-        Visitor* member = new Visitor("Bob", "Johnson", "bob@example.com");
-        Membership* membership = new Membership("MEM003", member, "Basic");
-        
-        membership->setDiscountPercentage(10);
-        CHECK_EQUAL(10, membership->getDiscountPercentage());
-        
-        membership->setAnnualFee(100.0);
-        CHECK_CLOSE(100.0, membership->getAnnualFee(), 0.01);
-        
-        delete membership;
-        delete member;
+
+    TEST(AddBenefitStoresStrings) {
+        Visitor visitor;
+        Membership m("M123", &visitor, "Standard");
+
+        m.addBenefit("Free entry");
+        m.addBenefit("Discount on souvenirs");
+
+        auto benefits = m.getBenefits();
+        CHECK_EQUAL(2, benefits.size());
+        CHECK_EQUAL("Free entry", benefits[0]);
+        CHECK_EQUAL("Discount on souvenirs", benefits[1]);
+    }
+
+    TEST(IsExpiredWhenInactive) {
+        Visitor visitor;
+        Membership m("M123", &visitor, "Standard");
+
+        m.setIsActive(false);
+        CHECK(m.isExpired());
+    }
+
+    TEST(IsExpiredWhenEndYearPassed) {
+        Visitor visitor;
+        Membership m("M123", &visitor, "Standard");
+
+        m.setEndYear(2000);
+        m.setIsActive(true);
+
+        CHECK(m.isExpired());
+    }
+
+    TEST(IsNotExpiredWhenActiveAndValidYears) {
+        Visitor visitor;
+        Membership m("M123", &visitor, "Standard");
+
+        m.setStartYear(2025);
+        m.setEndYear(2026);
+        m.setIsActive(true);
+
+        CHECK(!m.isExpired());
     }
 }
 

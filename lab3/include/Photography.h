@@ -14,7 +14,6 @@ public:
     Photography(const std::string& title, int year, Artist* artist);
     ~Photography() = default;
     
-    std::string getType() const override;
     std::string getCameraType() const;
     void setCameraType(const std::string& type);
     std::string getFilmType() const;

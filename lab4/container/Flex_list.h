@@ -1,3 +1,4 @@
+#pragma once
 #include "Default_element_traits.h"
 
 template<typename T, typename Traits = Default_element_traits<T>>
@@ -143,8 +144,6 @@ public:
     }
 
     reference front() {
-        if (empty()) 
-            throw std::out_of_range("front() on empty container");
         return head_->value;
     }
     const_reference front() const {
@@ -153,8 +152,6 @@ public:
         return head_->value;
     }
     reference back() {
-        if (empty()) 
-            throw std::out_of_range("back() on empty container");
         return tail_->value;
     }
     const_reference back() const {
@@ -239,8 +236,6 @@ public:
         return iterator(n);
     }
     iterator erase(iterator pos) {
-    if (!pos.p_) 
-        throw std::out_of_range("erase(end()) is invalid");
     node* curr = pos.p_;
     node* next = curr->next;
     if (curr->prev) 
@@ -287,7 +282,8 @@ public:
         if (a.size_ != b.size_) return false;
         auto it1 = a.begin(), it2 = b.begin();
         for (; it1 != a.end(); ++it1, ++it2) {
-            if (!(*it1 == *it2)) return false;
+            if (!(*it1 == *it2)) 
+                return false;
         }
         return true;
     }

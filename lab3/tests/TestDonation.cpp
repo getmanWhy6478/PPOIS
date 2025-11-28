@@ -6,47 +6,61 @@
 #include "../include/Artist.h"
 
 SUITE(DonationTests) {
-    TEST(DonationConstructor) {
-        Collector* donor = new Collector("John", "Patron");
-        Donation* donation = new Donation("DON001", donor, "Metropolitan Museum");
-        
-        CHECK_EQUAL("DON001", donation->getDonationId());
-        CHECK(donation->getDonor() == donor);
-        CHECK_EQUAL("Metropolitan Museum", donation->getRecipientInstitution());
-        
-        delete donation;
-        delete donor;
+    TEST(ConstructorInitializesFields) {
+        Collector donor;
+        Donation d("D123", &donor, "Национальный музей");
+
+        CHECK_EQUAL("D123", d.getDonationId());
+        CHECK_EQUAL(&donor, d.getDonor());
+        CHECK_EQUAL("Национальный музей", d.getRecipientInstitution());
+        CHECK_EQUAL(0.0, d.getEstimatedValue());
+        CHECK_EQUAL(0, d.getDonatedArtworks().size());
     }
-    
-    TEST(DonationProperties) {
-        Collector* donor = new Collector("Jane", "Benefactor");
-        Donation* donation = new Donation("DON002", donor, "MoMA");
-        
-        donation->setEstimatedValue(1000000.0);
-        
-        CHECK_CLOSE(1000000.0, donation->getEstimatedValue(), 0.01);
-        
-        delete donation;
-        delete donor;
+
+    TEST(SettersUpdateFields) {
+        Collector donor1;
+        Collector donor2;
+        Donation d("D123", &donor1, "Музей");
+
+        d.setDonationId("D456");
+        d.setDonor(&donor2);
+        d.setRecipientInstitution("Галерея");
+        d.setEstimatedValue(5000.0);
+
+        CHECK_EQUAL("D456", d.getDonationId());
+        CHECK_EQUAL(&donor2, d.getDonor());
+        CHECK_EQUAL("Галерея", d.getRecipientInstitution());
+        CHECK_EQUAL(5000.0, d.getEstimatedValue());
     }
-    
-    TEST(DonationAddArtwork) {
-        Collector* donor = new Collector("Bob", "Collector");
-        Donation* donation = new Donation("DON003", donor, "Tate");
-        Artist* artist = new Artist("Test", "Artist", "Unknown", 1900);
-        Artwork* artwork = new Painting("Donated Work", 2000, artist);
-        
-        artwork->setEstimatedValue(50000.0);
-        donation->addDonatedArtwork(artwork);
-        
-        std::vector<Artwork*> artworks = donation->getDonatedArtworks();
+
+    TEST(AddDonatedArtworkUpdatesListAndValue) {
+        Collector donor;
+        Donation d("D123", &donor, "Музей");
+
+        Artwork art1;
+        Artwork art2;
+
+        d.addDonatedArtwork(&art1);
+        d.addDonatedArtwork(&art2);
+
+        auto artworks = d.getDonatedArtworks();
+        CHECK_EQUAL(2, artworks.size());
+        d.setEstimatedValue(3000);
+        CHECK(artworks[0] == &art1);
+        CHECK(artworks[1] == &art2);
+
+        CHECK_EQUAL(3000.0, d.getEstimatedValue());
+    }
+
+    TEST(AddNullArtworkDoesNotChangeValue) {
+        Collector donor;
+        Donation d("D123", &donor, "Музей");
+
+        d.addDonatedArtwork(nullptr);
+
+        auto artworks = d.getDonatedArtworks();
         CHECK_EQUAL(1, artworks.size());
-        CHECK_CLOSE(50000.0, donation->getEstimatedValue(), 0.01);
-        
-        delete donation;
-        delete artwork;
-        delete artist;
-        delete donor;
+        CHECK_EQUAL(0.0, d.getEstimatedValue()); 
     }
 }
 

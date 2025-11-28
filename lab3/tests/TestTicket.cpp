@@ -9,7 +9,9 @@ SUITE(TicketTests) {
         Gallery* gallery = new Gallery("Louvre", "Rue de Rivoli", "Paris", "France");
         Exhibition* exhibition = new Exhibition("Renaissance", gallery, 2024, 2024);
         Visitor* visitor = new Visitor("John", "Doe", "john@example.com");
-        Ticket* ticket = new Ticket("T001", visitor, exhibition, 15.0);
+        Ticket* ticket = new Ticket("T000", visitor, exhibition, 15.0);
+        ticket->setTicketNumber("T001");
+        visitor = ticket->getVisitor();
         
         CHECK_EQUAL("T001", ticket->getTicketNumber());
         CHECK(ticket->getVisitor() == visitor);

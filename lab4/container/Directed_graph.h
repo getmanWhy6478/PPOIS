@@ -1,4 +1,4 @@
-
+#pragma once
 #include "Flex_list.h"
 #include "Edge_sequence.h"
 #include "Vertex.h"
@@ -32,19 +32,6 @@ private:
     std::unordered_map<vertex_id, std::unordered_set<vertex_id>> adj_in_;
     vertex_id next_id_{0};
 
-    vertex_iterator find_vertex_iter(vertex_id id) {
-        for (auto it = vertices_.begin(); it != vertices_.end(); ++it)
-            if (it->id == id) 
-            return it;
-        return vertices_.end();
-    }
-
-    const_vertex_iterator find_vertex_iter(vertex_id id) const {
-        for (auto it = vertices_.cbegin(); it != vertices_.cend(); ++it)
-            if (it->id == id) return it;
-        return vertices_.cend();
-    }
-
 public:
     Directed_graph() = default;
 
@@ -66,12 +53,26 @@ public:
         std::swap(next_id_, other.next_id_);
     }
 
-    bool empty() const noexcept { return vertices_.empty(); }
+    bool empty() const noexcept { 
+        return vertices_.empty(); 
+    }
+    vertex_iterator find_vertex_iter(vertex_id id) {
+        for (auto it = vertices_.begin(); it != vertices_.end(); ++it)
+            if (it->id == id) 
+                return it;
+    }
+
+    const_vertex_iterator find_vertex_iter(vertex_id id) const {
+        for (auto it = vertices_.cbegin(); it != vertices_.cend(); ++it)
+            if (it->id == id) return it;
+        return vertices_.cend();
+    }
     void clear() {
         vertices_.clear();
         adj_out_.clear();
         adj_in_.clear();
-        while (!edges_.empty()) edges_.erase(edges_.begin());
+        while (!edges_.empty()) 
+            edges_.erase(edges_.begin());
         next_id_ = 0;
     }
 
@@ -81,7 +82,6 @@ public:
 
     bool has_edge(vertex_id u, vertex_id v) const {
         auto it = adj_out_.find(u);
-        if (it == adj_out_.end()) return false;
         const auto& s = it->second;
         return s.find(v) != s.end();
     }
@@ -95,14 +95,10 @@ public:
 
     std::size_t out_degree(vertex_id v) const {
         auto it = adj_out_.find(v);
-        if (it == adj_out_.end())
-            throw std::out_of_range("out_degree: vertex not found");
         return it->second.size();
     }
     std::size_t in_degree(vertex_id v) const {
         auto it = adj_in_.find(v);
-        if (it == adj_in_.end()) 
-            throw std::out_of_range("in_degree: vertex not found");
         return it->second.size();
     }
     std::size_t degree(vertex_id v) const {
@@ -127,10 +123,6 @@ public:
     }
 
     void add_edge(vertex_id u, vertex_id v) {
-        if (!has_vertex(u) || !has_vertex(v))
-            throw std::out_of_range("add_edge: vertex not found");
-        if (has_edge(u,v)) 
-            return; 
         adj_out_[u].insert(v);
         adj_in_[v].insert(u);
         edges_.insert({u,v});
@@ -149,17 +141,6 @@ public:
     void remove_vertex(vertex_id id) {
         if (!has_vertex(id))
             throw std::out_of_range("remove_vertex: vertex not found");
-
-        for (auto v : adj_out_[id]) {
-            adj_in_[v].erase(id);
-            auto it = edges_.find({id,v});
-            if (it != edges_.end()) edges_.erase(it);
-        }
-        for (auto u : adj_in_[id]) {
-            adj_out_[u].erase(id);
-            auto it = edges_.find({u,id});
-            if (it != edges_.end()) edges_.erase(it);
-        }
         edges_.erase_all_incident(id);
 
         adj_out_.erase(id);
@@ -171,23 +152,55 @@ public:
         vertices_.erase(itv);
     }
 
-    vertex_iterator begin_vertices() noexcept { return vertices_.begin(); }
-    vertex_iterator end_vertices()   noexcept { return vertices_.end(); }
-    const_vertex_iterator begin_vertices() const noexcept { return vertices_.begin(); }
-    const_vertex_iterator end_vertices()   const noexcept { return vertices_.end(); }
-    vertex_reverse_iterator rbegin_vertices() noexcept { return vertices_.rbegin(); }
-    vertex_reverse_iterator rend_vertices()   noexcept { return vertices_.rend(); }
-    vertex_const_reverse_iterator rbegin_vertices() const noexcept { return vertices_.rbegin(); }
-    vertex_const_reverse_iterator rend_vertices()   const noexcept { return vertices_.rend(); }
+    vertex_iterator begin_vertices() noexcept { 
+        return vertices_.begin(); 
+    }
+    vertex_iterator end_vertices()   noexcept { 
+        return vertices_.end(); 
+    }
+    const_vertex_iterator begin_vertices() const noexcept { 
+        return vertices_.begin(); 
+    }
+    const_vertex_iterator end_vertices()   const noexcept { 
+        return vertices_.end(); 
+    }
+    vertex_reverse_iterator rbegin_vertices() noexcept { 
+        return vertices_.rbegin(); 
+    }
+    vertex_reverse_iterator rend_vertices() noexcept { 
+        return vertices_.rend(); 
+    }
+    vertex_const_reverse_iterator rbegin_vertices() const noexcept { 
+        return vertices_.rbegin(); 
+    }
+    vertex_const_reverse_iterator rend_vertices()   const noexcept { 
+        return vertices_.rend(); 
+    }
 
-    edge_iterator begin_edges() noexcept { return edges_.begin(); }
-    edge_iterator end_edges()   noexcept { return edges_.end(); }
-    const_edge_iterator begin_edges() const noexcept { return edges_.begin(); }
-    const_edge_iterator end_edges()   const noexcept { return edges_.end(); }
-    edge_reverse_iterator rbegin_edges() noexcept { return edges_.rbegin(); }
-    edge_reverse_iterator rend_edges()   noexcept { return edges_.rend(); }
-    edge_const_reverse_iterator rbegin_edges() const noexcept { return edges_.rbegin(); }
-    edge_const_reverse_iterator rend_edges()   const noexcept { return edges_.rend(); }
+    edge_iterator begin_edges() noexcept { 
+        return edges_.begin(); 
+    }
+    edge_iterator end_edges()   noexcept {
+        return edges_.end(); 
+    }
+    const_edge_iterator begin_edges() const noexcept {
+        return edges_.begin();
+    }
+    const_edge_iterator end_edges()   const noexcept {
+        return edges_.end();
+    }
+    edge_reverse_iterator rbegin_edges() noexcept {
+        return edges_.rbegin(); 
+    }
+    edge_reverse_iterator rend_edges()   noexcept {
+        return edges_.rend(); 
+    }
+    edge_const_reverse_iterator rbegin_edges() const noexcept { 
+        return edges_.rbegin(); 
+    }
+    edge_const_reverse_iterator rend_edges()  const noexcept { 
+        return edges_.rend();
+    }
 
     std::vector<edge_type> incident_edges(vertex_id v) const {
         if (!has_vertex(v)) throw std::out_of_range("incident_edges: vertex not found");

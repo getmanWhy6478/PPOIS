@@ -13,7 +13,6 @@ public:
     MixedMedia(const std::string& title, int year, Artist* artist);
     ~MixedMedia() = default;
     
-    std::string getType() const override;
     void addMediaType(const std::string& type);
     std::vector<std::string> getMediaTypes() const;
 };

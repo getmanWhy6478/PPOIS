@@ -47,5 +47,7 @@ public:
     bool getIsAlive() const;
     void setIsAlive(bool alive);
     int getAge() const;
+
+    Artwork createMasterpiece(const std::string& title, int age);
 };
 

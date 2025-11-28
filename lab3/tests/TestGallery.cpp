@@ -41,5 +41,34 @@ SUITE(GalleryTests) {
         delete gallery;
         delete room;
     }
+    TEST(BorrowCollectionSuccess) {
+        Gallery g1;
+        Gallery g2;
+
+        Collection c1;
+        g2.addCollection(&c1);
+
+        bool result = g1.borrow(c1, g2);
+
+        CHECK_EQUAL(result, true);
+        CHECK_EQUAL(1, g1.getCollections().size()); 
+        CHECK_EQUAL(0, g2.getCollections().size()); 
+    }
+
+    TEST(BorrowCollectionFail) {
+        Gallery g1;
+        Gallery g2;
+
+        Collection c1;
+        Collection c2;
+
+        g2.addCollection(&c2);
+
+        bool result = g1.borrow(c1, g2);
+
+        CHECK_EQUAL(result, false);
+        CHECK_EQUAL(0, g1.getCollections().size());
+        CHECK_EQUAL(1, g2.getCollections().size());
+    }
 }
 

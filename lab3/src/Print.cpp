@@ -6,10 +6,6 @@ Print::Print(const std::string& title, int year, Artist* artist)
       isSigned(false), isNumbered(false) {
 }
 
-std::string Print::getType() const {
-    return "Print";
-}
-
 std::string Print::getPrintType() const {
     return printType;
 }
@@ -20,14 +16,6 @@ void Print::setPrintType(const std::string& type) {
 
 int Print::getEditionNumber() const {
     return editionNumber;
-}
-
-std::string Print::getPaperType() const {
-    return paperType;
-}
-
-void Print::setPaperType(const std::string& type) {
-    this->paperType = type;
 }
 
 bool Print::getIsSigned() const {

@@ -5,7 +5,7 @@
 
 Order::Order(const std::string& orderNumber, Visitor* customer)
     : orderNumber(orderNumber), customer(customer), totalAmount(0.0),
-      status("pending"), paymentStatus("unpaid") {
+      status("pending") {
     std::time_t t = std::time(nullptr);
     std::tm* now = std::localtime(&t);
     orderYear = now->tm_year + 1900;
@@ -63,13 +63,5 @@ std::string Order::getStatus() const {
 
 void Order::setStatus(const std::string& status) {
     this->status = status;
-}
-
-std::string Order::getPaymentStatus() const {
-    return paymentStatus;
-}
-
-void Order::setPaymentStatus(const std::string& status) {
-    this->paymentStatus = status;
 }
 

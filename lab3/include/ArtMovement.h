@@ -11,7 +11,6 @@ private:
     int startYear;
     int endYear;
     std::vector<Artist*> artists;
-    std::vector<std::string> keyWorks;
 
 public:
     ArtMovement(const std::string& name, int startYear);
@@ -27,7 +26,5 @@ public:
     void setEndYear(int year);
     void addArtist(Artist* artist);
     std::vector<Artist*> getArtists() const;
-    void addKeyWork(const std::string& work);
-    std::vector<std::string> getKeyWorks() const;
 };
 

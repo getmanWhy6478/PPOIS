@@ -48,14 +48,6 @@ void Conservation::setCompletionYear(int year) {
     this->completionYear = year;
 }
 
-std::string Conservation::getEnvironmentalConditions() const {
-    return environmentalConditions;
-}
-
-void Conservation::setEnvironmentalConditions(const std::string& conditions) {
-    this->environmentalConditions = conditions;
-}
-
 double Conservation::getCost() const {
     return cost;
 }

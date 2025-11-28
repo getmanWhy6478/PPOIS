@@ -7,7 +7,6 @@ SUITE(PaintingTests) {
         Artist* artist = new Artist("Rembrandt", "van Rijn", "Dutch", 1606);
         Painting* painting = new Painting("The Night Watch", 1642, artist);
         
-        CHECK_EQUAL("Painting", painting->getType());
         CHECK_EQUAL("The Night Watch", painting->getTitle());
         CHECK_EQUAL(1642, painting->getYear());
         

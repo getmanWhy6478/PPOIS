@@ -12,7 +12,6 @@ private:
     Restorer* conservator;
     int startYear;
     int completionYear;
-    std::string environmentalConditions;
     double cost;
     std::string status;
 
@@ -32,8 +31,6 @@ public:
     void setStartYear(int year);
     int getCompletionYear() const;
     void setCompletionYear(int year);
-    std::string getEnvironmentalConditions() const;
-    void setEnvironmentalConditions(const std::string& conditions);
     double getCost() const;
     void setCost(double cost);
     std::string getStatus() const;

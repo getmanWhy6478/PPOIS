@@ -24,16 +24,12 @@ SUITE(AppraisalTests) {
         Artwork* artwork = new Painting("Valuable Work", 1850, artist);
         Appraisal* appraisal = new Appraisal("APP002", artwork, "Certified Appraiser");
         
-        appraisal->setEstimatedValue(1000000.0);
         appraisal->setMarketValue(1200000.0);
         appraisal->setAppraisalYear(2024);
         appraisal->setAppraiserName("John");
         appraisal->setArtwork(artwork);
-        appraisal->setInsuranceValue(0);
         
-        CHECK_CLOSE(1000000.0, appraisal->getEstimatedValue(), 0.01);
         CHECK_CLOSE(1200000.0, appraisal->getMarketValue(), 0.01);
-        CHECK_CLOSE(0, appraisal->getInsuranceValue(), 0.01);
         CHECK_EQUAL(2024, appraisal->getAppraisalYear());
         CHECK_EQUAL("John", appraisal->getAppraiserName());
 

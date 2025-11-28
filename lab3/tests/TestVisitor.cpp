@@ -3,6 +3,7 @@
 #include "../include/Ticket.h"
 #include "../include/Exhibition.h"
 #include "../include/Gallery.h"
+#include "../include/Artist.h"
 
 SUITE(VisitorTests) {
     TEST(VisitorConstructor) {
@@ -59,11 +60,22 @@ SUITE(VisitorTests) {
         CHECK_EQUAL(visitor, ticket->getVisitor());
         CHECK_EQUAL(exhibition, ticket->getExhibition());
         CHECK_EQUAL(1, visitor->getVisitCount());
+        visitor->leaveRecommendation("Супер-пупер-шмупер!");
 
         delete ticket;
         delete visitor;
         delete exhibition;
         delete gallery;
+    }
+    TEST(GetTooExcitedCreatesArtistFromVisitor) {
+        Visitor v("Иван", "Иванов", "meow@mail.ru");
+        v.setBirthYear(1985);
+        Artist a = v.getTooExcited("Беларусь");
+
+        CHECK_EQUAL("Иван", a.getFirstName());
+        CHECK_EQUAL("Иванов", a.getLastName());
+        CHECK_EQUAL("Беларусь", a.getNationality());
+        CHECK_EQUAL(1985, a.getBirthYear());
     }
 }
 

@@ -13,7 +13,6 @@ public:
     Textile(const std::string& title, int year, Artist* artist);
     ~Textile() = default;
     
-    std::string getType() const override;
     std::string getTextileType() const;
     void setTextileType(const std::string& type);
     bool getIsHandmade() const;

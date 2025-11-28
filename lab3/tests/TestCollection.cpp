@@ -36,5 +36,64 @@ SUITE(CollectionTests) {
         delete artist;
         delete collector;
     }
+    TEST(CollectionsEqual) {
+        Collection c1 ;
+        Collection c2 ;
+        CHECK_EQUAL(c1 == c2, false);
+    }
+
+    TEST(DifferentName) {
+        Collection c1 ;
+        Collection c2 ;
+        c2.setName("Другая");
+        CHECK_EQUAL(!(c1 == c2), true);
+    }
+
+    TEST(DifferentDescription) {
+        Collection c1 ;
+        Collection c2 ;
+        c2.setDescription("Другое описание");
+        CHECK_EQUAL(!(c1 == c2), true);
+    }
+
+    TEST(DifferentCollectorPointer) {
+        Collection c1 ;
+        Collection c2 ;
+        Collector* j;
+        c2.setCollector(j);
+        CHECK_EQUAL(!(c1 == c2), true);
+    }
+
+    TEST(DifferentTotalArtworks) {
+        Collection c1 ;
+        Collection c2 ;
+        Artwork* a1;
+        c2.addArtwork(a1); 
+        CHECK_EQUAL(!(c1 == c2), true);
+    }
+
+    TEST(DifferentTotalValue) {
+        Collection c1 ;
+        Collection c2 ;
+        Artwork* a1;
+        c2.addArtwork(a1);
+        CHECK_EQUAL(!(c1 == c2), true);
+    }
+
+    TEST(DifferentArtworksSize) {
+        Collection c1 ;
+        Collection c2 ;
+        Artwork* a1;
+        c2.addArtwork(a1);
+        CHECK_EQUAL(!(c1 == c2), true);
+    }
+
+    TEST(DifferentArtworkPointer) {
+        Collection c1 ;
+        Collection c2 ;
+        Artwork* a1;
+        c2.addArtwork(a1);
+        CHECK_EQUAL(!(c1 == c2), true);
+    }
 }
 

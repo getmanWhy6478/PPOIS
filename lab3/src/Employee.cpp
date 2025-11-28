@@ -60,14 +60,6 @@ void Employee::setSalary(double salary) {
     this->salary = salary;
 }
 
-std::string Employee::getDepartment() const {
-    return department;
-}
-
-void Employee::setDepartment(const std::string& department) {
-    this->department = department;
-}
-
 Gallery* Employee::getGallery() const {
     return gallery;
 }
