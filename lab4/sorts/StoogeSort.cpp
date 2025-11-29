@@ -1,7 +1,7 @@
 class StoogeSort {
 private:
     template<typename T>
-    static void mySwap(T& a, T& b) {
+    void mySwap(T& a, T& b) {
         T tmp = a;
         a = b;
         b = tmp;
@@ -9,7 +9,7 @@ private:
 
 public:
     template<typename RandomIt>
-    static void sort(RandomIt begin, RandomIt end) {
+    void sort(RandomIt begin, RandomIt end) {
         auto len = end - begin;
         if (len <= 1) return;
 

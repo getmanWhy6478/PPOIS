@@ -7,7 +7,7 @@
 class HeapSort {
 private:
     template<typename RandomIt>
-    static void heapify(RandomIt begin, size_t heap_size, size_t root_index) {
+    void heapify(RandomIt begin, size_t heap_size, size_t root_index) {
         size_t largest = root_index;
         size_t left = 2 * root_index + 1;
         size_t right = 2 * root_index + 2;
@@ -24,14 +24,14 @@ private:
     }
 
     template<typename RandomIt>
-    static void build_heap(RandomIt begin, size_t heap_size) {
+    void build_heap(RandomIt begin, size_t heap_size) {
         for (int i = static_cast<int>(heap_size / 2) - 1; i >= 0; --i)
             heapify(begin, heap_size, static_cast<size_t>(i));
     }
 
 public:
     template<typename RandomIt>
-    static void sort(RandomIt begin, RandomIt end) {
+    void sort(RandomIt begin, RandomIt end) {
         size_t n = std::distance(begin, end);
         if (n < 2) return;
 
