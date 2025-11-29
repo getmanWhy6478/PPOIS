@@ -2,38 +2,44 @@
 #include <vector>
 #include <iterator>
 #include <algorithm>
+#include <utility> 
 
-template<typename RandomIt>
-void heapify(RandomIt begin, size_t heap_size, size_t root_index) {
-    size_t largest = root_index;
-    size_t left = 2 * root_index + 1;
-    size_t right = 2 * root_index + 2;
+class HeapSort {
+private:
+    template<typename RandomIt>
+    static void heapify(RandomIt begin, size_t heap_size, size_t root_index) {
+        size_t largest = root_index;
+        size_t left = 2 * root_index + 1;
+        size_t right = 2 * root_index + 2;
 
-    if (left < heap_size && *(begin + left) > *(begin + largest))
-        largest = left;
-    if (right < heap_size && *(begin + right) > *(begin + largest))
-        largest = right;
+        if (left < heap_size && *(begin + left) > *(begin + largest))
+            largest = left;
+        if (right < heap_size && *(begin + right) > *(begin + largest))
+            largest = right;
 
-    if (largest != root_index) {
-        std::swap(*(begin + root_index), *(begin + largest));
-        heapify(begin, heap_size, largest);
+        if (largest != root_index) {
+            std::swap(*(begin + root_index), *(begin + largest));
+            heapify(begin, heap_size, largest);
+        }
     }
-}
 
-// Построение кучи
-template<typename RandomIt>
-void build_heap(RandomIt begin, size_t heap_size) {
-    for (int i = heap_size / 2 - 1; i >= 0; --i)
-        heapify(begin, heap_size, i);
-}
-
-template<typename RandomIt>
-void heapsort(RandomIt begin, RandomIt end) {
-    size_t n = std::distance(begin, end);
-    build_heap(begin, n);
-
-    for (size_t i = n - 1; i > 0; --i) {
-        std::swap(*begin, *(begin + i));
-        heapify(begin, i, 0);
+    template<typename RandomIt>
+    static void build_heap(RandomIt begin, size_t heap_size) {
+        for (int i = static_cast<int>(heap_size / 2) - 1; i >= 0; --i)
+            heapify(begin, heap_size, static_cast<size_t>(i));
     }
-}
+
+public:
+    template<typename RandomIt>
+    static void sort(RandomIt begin, RandomIt end) {
+        size_t n = std::distance(begin, end);
+        if (n < 2) return;
+
+        build_heap(begin, n);
+
+        for (size_t i = n - 1; i > 0; --i) {
+            std::swap(*begin, *(begin + i));
+            heapify(begin, i, 0);
+        }
+    }
+};
