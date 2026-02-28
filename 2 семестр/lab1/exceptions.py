@@ -14,10 +14,6 @@ class LowInkError(PrinterException):
     """Ошибка: низкий уровень чернил"""
     pass
 
-class PaperJamError(PrinterException):
-    """Ошибка: замятие бумаги"""
-    pass
-
 class HardwareError(PrinterException):
     """Ошибка: аппаратная неисправность"""
     pass

@@ -34,9 +34,15 @@ python -m unittest tests.test_document -v
 
 ### Запуск с отчётом покрытия (coverage)
 
-Сначала установите: `pip install coverage`, затем:
+Сначала установите: `pip install coverage`. В проекте есть файл `.coveragerc`: покрытие считается **только по коду приложения** (без папки `tests`), цель — не менее 90%.
 
 ```cmd
 coverage run -m unittest discover -s tests
-coverage report
+coverage report -m
+```
+
+HTML-отчёт (откройте `htmlcov/index.html`):
+
+```cmd
+coverage html
 ```

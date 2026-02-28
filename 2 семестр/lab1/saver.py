@@ -5,7 +5,6 @@ from typing import Optional
 from printer import Printer
 from interfaces import IDriver
 
-
 class PrinterStateStorage:
 
     def __init__(self, storage_path: str = "printer_state.json"):

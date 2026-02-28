@@ -14,7 +14,6 @@ class PrinterState(Enum):
     OFF = "off"
     IDLE = "idle"
     PRINTING = "printing"
-    PAUSED = "paused"
     OUT_OF_PAPER = "out_of_paper"
     LOW_INK = "low_ink"
     ERROR = "error"

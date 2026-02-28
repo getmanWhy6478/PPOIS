@@ -1,6 +1,5 @@
 from interfaces import IPrintable
 from exceptions import InvalidDocumentError
-from typing import Union
 
 
 class Document(IPrintable):
@@ -35,11 +34,4 @@ class Document(IPrintable):
     def validate(self) -> bool:
         if self._format not in self.SUPPORTED_FORMATS:
             return False
-        if self._pages <= 0:
-            return False
-        if self._size_mb <= 0:
-            return False
         return True
-
-    def __str__(self) -> str:
-        return f"Документ '{self._filename}' ({self._format}, {self._pages} стр., {self._size_mb:.2f}МБ)"

@@ -3,14 +3,14 @@ from exceptions import PrinterException
 
 class InkCartridge(IConsumable):
     """Модель картриджа с чернилами"""
-    VALID_COLORS = {'C', 'M', 'Y', 'K', 'BK'}  # Cyan, Magenta, Yellow, Black, Black (photo)
+    VALID_COLORS = {'C', 'M', 'Y', 'K',}  # Cyan, Magenta, Yellow, Black
 
     def __init__(self, color: str, capacity_ml: float = 10.0, current_level: float = None):
         if color.upper() not in self.VALID_COLORS:
             raise ValueError(f"Недопустимый цвет чернил: {color}")
 
         self._color = color.upper()
-        self._capacity = max(0.1, capacity_ml)
+        self._capacity = max(0.01, capacity_ml)
         self._level = current_level if current_level is not None else self._capacity
 
     @property
@@ -31,7 +31,7 @@ class InkCartridge(IConsumable):
 
     @property
     def is_empty(self) -> bool:
-        return self._level <= 0.1  # 1% от емкости считается пустым
+        return self._level <= 0.01  # 1% от емкости считается пустым
 
     def consume(self, amount_ml: float) -> None:
         if amount_ml <= 0:
@@ -42,7 +42,3 @@ class InkCartridge(IConsumable):
 
     def refill(self) -> None:
         self._level = self._capacity
-
-    def __str__(self) -> str:
-        status = "пустой" if self.is_empty else f"{self.level_percent}%"
-        return f"Чернила {self._color}: {status} ({self._level:.1f}мл/{self._capacity:.1f}мл)"
