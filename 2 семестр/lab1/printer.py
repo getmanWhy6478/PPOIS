@@ -99,16 +99,13 @@ class Printer:
         self._check_consumables(settings.copies * document.pages)
 
         try:
-            # Установка состояния печати
             self._state = PrinterState.PRINTING
 
-            # Расчет потребления ресурсов
             pages_to_print = settings.copies * document.pages
             ink_per_page = self.INK_CONSUMPTION_RATES
 
             # Имитация постраничной печати
             for page_num in range(1, pages_to_print + 1):
-                # Потребление бумаги
                 self._paper.consume(1)
 
                 # Потребление чернил (для цветной печати используем все картриджи)
@@ -119,31 +116,26 @@ class Printer:
                     # Для монохромной печати используем только черный
                     self._get_black_cartridge().consume(ink_per_page)
 
-                # Проверка критических уровней после каждой страницы
                 if self._paper.is_empty:
                     raise OutOfPaperError("Закончилась бумага во время печати", "OUT_OF_PAPER")
 
                 if any(c.is_empty for c in self._cartridges):
                     raise LowInkError("Закончились чернила во время печати", "LOW_INK")
 
-            # Отправка команды драйверу
             success = self._driver.send_print_command(document, settings)
 
             if not success:
                 self._state = PrinterState.ERROR
                 raise HardwareError("Сбой печати на аппаратном уровне", "ERROR")
 
-            # Возврат в состояние ожидания
             self._state = PrinterState.IDLE
             return True
 
-        except Exception as e:
+        except Exception:
             self._state = PrinterState.ERROR
             raise
 
     def _check_consumables(self, pages_needed: int) -> None:
-        """Проверка достаточности расходников перед печатью"""
-        # Проверка бумаги
         if self._paper.quantity < pages_needed:
             self._state = PrinterState.OUT_OF_PAPER
             raise OutOfPaperError(
@@ -151,7 +143,6 @@ class Printer:
                 "OUT_OF_PAPER"
             )
 
-        # Проверка чернил
         for cartridge in self._cartridges:
             if cartridge.level_percent < 5:  # критический уровень
                 self._state = PrinterState.LOW_INK
@@ -161,26 +152,22 @@ class Printer:
                 )
 
     def _get_black_cartridge(self) -> InkCartridge:
-        """Получение черного картриджа"""
         for c in self._cartridges:
             if c.color == 'K':
                 return c
         raise RuntimeError("Черный картридж не найден")
 
     def load_paper(self, quantity: int = 100) -> None:
-        """Загрузка бумаги"""
         if self._state == PrinterState.OFF:
             raise PrinterException("Невозможно загрузить бумагу при выключенном принтере", "OFF")
 
         self._paper.refill(quantity)
 
-        # Автоматический переход в состояние ожидания при наличии бумаги и достаточных чернилах
         if self._state == PrinterState.OUT_OF_PAPER:
             if all(c.level_percent >= 10 for c in self._cartridges):
                 self._state = PrinterState.IDLE
 
     def replace_ink(self, color: str) -> None:
-        """Замена картриджа указанного цвета"""
         if self._state == PrinterState.OFF:
             raise PrinterException("Невозможно заменить чернила при выключенном принтере", "OFF")
 
@@ -192,13 +179,11 @@ class Printer:
         else:
             raise ValueError(f"Картридж цвета {color} не найден")
 
-        # Проверка, можно ли вернуться в состояние ожидания
         if self._state == PrinterState.LOW_INK:
             if not any(c.level_percent < 10 for c in self._cartridges):
                 self._state = PrinterState.IDLE
 
     def start_maintenance(self, operation: str = 'clean') -> bool:
-        """Запуск операции обслуживания"""
         if self._state not in (PrinterState.IDLE, PrinterState.ERROR):
             raise PrinterException(
                 f"Обслуживание невозможно в состоянии {self._state.value}",
@@ -213,7 +198,6 @@ class Printer:
             self._maintenance_count += 1
 
             if success:
-                # После успешного обслуживания возвращаемся в исходное состояние или в ожидание
                 if previous_state == PrinterState.ERROR:
                     self._state = PrinterState.IDLE
                 else:
@@ -227,7 +211,6 @@ class Printer:
             raise HardwareError(f"Ошибка обслуживания: {str(e)}", "ERROR")
 
     def get_status(self) -> dict:
-        """Получение полного статуса принтера"""
         return {
             'model': self._model,
             'state': self._state.value,
@@ -250,7 +233,6 @@ class Printer:
         }
 
     def to_dict(self) -> dict:
-        """Сериализация состояния принтера"""
         return {
             'model': self._model,
             'state': self._state.value,
@@ -271,16 +253,13 @@ class Printer:
 
     @classmethod
     def from_dict(cls, data: dict, driver: IDriver) -> 'Printer':
-        """Десериализация состояния принтера"""
         printer = cls(data['model'], driver)
 
-        # Восстановление состояния бумаги
         printer._paper = Paper(
             paper_type=data['paper']['type'],
             quantity=data['paper']['quantity'],
         )
 
-        # Восстановление состояния картриджей
         printer._cartridges = [
             InkCartridge(
                 color=c['color'],
@@ -290,10 +269,8 @@ class Printer:
             for c in data['cartridges']
         ]
 
-        # Восстановление счетчика обслуживания
         printer._maintenance_count = data.get('maintenance_count', 0)
 
-        # Восстановление состояния (без включения питания)
         try:
             printer._state = PrinterState(data['state'])
         except ValueError:

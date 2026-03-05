@@ -3,7 +3,6 @@ from exceptions import PrinterException
 
 
 class Paper(IConsumable):
-    """Модель бумаги как расходного материала"""
     VALID_TYPES = {'A4', 'A3', 'PHOTO', 'LETTER'}
 
     def __init__(self, paper_type: str = 'A4', quantity: int = 100):

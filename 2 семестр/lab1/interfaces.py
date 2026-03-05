@@ -2,7 +2,6 @@ from abc import ABC, abstractmethod
 from settings import PrintSettings
 
 class IPrintable(ABC):
-    """Интерфейс печатаемого документа"""
 
     @property
     @abstractmethod
@@ -20,7 +19,6 @@ class IPrintable(ABC):
 
 
 class IConsumable(ABC):
-    """Интерфейс расходного материала"""
 
     @property
     @abstractmethod
@@ -33,7 +31,6 @@ class IConsumable(ABC):
 
 
 class IDriver(ABC):
-    """Интерфейс драйвера принтера"""
 
     @abstractmethod
     def initialize(self) -> bool:

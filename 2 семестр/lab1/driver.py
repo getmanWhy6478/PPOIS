@@ -5,7 +5,6 @@ import random
 
 
 class PrinterDriver(IDriver):
-    """Реализация драйвера принтера"""
 
     def __init__(self):
         self._initialized = False
@@ -16,26 +15,22 @@ class PrinterDriver(IDriver):
         }
 
     def initialize(self) -> bool:
-        """Инициализация драйвера"""
-        time.sleep(0.2)  # имитация инициализации
+        time.sleep(0.2)
         self._initialized = True
         return True
 
     def send_print_command(self, document: IPrintable, settings: PrintSettings) -> bool:
-        """Отправка команды печати"""
         if not self._initialized:
             raise RuntimeError("Драйвер не инициализирован")
 
         # Имитация процесса печати
         time.sleep(0.1 * document.pages * (1.5 if settings.quality == 'high' else 1.0))
 
-        # Моделирование возможных ошибок
-        if random.random() < 0.005:  # 0.5% вероятность ошибки
+        if random.random() < 0.005:
             return False
         return True
 
     def run_maintenance(self, operation: str) -> bool:
-        """Выполнение операции обслуживания"""
         if not self._initialized and operation != 'init':
             raise RuntimeError("Драйвер не инициализирован")
 
@@ -46,7 +41,7 @@ class PrinterDriver(IDriver):
         return self._supported_commands[operation]()
 
     def _cmd_clean(self) -> bool:
-        return random.random() > 0.02  # 2% вероятность неудачи очистки
+        return random.random() > 0.02 
 
     def _cmd_calibrate(self) -> bool:
-        return random.random() > 0.01  # 1% вероятность неудачи калибровки
+        return random.random() > 0.01 

@@ -3,7 +3,6 @@ from exceptions import InvalidDocumentError
 
 
 class Document(IPrintable):
-    """Модель печатаемого документа"""
     SUPPORTED_FORMATS = {'PDF', 'JPG', 'JPEG', 'PNG', 'TXT', 'DOCX'}
 
     def __init__(self, filename: str, format: str, pages: int, size_mb: float):

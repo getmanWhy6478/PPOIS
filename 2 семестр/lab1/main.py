@@ -15,10 +15,10 @@ MAINTENANCE_OPS = ("clean", "calibrate", "init")
 
 def input_int(prompt: str, default: Optional[int] = None, min_val: int = 1) -> int|None:
     while True:
-        s = int(input(prompt))
-        if default is not None and s == "":
-            return default
         try:
+            s = int(input(prompt)) 
+            if default is not None and s == "":
+                return default
             if s < min_val:
                 print(f"  Минимум: {min_val}")
                 continue
@@ -126,7 +126,7 @@ def power_control(printer: Printer) -> None:
 
 def maintenance(printer: Printer) -> None:
     if printer.state not in (PrinterState.IDLE, PrinterState.ERROR):
-        print(f"  Обслуживание возможно только в состоянии 'ожидание' или 'ошибка'.")
+        print("  Обслуживание возможно только в состоянии 'ожидание' или 'ошибка'.")
         return
 
     op = input_choice("  Операция", MAINTENANCE_OPS, "clean")
@@ -140,7 +140,7 @@ def main_menu(printer: Printer, storage: PrinterStateStorage) -> None:
     settings = PrintSettings()
 
     while True:
-        print("\n=== Меню ===")
+        print("\nМеню")
         print("1 — Печать | 2 — Расходники | 3 — Вкл/Выкл | 4 — Статус | 5 — Обслуживание | 0 — Выход")
 
         choice = input("Выбор: ").strip()

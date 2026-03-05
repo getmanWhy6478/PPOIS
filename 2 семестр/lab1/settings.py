@@ -3,7 +3,6 @@ from typing import Literal
 
 @dataclass
 class PrintSettings:
-    """Параметры печати"""
     quality: Literal['draft', 'normal', 'high'] = 'normal'
     color_mode: Literal['color', 'grayscale', 'black_and_white'] = 'color'
     copies: int = 1
