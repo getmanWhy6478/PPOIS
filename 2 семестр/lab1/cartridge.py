@@ -2,7 +2,6 @@ from interfaces import IConsumable
 from exceptions import PrinterException
 
 class InkCartridge(IConsumable):
-    """Модель картриджа с чернилами"""
     VALID_COLORS = {'C', 'M', 'Y', 'K',}  # Cyan, Magenta, Yellow, Black
 
     def __init__(self, color: str, capacity_ml: float = 10.0, current_level: float = None):
