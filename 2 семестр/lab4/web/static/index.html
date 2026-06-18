@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Система управления принтером</title>
+    <link rel="stylesheet" href="/static/style1.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Система управления принтером</h1>
+        </header>
+
+        <div class="status-panel">
+            <h2>Текущее состояние</h2>
+            <div id="printer-status">
+                <p>Загрузка...</p>
+            </div>
+        </div>
+
+        <div class="control-panel">
+            <h2>Управление</h2>
+
+            <div class="power-controls">
+                <button id="power-on">Включить</button>
+                <button id="power-off">Выключить</button>
+            </div>
+
+            <div class="paper-controls">
+                <h3>Бумага</h3>
+                <input type="number" id="paper-quantity" value="100" min="1">
+                <button id="load-paper">Загрузить бумагу</button>
+            </div>
+
+            <div class="ink-controls">
+                <h3>Чернила</h3>
+                <select id="ink-color">
+                    <option value="C">Голубой (C)</option>
+                    <option value="M">Пурпурный (M)</option>
+                    <option value="Y">Желтый (Y)</option>
+                    <option value="K">Черный (K)</option>
+                </select>
+                <button id="replace-ink">Заменить картридж</button>
+            </div>
+
+            <div class="maintenance-controls">
+                <h3>Обслуживание</h3>
+                <select id="maintenance-operation">
+                    <option value="clean">Очистка</option>
+                    <option value="calibrate">Калибровка</option>
+                </select>
+                <button id="run-maintenance">Выполнить</button>
+            </div>
+
+            <div class="print-controls">
+                <h3>Печать документа</h3>
+                <form id="print-form">
+                    <input type="text" id="filename" placeholder="Имя файла" required>
+                    <select id="format">
+                        <option value="PDF">PDF</option>
+                        <option value="JPG">JPG</option>
+                        <option value="PNG">PNG</option>
+                        <option value="TXT">TXT</option>
+                        <option value="DOCX">DOCX</option>
+                    </select>
+                    <input type="number" id="pages" placeholder="Страницы" value="1" min="1" required>
+                    <input type="number" id="size" placeholder="Размер (МБ)" value="0.1" min="0.01" step="0.01" required>
+
+                    <h4>Настройки печати</h4>
+                    <select id="quality">
+                        <option value="draft">Черновик</option>
+                        <option value="normal" selected>Обычное</option>
+                        <option value="high">Высокое</option>
+                    </select>
+                    <select id="color-mode">
+                        <option value="color" selected>Цветная</option>
+                        <option value="grayscale">Оттенки серого</option>
+                        <option value="black_and_white">Черно-белая</option>
+                    </select>
+                    <input type="number" id="copies" placeholder="Копии" value="1" min="1" required>
+
+                    <button type="submit">Печать</button>
+                </form>
+            </div>
+
+            <div class="reset-controls">
+                <button id="reset-printer" class="danger">Сбросить принтер</button>
+            </div>
+        </div>
+
+        <div class="messages">
+            <div id="message-area"></div>
+        </div>
+    </div>
+    <script src="/static/app.js"></script>
+</body>
+</html>

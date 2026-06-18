@@ -2,7 +2,7 @@ class ReversiLogic:
     def __init__(self, size=8):
         self.size = size
         self.board = [[0] * size for _ in range(size)]
-        self.current_player = 1  # 1 - Чёрные, -1 - Белые
+        self.current_player = 1
         self.reset()
 
     def reset(self):
@@ -46,8 +46,6 @@ class ReversiLogic:
         return total_flips
 
     def make_move(self, x, y):
-        """Делает ход и возвращает (успех, список перевёрнутых фишек)"""
-        # ← ПРОВЕРКА: клетка должна быть пустой
         if self.board[x][y] != 0:
             return False, []
 
@@ -69,9 +67,18 @@ class ReversiLogic:
         return black, white
 
     def is_game_over(self):
+        # Игра окончена, если у обоих игроков нет ходов
         if not self.get_valid_moves(1) and not self.get_valid_moves(-1):
             return True
         return False
+
+    def must_skip_turn(self, player):
+        """Проверка, должен ли игрок пропустить ход"""
+        return len(self.get_valid_moves(player)) == 0
+
+    def skip_turn(self):
+        """Пропустить ход текущего игрока"""
+        self.current_player = -self.current_player
 
     def get_board_state(self):
         return [row[:] for row in self.board]

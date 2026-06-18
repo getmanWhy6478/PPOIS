@@ -10,7 +10,6 @@ class Menu:
         self.buttons = []
 
     def create_main_menu(self):
-        """Создаёт кнопки главного меню"""
         self.buttons = [
             {"text": "Начать игру (Локально)", "rect": pygame.Rect(300, 150, 200, 50), "action": "play_local"},
             {"text": "Онлайн игра", "rect": pygame.Rect(300, 220, 200, 50), "action": "play_online"},
@@ -20,20 +19,18 @@ class Menu:
         ]
 
     def create_online_menu(self):
-        """Создаёт кнопки меню онлайн-игры"""
         self.buttons = [
             {"text": "Найти игру", "rect": pygame.Rect(300, 200, 200, 50), "action": "find_game"},
-            {"text": "Назад", "rect": pygame.Rect(300, 450, 200, 50), "action": "back"}  # ← Исправлено: y=450
+            {"text": "Назад", "rect": pygame.Rect(300, 450, 200, 50), "action": "back"}
         ]
 
     def draw(self):
-        """Отрисовывает кнопки меню"""
         mouse_pos = pygame.mouse.get_pos()
         for button in self.buttons:
             if button["rect"].collidepoint(mouse_pos):
-                color = (100, 255, 100)  # Светло-зелёный при наведении
+                color = (100, 255, 100)
             else:
-                color = (50, 150, 50)  # Тёмно-зелёный
+                color = (50, 150, 50)
 
             pygame.draw.rect(self.screen, color, button["rect"])
             pygame.draw.rect(self.screen, (255, 255, 255), button["rect"], 2)
@@ -43,15 +40,13 @@ class Menu:
             self.screen.blit(text_surf, text_rect)
 
     def handle_click(self, pos):
-        """Обрабатывает клик по кнопке и возвращает action"""
         for button in self.buttons:
             if button["rect"].collidepoint(pos):
-                print(f"Кнопка нажата: {button['text']} (action={button['action']})")  # ← Отладка
+                print(f"Кнопка нажата: {button['text']} (action={button['action']})")
                 return button["action"]
         return None
 
     def draw_help(self):
-        """Отрисовывает справку"""
         rules = [
             "ПРАВИЛА ИГРЫ:",
             "1. Чёрные ходят первыми.",
@@ -80,7 +75,6 @@ class Menu:
             y += 35
 
     def draw_leaderboard(self, scores):
-        """Отрисовывает таблицу рекордов"""
         title = self.font_large.render("ТАБЛИЦА РЕКОРДОВ", True, CONFIG["colors"]["text"])
         self.screen.blit(title, (250, 50))
 
@@ -92,12 +86,33 @@ class Menu:
             y += 40
 
         back = self.font_small.render("Нажмите ESC для возврата", True, (200, 200, 200))
-        self.screen.blit(back, (280, 500))
+        self.screen.blit(back, (280, 550))
 
-    def draw_input_name(self, input_text):
-        """Отрисовывает ввод имени для рекорда"""
+    # Добавлен параметр winner
+    def draw_input_name(self, input_text, winner=None, score=None):
+        # Заголовок
         msg = self.font_large.render("НОВЫЙ РЕКОРД!", True, (255, 215, 0))
-        self.screen.blit(msg, (250, 150))
+        self.screen.blit(msg, (250, 100))
+
+        if winner:
+            # Цвет победителя
+            if winner == "Чёрные":
+                winner_color = (150, 150, 150)  # Серый для чёрных
+            elif winner == "Белые":
+                winner_color = (255, 255, 255)  # Белый
+            else:
+                winner_color = (255, 255, 100)  # Жёлтый для ничьей
+
+            winner_text = f"Победили: {winner}"
+            winner_surf = self.font_large.render(winner_text, True, winner_color)
+            winner_rect = winner_surf.get_rect(center=(CONFIG["window_width"] // 2, 160))
+            self.screen.blit(winner_surf, winner_rect)
+
+            if score:
+                score_text = f"Счёт: {score[0]} - {score[1]}"
+                score_surf = self.font_small.render(score_text, True, (200, 200, 200))
+                score_rect = score_surf.get_rect(center=(CONFIG["window_width"] // 2, 200))
+                self.screen.blit(score_surf, score_rect)
 
         prompt = self.font_small.render("Введите имя:", True, CONFIG["colors"]["text"])
         self.screen.blit(prompt, (250, 250))

@@ -13,6 +13,7 @@ class NetworkClient:
         self.callbacks = {}
         self.lock = threading.Lock()
 
+
     def connect(self, host=None, port=None):
         # Получаем значения с дефолтными fallback
         host = host or CONFIG.get_server_host()
@@ -85,9 +86,6 @@ class NetworkClient:
 
     def send_move(self, x, y):
         return self.send('move', {'x': x, 'y': y})
-
-    def send_chat(self, message):
-        return self.send('chat', {'message': message})
 
     def send_find_game(self):
         return self.send('find_game', {})
@@ -177,7 +175,6 @@ class NetworkServer:
             except Exception as e:
                 if self.running:
                     print(f"Ошибка сервера: {e}")
-
     def handle_client(self, player_id):
         client = self.clients[player_id]['client']
         client.settimeout(1.0)
@@ -199,8 +196,6 @@ class NetworkServer:
 
                         if msg_type == 'move':
                             self.handle_move(player_id, msg_data)
-                        elif msg_type == 'chat':
-                            self.handle_chat(player_id, msg_data)
                         elif msg_type == 'find_game':
                             self.find_game(player_id)
 
@@ -236,30 +231,6 @@ class NetworkServer:
             })
 
             game['current_player'] = -game['current_player']
-
-    def handle_chat(self, player_id, data):
-        with self.lock:
-            game_id = self.clients[player_id].get('game_id')
-            if not game_id or game_id not in self.games:
-                return
-
-            game = self.games[game_id]
-            opponent_id = (game['player1'] if player_id == game['player2']
-                           else game['player2'])
-
-            if opponent_id and opponent_id in self.clients:
-                msg = json.dumps({
-                    'type': 'chat_message',
-                    'data': {
-                        'player_id': player_id,
-                        'message': data['message']
-                    }
-                }) + '\n'
-
-                try:
-                    self.clients[opponent_id]['client'].send(msg.encode())
-                except:
-                    pass
 
     def find_game(self, player_id):
         with self.lock:
